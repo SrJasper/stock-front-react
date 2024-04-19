@@ -1,0 +1,70 @@
+body{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(21, 21, 21);
+}
+
+.register-form{
+  margin-top: 15%;
+  padding: 20px;
+  background-color: rgb(39, 39, 39);
+  width: auto;
+}
+
+input{
+  width: 250px;
+}
+
+.register-form button{
+  background-color: rgb(143, 143, 143); 
+}
+
+.padding-top{
+  margin-top: 5%;
+}
+
+.title{
+  font-size: 30px;
+  color:rgb(37, 209, 66);
+  display: flex;
+  justify-content: center;    
+}
+
+.orientation-text{
+  color:rgb(211, 211, 211);
+}
+
+.next-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.next-buttons button{
+  width: 70px;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.pass-rec{
+  margin-top: 2px;
+}
+.pass-rec button{
+  border: none;
+  display: none;
+  background-color: rgb(39, 39, 39);
+  color: rgb(37, 209, 66);
+  cursor: pointer;
+}
+
+button:active{
+  opacity: 0.8;
+}
+
+.error{
+  color: red;
+  font-size: small;
+  font-weight: bold;
+  display:none;
+}
