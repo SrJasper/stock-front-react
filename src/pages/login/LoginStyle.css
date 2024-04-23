@@ -15,6 +15,8 @@ body{
 
 input{
   width: 250px;
+  padding: 8px;
+  color: green;
 }
 
 .register-form button{
@@ -38,12 +40,16 @@ input{
 
 .next-buttons{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .next-buttons button{
   width: 70px;
   cursor: pointer;
+  flex-grow: 0.5;
+  background-color: rgb(78, 78, 78);
+  padding: 10px;
 }
 
 .pass-rec{

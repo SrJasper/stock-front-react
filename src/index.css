@@ -8,18 +8,5 @@
 }
 
 body{
-  background-color: rgb(24, 6, 30);
-  padding: 2rem; 
-}
-
-input, button{
-  padding: 10px;
-}
-
-p{
-  text-align: center;
-}
-
-a{
-  text-decoration: none;
+  background-color: rgb(17, 17, 17);
 }

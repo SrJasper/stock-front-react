@@ -26,12 +26,12 @@ function LoginPage() {
             senha
         </div>
         <input type="password" id="passwordInput"/>
-        <div  className="pass-rec centralize">
+        {/* <div  className="pass-rec centralize">
             <button type="button" id="password-recuperation">Esqueceu a senha</button>
-        </div>
+        </div> */}
         <div className="next-buttons padding-top">
-            <button type="button" className="entry-button" onClick={goToRegisterPage}>registrar</button>
-            <button type="button" className="entry-button" onClick={goToHomePage}>login</button>
+            <button type="button" onClick={goToRegisterPage}>registrar</button>
+            <button type="button" onClick={goToHomePage}>login</button>
         </div>
       </form>
     </main>
