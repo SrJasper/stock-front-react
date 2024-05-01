@@ -37,7 +37,7 @@ const useAuth = create<States & Actions>((set) => ({
   login: async (credentials: ILoginCredentials) => {
     set(() => ({isLoading: true}))
     try {
-      const res = await axios.post("http://localhost:3000/auth/login", credentials)
+      const res = await axios.post("https://stock-project-seven.vercel.app/auth/login", credentials)
 
       Cookies.set("refreshToken", res.data)
 
@@ -52,7 +52,7 @@ const useAuth = create<States & Actions>((set) => ({
   register: async (credentials) => {
     set(() => ({isLoading: true}))
     try {
-    await axios.post("http://localhost:3000/users", credentials)
+    await axios.post("https://stock-project-seven.vercel.app/users", credentials)
 
      
      

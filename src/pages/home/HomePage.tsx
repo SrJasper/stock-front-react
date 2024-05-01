@@ -35,7 +35,7 @@ function HomePage() {
     e.preventDefault();
     setLoading(true);
     setDBStock(false);
-    const res = await axios.get("http://localhost:3000/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
+    const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
     setStock(res.data);
     setLoading(false);
   }
