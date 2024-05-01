@@ -1,33 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegisterStockCard } from "../../components/RegisterStockCard";
-import { LoadingCard } from "../../components/LoadingCard";
 import { StockCardToSim } from "../../components/StockCardToSim";
+import StockCardFromDB from "../../components/StockCardFromDB";
+import { LoadingCard } from "../../components/LoadingCard";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/useAuth";
 import { FormEvent, useState } from "react";
+import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyle.css';
-import StockCardFromDB from "../../components/StockCardFromDB";
-import { useAuth } from "../../store/useAuth";
-import Cookies from "js-cookie";
 
 function HomePage() {
 
   const [search, setSearch] = useState("");
 
   const [stock, setStock] = useState();
-  //const [stock, setStock] = useState<Stock[] | null>(null);
   const [dbstock, setDBStock] = useState(true);
   
   const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
-
-  /*
-  *useEffect
-  *useRef
-  *useContext
-  useMemo
-  zustand
-  */
 
   const token = Cookies.get("refreshToken")
 

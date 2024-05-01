@@ -1,8 +1,9 @@
-import axios from 'axios';
-import './styles/stockCard.css'
-import { useState } from 'react';
-import './styles/cardConfiguration.css'
 import { LoadingCard } from './LoadingCard';
+import './styles/cardConfiguration.css';
+import { useState } from 'react';
+import Cookies from "js-cookie";
+import './styles/stockCard.css';
+import axios from 'axios';
 
 export type Stock = {
   Symbol: string;
@@ -17,9 +18,9 @@ type Props = {
 
 const Card = ({stock, handleClose}: Props) => {
 
-  const [qnt, setQnt] = useState(0);
-  
+  const [qnt, setQnt] = useState(0);  
   const [loading, setLoading] = useState(false);
+  const token = Cookies.get("refreshToken")
 
   const refreshPage = () => {
     window.location.reload();
@@ -37,7 +38,7 @@ const Card = ({stock, handleClose}: Props) => {
       qnt: qnt
     };
     setLoading(true);
-    await axios.post("http://localhost:3000/stocks/newsim", data, {headers: {Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNDA4MTMxOCwiZXhwIjoxNzE0OTQ1MzE4fQ.V9vZ090EDH-X_KSujIq7kalGGQxzw4eWPLs6AIQL5Rk"}});    
+    await axios.post("https://stock-project-seven.vercel.app/stocks/newsim", data, {headers: {Authorization: `Bearer ${token}`}});    
     refreshPage();
   }
 

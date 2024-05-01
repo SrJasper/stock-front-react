@@ -1,8 +1,8 @@
 import { LoadingCard } from '../../components/LoadingCard';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../store/useAuth';
 import { useState } from 'react';
 import './RegisterStyle.css';
-import { useAuth } from '../../store/useAuth';
 
 function RegisterPage(){
 

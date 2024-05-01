@@ -1,5 +1,6 @@
   import { useState, useEffect } from 'react';
-  import axios from 'axios';
+  import Cookies from "js-cookie";
+  import axios from 'axios';  
 
   export type Stock = {
     id: number
@@ -14,14 +15,13 @@
 
   const StockCardFromDB = () => {
     const [stocks, setStocks] = useState<Stock[]>([]);
+    const token = Cookies.get("refreshToken")
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/stocks/listall/", {
-          headers: {
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNDA4MTMxOCwiZXhwIjoxNzE0OTQ1MzE4fQ.V9vZ090EDH-X_KSujIq7kalGGQxzw4eWPLs6AIQL5Rk"
-          }
-        });
+        const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
+        {headers: {Authorization: `Bearer ${token}`}}
+      );
         //Colocar pra puxar o stock pelo índice do user 
         setStocks(response.data);
       } catch (error) {
