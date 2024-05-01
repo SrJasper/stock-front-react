@@ -1,9 +1,9 @@
-body{
+.login{
   display: flex;
   justify-content:center;
   align-items:center;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(21, 21, 21);
+  background-color: rgb(17, 17, 17);
 }
 
 .register-form{
@@ -16,11 +16,7 @@ body{
 input{
   width: 250px;
   padding: 8px;
-  color: green;
-}
-
-.register-form button{
-  background-color: rgb(143, 143, 143); 
+  color: rgb(0, 0, 0);
 }
 
 .padding-top{
@@ -34,6 +30,11 @@ input{
   justify-content: center;    
 }
 
+.field-box{
+  display: flex;
+  flex-direction: column;
+}
+
 .orientation-text{
   color:rgb(211, 211, 211);
 }
@@ -44,12 +45,8 @@ input{
   gap: 10px;
 }
 
-.next-buttons button{
-  width: 70px;
-  cursor: pointer;
-  flex-grow: 0.5;
-  background-color: rgb(78, 78, 78);
-  padding: 10px;
+.use-width{
+  width:100%;
 }
 
 .pass-rec{

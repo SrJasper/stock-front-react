@@ -1,37 +1,56 @@
+import { LoadingCard } from '../../components/LoadingCard';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import './LoginStyle.css';
+import { useAuth } from '../../store/useAuth';
 
 
 function LoginPage() {
+
+  const [user, setUser] = useState("");  
+  const [password, setPassword] = useState("");  
 
   const navigate = useNavigate();
   const goToRegisterPage = () => {
     navigate('/register');
   }
-  const goToHomePage = () => {
-    navigate('/home');
+
+  const {isLoading, error,login} = useAuth()
+
+
+  async function handleSubmit(e:React.FormEvent){
+    e.preventDefault()
+
+    await login({email: user, password: password})
   }
 
   return (
-    <main>
-      <form className="register-form">
-        <div className="title" id="1">
+    <main className='login'>
+      
+      {isLoading && <LoadingCard/>}
+      <form onSubmit={handleSubmit} className="register-form">
+        <h1 className="title">
             Stocks
+        </h1>
+        <div className="field-box">
+          <label className="orientation-text">
+              e-mail
+          </label>
+          <input className='use-width' type="text" value={user} onChange={(e) => setUser(e.target.value)}/>
         </div>
-        <div className="orientation-text">
-            e-mail
+        <div className="field-box">
+          <label className="orientation-text padding-top">
+              senha
+          </label>
+          <input className='use-width' type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <input type="text" id="emailInput"/>
-        <div className="orientation-text padding-top">
-            senha
-        </div>
-        <input type="password" id="passwordInput"/>
         {/* <div  className="pass-rec centralize">
-            <button type="button" id="password-recuperation">Esqueceu a senha</button>
+            <button type="button">Esqueceu a senha</button>
         </div> */}
+        {error && error.message && <p> {error.message} </p>}
         <div className="next-buttons padding-top">
-            <button type="button" onClick={goToRegisterPage}>registrar</button>
-            <button type="button" onClick={goToHomePage}>login</button>
+            <button className='gray-button' type='button' onClick={goToRegisterPage}>registrar</button>
+            <button className='green-button' type='submit'>login</button>
         </div>
       </form>
     </main>

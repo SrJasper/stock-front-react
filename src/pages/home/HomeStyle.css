@@ -31,7 +31,6 @@
 }
 
 .search-tab button{
-  color: rgb(37, 37, 37);
   height: 35px;
   padding-left: 1%;
   padding-right: 1%;
@@ -40,7 +39,7 @@
   white-space: nowrap;
 }
 
-.reg-button{  
+.reg-button{
   margin-left: 500px;
 }
 
@@ -49,10 +48,11 @@
   margin-left: 100px;
 }
 
-.stock{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.stock-board{
+  list-style-type: none;
+  counter-reset: item;
+  margin-left: 0%;
+  padding-left: 0%;
 }
 
 .sell-button{
@@ -71,37 +71,4 @@
 .search-symbol select{
   background-color: rgb(211, 211, 211);
   color: black;
-}
-
-.stock-pannel{
-  list-style-type: none;
-  counter-reset: item;
-  margin-left: 0%;
-  padding-left: 0%;
-}
-
-.stock-name{
-  display: flex;
-  font-size: large;
-  font-weight: bold;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-
-.stock-info{
-  display: flex;
-  font-size: 50px;
-}
-
-.stock-pannel li{    
-  background-color: rgba(10, 71, 29, 0.584);
-  padding-top: 2%;
-  padding-bottom: 3%;
-  margin-bottom: 1%;    
-  border-left: 10px solid;
-}
-
-.stock-pannel li p{
-  margin-left: 5%;
-  margin-top: 5px;
 }

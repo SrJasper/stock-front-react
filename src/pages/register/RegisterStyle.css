@@ -10,6 +10,12 @@
   height: 1000px;
 }
 
+.register-form{
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 300px;
+}
+
 .loading label{
   color: rgb(202, 202, 202);
   font-size: 40px;
@@ -20,3 +26,11 @@
   justify-content: center;
   align-items: center;
 } 
+
+
+.next-buttons button{
+  width: 70px;
+  cursor: pointer;
+  flex-grow: 0.5;
+  padding: 10px;
+}

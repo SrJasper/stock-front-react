@@ -1,11 +1,56 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { RegisterStockCard } from "../../components/RegisterStockCard";
+import { LoadingCard } from "../../components/LoadingCard";
+import { StockCardToSim } from "../../components/StockCardToSim";
 import { useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import axios from "axios";
 import './HomeStyle.css';
+import StockCardFromDB from "../../components/StockCardFromDB";
+import { useAuth } from "../../store/useAuth";
+import Cookies from "js-cookie";
 
 function HomePage() {
 
+  const [search, setSearch] = useState("");
+
+  const [stock, setStock] = useState();
+  //const [stock, setStock] = useState<Stock[] | null>(null);
+  const [dbstock, setDBStock] = useState(true);
+  
+  const [loading, setLoading] = useState(false);
+  const [register, setRegister] = useState(false);
+
+  /*
+  *useEffect
+  *useRef
+  *useContext
+  useMemo
+  zustand
+  */
+
+  const token = Cookies.get("refreshToken")
+
+  async function fetchStocks(e:FormEvent ,data: string) {
+    e.preventDefault();
+    setLoading(true);
+    setDBStock(false);
+    const res = await axios.get("http://localhost:3000/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
+    setStock(res.data);
+    setLoading(false);
+  }
+
+  function registerCard(){
+    setRegister(true);
+  }
+
   const navigate = useNavigate();
-  const Logout = () => {
-    navigate('/home');
+
+  const {logout} = useAuth()
+
+  function handleLogout() {
+    navigate("/")
+    logout()
   }
 
   return(
@@ -16,15 +61,21 @@ function HomePage() {
             <div className="info">user</div>
             <div className="info">email@teste.com</div>
         </div>
-        <div className="exit-button" onClick={Logout}> sair </div>
+        <div className="exit-button" onClick={handleLogout}> sair </div>
       </div>
 
-      <div className="market-body">
+      <div className="market-body">        
+        
+        {loading && <LoadingCard/>}
+        {register && <RegisterStockCard/>}
+                
         <div className="search-tab">
-            <p>Procurar ação</p>
-            <input type="text"/>
-            <button> pesquisar </button>
-            <button className="reg-button"> Registrar ação </button>
+    
+          <p>Procurar ação</p>
+            <input  type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
+            <button className="green-button" onClick={(e) => fetchStocks(e, search)}> pesquisar </button>
+            <button className="reg-button gray-button" onClick={registerCard}> Registrar ação </button>
+            
         </div>
 
         <div className="search-symbol">
@@ -35,22 +86,9 @@ function HomePage() {
           </select>
         </div>
 
-        <ol className="stock-pannel" id="stocks">
-            <li className="stock">
-                <div>
-                  <div className="stock-name">
-                      <p>Gerdau S.A</p>
-                      <p>GGB</p>                    
-                  </div>
-                  <div className="stock-info">
-                      <p>R$</p>
-                      <p className="stockValue">4.24</p>
-                  </div>
-                  <p>Valor pago </p>
-                  <p className="stockOpen">4.43</p>                           
-                </div>
-                <button className="sell-button"> vender </button>
-            </li>
+        <ol className="stock-board">
+          {dbstock && <StockCardFromDB/>}   
+          {stock && <StockCardToSim stock={stock} />}
         </ol>
       </div>
     </main>
