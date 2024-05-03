@@ -40,9 +40,8 @@ const StockCardFromDB = () => {
   async function GetStockInfo(id:number){
 
     setLoading(true);
-    
-    console.log(id);
     setCard(true);
+    
     try {
       const response = await axios.post("http://localhost:3000/stocks/sell", 
       {id},
@@ -55,7 +54,6 @@ const StockCardFromDB = () => {
     setLoading(false);
   }
   useEffect(() => {
-    console.log(stockInfo); 
   }, [stockInfo]);
       
   return (
@@ -66,9 +64,8 @@ const StockCardFromDB = () => {
           <>
           {loading && <LoadingCard/>}
           {card && stockInfo && (
-            <SellCard stock={stockInfo} handleClose={() => setCard(false)} />
+            <SellCard stockInfo={stockInfo}  handleClose={() => setCard(false)} id={stock.id} />
           )}
-
             <li className="stock" key={stock.id}>
               <div className="stock-name">
                 <p className="stock-symbol margin-left">{stock.symbol}</p>
