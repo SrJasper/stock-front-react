@@ -1,0 +1,19 @@
+.sell-stock-form{
+  padding: 2%;
+  background-color: rgb(62, 62, 62);
+  justify-content: center;
+  align-items: center;
+}
+
+.money-spent{
+  color:rgb(255, 37, 37)
+}
+
+.money-earned{
+  color:rgb(64, 225, 64)
+}
+
+.information-text{
+  display:flex;
+  justify-content: space-between;
+}

@@ -10,9 +10,9 @@ export interface ILoginCredentials {
 
 export interface IRegisterCredentials {
   name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 type States = {
@@ -53,9 +53,7 @@ const useAuth = create<States & Actions>((set) => ({
     set(() => ({isLoading: true}))
     try {
     await axios.post("https://stock-project-seven.vercel.app/users", credentials)
-
-     
-     
+  
     } catch (err: any) {
       set(() => ({error: err.response.data}))
     } finally {
@@ -71,7 +69,6 @@ const useAuth = create<States & Actions>((set) => ({
   },
   getUser: () => {
     const token = Cookies.get("refreshToken")
-
     set(() => ({user: token}))
   }
 

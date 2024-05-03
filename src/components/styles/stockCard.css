@@ -6,7 +6,7 @@
   margin-bottom: 10px;
 }
 
-.stock div{
+.margin-left{
   margin-left: 50px;
 }
 
@@ -53,4 +53,19 @@
 
 .sim-button{
   padding: 2%;
+}
+
+.stock-title{
+  font-size: 30px;
+  white-space: nowrap;
+}
+
+.stock-symbol{
+  font-size: 40px;
+}
+
+.stock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

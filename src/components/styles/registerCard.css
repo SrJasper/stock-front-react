@@ -104,17 +104,3 @@ button:active{
   font-size: 20px;
 }
 
-.stock-title{
-  font-size: 30px;
-  white-space: nowrap;
-}
-
-.stock-symbol{
-  font-size: 20px;
-}
-
-.stock{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
