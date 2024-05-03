@@ -43,7 +43,7 @@ const StockCardFromDB = () => {
     setCard(true);
     
     try {
-      const response = await axios.post("http://localhost:3000/stocks/sell", 
+      const response = await axios.post("https://stock-project-seven.vercel.app/stocks/sell", 
       {id},
       {headers: {Authorization: `Bearer ${token}`}}
     );

@@ -39,7 +39,7 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
     async function SellStock(){
         setLoading(true);
         try {
-            const response = await axios.delete(`http://localhost:3000/stocks/delone/${id}`,
+            const response = await axios.delete(`https://stock-project-seven.vercel.app/stocks/delone/${id}`,
             {headers: {Authorization: `Bearer ${token}`}}
             );
             console.log(response.data);
