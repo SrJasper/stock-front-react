@@ -52,7 +52,7 @@ function HomePage() {
   const [user, setUser] = useState<userInfoHeader>();
   async function userInfo() {
     try {
-      const response = await axios.get("http://localhost:3000/users/info", 
+      const response = await axios.get("http:////stock-project-seven.vercel.app/users/info", 
       {headers: {Authorization: `Bearer ${token}`}}
     );
       setUser(response.data);
