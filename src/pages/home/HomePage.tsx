@@ -15,7 +15,7 @@ function HomePage() {
   const [search, setSearch] = useState("");
 
   const [stock, setStock] = useState();
-  const [dbstock, setDBStock] = useState(true);
+  const [dbstockDisplay, setDBStockDisplay] = useState(true);
   
   const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
@@ -38,13 +38,13 @@ function HomePage() {
   async function fetchStocks(e:FormEvent ,data: string) {
     e.preventDefault();
     setLoading(true);
-    setDBStock(false);
+    setDBStockDisplay(false);
     const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
     setStock(res.data);
     setLoading(false);
   }
   
-  const [stockList, setStockList] = useState([]); 
+  const [stockList, setStockList] = useState([]);
   
   async function listStocks() {
     try {
@@ -64,6 +64,12 @@ function HomePage() {
   useEffect(() => {
     console.log(stockList);
   }, [stockList]);
+
+  const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
+
+  const handleSymbolChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSymbol(event.target.value);
+  };
 
   return(
     <main>
@@ -91,8 +97,8 @@ function HomePage() {
         </div>
 
         <div className="search-symbol">
-          <select>
-            <option value="opcao1">Selecionar ação </option>
+          <select value={selectedSymbol} onChange={handleSymbolChange}>
+            <option value="opcao1">Selecionar ação</option>
             {stockList.map((stock, index) => (
               <option key={index} value={stock}>{stock}</option>
             ))}
@@ -100,7 +106,7 @@ function HomePage() {
         </div>
 
         <ol className="stock-board">
-          {dbstock && <StockCardFromDB/>} 
+        {dbstockDisplay && <StockCardFromDB filterSymbol={selectedSymbol !== 'opcao1' ? selectedSymbol : undefined} />} 
           {stock && <StockCardToSim stock={stock}/>}
         </ol>
       </div>

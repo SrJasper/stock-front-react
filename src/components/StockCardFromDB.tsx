@@ -15,7 +15,7 @@ export type Stock = {
   simulation: boolean
 }
 
-const StockCardFromDB = () => {
+const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) => {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const token = Cookies.get("refreshToken");
   const [card, setCard] = useState(false);
@@ -58,9 +58,10 @@ const StockCardFromDB = () => {
       
   return (
     <>
-      {
-      stocks.length > 0 ? (
-        stocks.map((stock) => (
+      {stocks.length > 0 ? (
+        stocks
+          .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
+          .map(stock => (
           <>
           {loading && <LoadingCard/>}
           {card && stockInfo && (
