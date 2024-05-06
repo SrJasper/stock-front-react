@@ -4,10 +4,33 @@
   padding: 0;
   margin: 0;
   width: 100%;
+  justify-content: space-between;
 }
 
 .header-container h1{
   padding: 2%;
+}
+
+.profile{
+  align-content: center;
+  margin-right: 3rem;
+}
+.user-name{
+  font-size: 20px;
+}
+
+.user-options{
+  display: flex;
+  font-size: smaller;
+}
+
+.user-options div{
+  cursor: pointer;
+}
+
+.user-options label{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .market-body{
@@ -41,11 +64,6 @@
 
 .reg-button{
   margin-left: 500px;
-}
-
-.exit-button{
-  cursor: pointer;
-  margin-left: 100px;
 }
 
 .stock-board{

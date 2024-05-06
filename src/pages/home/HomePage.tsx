@@ -10,6 +10,11 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyle.css';
 
+export type userInfoHeader = {
+  name: string,
+  email: string
+}
+
 function HomePage() {
 
   const [search, setSearch] = useState("");
@@ -44,8 +49,19 @@ function HomePage() {
     setLoading(false);
   }
   
-  const [stockList, setStockList] = useState([]);
+  const [user, setUser] = useState<userInfoHeader>();
+  async function userInfo() {
+    try {
+      const response = await axios.get("http://localhost:3000/users/info", 
+      {headers: {Authorization: `Bearer ${token}`}}
+    );
+      setUser(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }  
   
+  const [stockList, setStockList] = useState([]);
   async function listStocks() {
     try {
       const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
@@ -59,11 +75,11 @@ function HomePage() {
 
   useEffect(() => {
     listStocks();
+    userInfo();
   }, []);
 
-  useEffect(() => {
-    console.log(stockList);
-  }, [stockList]);
+  useEffect(() => {}, [stockList]);
+  useEffect(() => {console.log(user)}, [user]);
 
   const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
 
@@ -75,11 +91,14 @@ function HomePage() {
     <main>
       <div className="header-container">
         <h1>Stocks</h1>
-        <div>
-            <div className="info">user</div>
-            <div className="info">email@teste.com</div>
+        <div className="profile">
+          <div className="user-name">Olá, {user?.name}</div>
+          <div className="user-options">            
+            <div >minha conta</div>
+            <label>|</label>
+            <div className="exit-button" onClick={handleLogout}> sair </div>
+          </div>
         </div>
-        <div className="exit-button" onClick={handleLogout}> sair </div>
       </div>
 
       <div className="market-body">        
