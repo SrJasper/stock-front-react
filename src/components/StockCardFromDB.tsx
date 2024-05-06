@@ -67,12 +67,16 @@ const StockCardFromDB = () => {
             <SellCard stockInfo={stockInfo}  handleClose={() => setCard(false)} id={stock.id} />
           )}
             <li className="stock" key={stock.id}>
-              <div className="stock-name">
-                <p className="stock-symbol margin-left">{stock.symbol}</p>
+              <div className="stock-name margin-left">
+                <label > {stock.longName}</label>
+                <p className="big-font">{stock.symbol}</p>
               </div>
               <div className="stock-info">
-                <p>R$</p>
-                <p className="stockValue">{stock.price ? stock.price : 0}</p>
+                <label className='sotck-label' >valor da compra</label>
+                <div className='stock-value big-font'>
+                  <p>R$</p>
+                  <p className='big-font'>{stock.price ? stock.price : 0}</p>
+                </div>
               </div>
               <div>
               <button className="buy-button green-button" onClick={() => GetStockInfo(stock.id)}>Vender</button>

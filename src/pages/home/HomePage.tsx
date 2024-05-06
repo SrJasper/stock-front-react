@@ -5,7 +5,7 @@ import StockCardFromDB from "../../components/StockCardFromDB";
 import { LoadingCard } from "../../components/LoadingCard";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyle.css';
@@ -20,16 +20,7 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
 
-  const token = Cookies.get("refreshToken")
-
-  async function fetchStocks(e:FormEvent ,data: string) {
-    e.preventDefault();
-    setLoading(true);
-    setDBStock(false);
-    const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
-    setStock(res.data);
-    setLoading(false);
-  }
+  const token = Cookies.get("refreshToken");
 
   function registerCard(){
     setRegister(true);
@@ -43,6 +34,36 @@ function HomePage() {
     navigate("/")
     logout()
   }
+
+  async function fetchStocks(e:FormEvent ,data: string) {
+    e.preventDefault();
+    setLoading(true);
+    setDBStock(false);
+    const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
+    setStock(res.data);
+    setLoading(false);
+  }
+  
+  const [stockList, setStockList] = useState([]); 
+  
+  async function listStocks() {
+    try {
+      const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
+      {headers: {Authorization: `Bearer ${token}`}}
+    );
+      setStockList(response.data.map((item: { symbol: string }) => item.symbol));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  useEffect(() => {
+    listStocks();
+  }, []);
+
+  useEffect(() => {
+    console.log(stockList);
+  }, [stockList]);
 
   return(
     <main>
@@ -71,15 +92,16 @@ function HomePage() {
 
         <div className="search-symbol">
           <select>
-            <option value="opcao1"> Selecionar ação </option>
-            <option value="opcao2">Opção 2</option>
-            <option value="opcao3">Opção 3</option>
+            <option value="opcao1">Selecionar ação </option>
+            {stockList.map((stock, index) => (
+              <option key={index} value={stock}>{stock}</option>
+            ))}
           </select>
         </div>
 
         <ol className="stock-board">
-          {dbstock && <StockCardFromDB/>}   
-          {stock && <StockCardToSim stock={stock} />}
+          {dbstock && <StockCardFromDB/>} 
+          {stock && <StockCardToSim stock={stock}/>}
         </ol>
       </div>
     </main>

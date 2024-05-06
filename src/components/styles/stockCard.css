@@ -13,16 +13,18 @@
 .stock-name{
   display: flex;
   flex-direction: column;
-  font-size: large;
-  font-weight: bold;
   padding-top: 2%;
   padding-bottom: 2%;
 }
 
 .stock-info {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  font-size: 50px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.big-font{
+  font-size: 40px;
 }
 
 .buy-button{
@@ -51,6 +53,14 @@
   color: white;
 }
 
+.stock-value{
+  display:flex;
+}
+
+.sotck-label{
+  font-size: 20px;
+}
+
 .sim-button{
   padding: 2%;
 }
@@ -58,10 +68,6 @@
 .stock-title{
   font-size: 30px;
   white-space: nowrap;
-}
-
-.stock-symbol{
-  font-size: 40px;
 }
 
 .stock{
