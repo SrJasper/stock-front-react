@@ -20,7 +20,7 @@ function LoginPage() {
 
   async function handleSubmit(e:React.FormEvent){
     e.preventDefault()
-
+    if(user === "" || password === "") return alert("Preencha todos os campos");
     await login({email: user, password: password})
   }
 

@@ -48,11 +48,11 @@ function HomePage() {
     setStock(res.data);
     setLoading(false);
   }
-  
+
   const [user, setUser] = useState<userInfoHeader>();
   async function userInfo() {
     try {
-      const response = await axios.get("http:////stock-project-seven.vercel.app/users/info", 
+      const response = await axios.get("https://stock-project-seven.vercel.app/users/info",
       {headers: {Authorization: `Bearer ${token}`}}
     );
       setUser(response.data);
@@ -79,7 +79,7 @@ function HomePage() {
   }, []);
 
   useEffect(() => {}, [stockList]);
-  useEffect(() => {console.log(user)}, [user]);
+  useEffect(() => {}, [user]);
 
   const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
 
@@ -104,11 +104,10 @@ function HomePage() {
       <div className="market-body">        
         
         {loading && <LoadingCard/>}
-        {register && <RegisterStockCard/>}
+        {register && <RegisterStockCard handleClose={() => setRegister(false)}/>}
                 
         <div className="search-tab">
-    
-          <p>Procurar ação</p>
+          <label>Procurar ação</label>
             <input  type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
             <button className="green-button" onClick={(e) => fetchStocks(e, search)}> pesquisar </button>
             <button className="reg-button gray-button" onClick={registerCard}> Registrar ação </button>
@@ -125,7 +124,7 @@ function HomePage() {
         </div>
 
         <ol className="stock-board">
-        {dbstockDisplay && <StockCardFromDB filterSymbol={selectedSymbol !== 'opcao1' ? selectedSymbol : undefined} />} 
+          {dbstockDisplay && <StockCardFromDB filterSymbol={selectedSymbol !== 'opcao1' ? selectedSymbol : undefined} />} 
           {stock && <StockCardToSim stock={stock}/>}
         </ol>
       </div>

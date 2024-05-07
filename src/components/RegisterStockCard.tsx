@@ -1,55 +1,50 @@
-import './styles/registerCard.css'
 
-const RegisterStockCard = () => {
+import React, { useState } from 'react';
+import './styles/registerCard.css';
 
-  const refreshPage = () => {
-    window.location.reload();
-  }
-  
-  function refresh(){
-    refreshPage();
-  }
+type Props = {
+  handleClose: () => void;
+}
+
+const RegisterStockCard = ({ handleClose }: Props) => {
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   return (
-    <div className="background-blocker">
-      
+    <div className="screen-blocker">
       <form className="register-stock-form">
         <div className="title">
           Registrar nova ação
         </div>
         <div className="input-box padding-top">
           <label>Nome da ação</label>
-          <input type="text"/>
+          <input type="text" />
         </div>
         <div className="input-box padding-top">
           <div className="input-row">
             <label>Simbolo da ação</label>
             <label className='mark'> ⓘ </label>
           </div>
-          <input type="text"/>
+          <input type="text" />
         </div>
         <div className="input-box padding-top">
           <label>Quantidade</label>
-          <input type="text"/>
+          <input type="text" />
         </div>
         <div className="input-box padding-top">
           <label>Preço</label>
-          <input type="text"/>
+          <input type="text" />
         </div>
         <div className="input-box padding-top">
           <label>Data de compra</label>
-          <input type="date"/>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
-
-        <div className="create-button padding-top">
-            <button type="button" className="confirm-button padding-top green-button">registrar</button>
-        </div>
-        <div className="create-button">
-            <button type="button" className="cancel-button padding-top gray-button" onClick={refresh}>cancelar</button>
+        <div className="register-buttons padding-top">
+          <button type="button" className="green-button">registrar</button>          
+          <button type="button" className="gray-button" onClick={handleClose}>cancelar</button>          
         </div>
       </form>
-    </div>  
-  )
+    </div>
+  );
 }
 
-export {RegisterStockCard}
+export { RegisterStockCard };

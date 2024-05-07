@@ -29,8 +29,6 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
     const token = Cookies.get("refreshToken");
     
     const [stock, setStock] = useState<StockToSell>(stockInfo);
-
-    
     
     useEffect(() => {
         setStock(stockInfo);
@@ -39,10 +37,9 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
     async function SellStock(){
         setLoading(true);
         try {
-            const response = await axios.delete(`https://stock-project-seven.vercel.app/stocks/delone/${id}`,
+            await axios.delete(`https://stock-project-seven.vercel.app/stocks/delone/${id}`,
             {headers: {Authorization: `Bearer ${token}`}}
             );
-            console.log(response.data);
             window.location.reload();
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -69,7 +66,7 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
             </div>
             
             <div className="orientation-text padding-top">
-                valor vendido
+                valor de venda
             </div>
             <div className="information-text">
                 <span>
@@ -78,8 +75,6 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
                 </span>
                 <span className='orientation-text'>{stock.sellPriceSingle.toFixed(2)}</span>
             </div>
-
-
 
             <div className="orientation-text padding-top">
                 valor de compra (não cor)
@@ -98,8 +93,6 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
                 <span className="orientation-text">R$</span> {stock.taxes.toFixed(2)}
             </div>
             
-            
-            
             <div className="orientation-text padding-top">
                 lucro
             </div>
@@ -112,8 +105,6 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
                 )}
             </div>
 
-            
-
             <div className="orientation-text padding-top">
                 Porcentagem de lucro
             </div>
@@ -124,7 +115,6 @@ const SellCard = ({ stockInfo: stockInfo, handleClose, id }: Props) => {
                     <span className="money-spent">{stock.proportionalProfit}</span>
                 )}
             </div>
-
 
             <div className="next-buttons padding-top">
                 <button type="button" className="green-button" onClick={SellStock}>Vender</button>

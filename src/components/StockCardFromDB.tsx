@@ -28,14 +28,43 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
       {headers: {Authorization: `Bearer ${token}`}}
     );
       setStocks(response.data);
+      setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    fetchData();      
+    fetchData();  
   }, []);
+
+  
+  
+  const [stockToFindPrice, setStockToFindPrice] = useState([]);
+  const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  async function StockPriceFromAPI(data: string[]) {
+    setLoading(true);
+    const prices = [];
+    for (const stockToBePriced of data) {
+      const res = await axios.get(`https://stock-project-seven.vercel.app/stocks/search/${stockToBePriced}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      prices.push(res.data.Price);
+    }
+    setStockPriceFromApi(prices);
+    setLoaded(true);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    if (stockToFindPrice.length > 0 && !loaded) {
+      StockPriceFromAPI(stockToFindPrice);
+    }
+  }, [stockToFindPrice, loaded]);
+
+  useEffect(() => {}, [stockPriceFromApi]);
 
   async function GetStockInfo(id:number){
 
@@ -53,6 +82,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
     }
     setLoading(false);
   }
+
   useEffect(() => {
   }, [stockInfo]);
       
@@ -61,7 +91,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
       {stocks.length > 0 ? (
         stocks
           .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
-          .map(stock => (
+          .map((stock, index) => (
           <>
           {loading && <LoadingCard/>}
           {card && stockInfo && (
@@ -72,15 +102,30 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
                 <label > {stock.longName}</label>
                 <p className="big-font">{stock.symbol}</p>
               </div>
-              <div className="stock-info">
-                <label className='sotck-label' >valor da compra</label>
-                <div className='stock-value big-font'>
-                  <p>R$</p>
-                  <p className='big-font'>{stock.price ? stock.price : 0}</p>
+              
+              <div className="stock-comparison">
+                <div className="stock-info value-bought">
+                  <label className='sotck-label' >valor da compra</label>
+                  <div className='stock-value big-font'>
+                    <p>R$</p>
+                    <p className='big-font'>{stock.price ? stock.price : 0}</p>
+                  </div>
+                </div>
+                <div className="stock-info value-to-sell">
+                  <label className='sotck-label' >valor atual</label>
+                  <div className='stock-value big-font'>
+                    <p>R$</p>
+                    <p className='big-font'>{stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : 0}</p>
+                  </div>
                 </div>
               </div>
+              
               <div>
-              <button className="buy-button green-button" onClick={() => GetStockInfo(stock.id)}>Vender</button>
+                {Number(stockPriceFromApi[index]) > stock.price ? (
+                  <button className="buy-button green-button" onClick={() => GetStockInfo(stock.id)}>Vender</button>
+                ) : (
+                  <button className="buy-button red-button" onClick={() => GetStockInfo(stock.id)}>Vender</button>
+                )}
               </div>
             </li>
           </>

@@ -13,9 +13,10 @@ function App() {
     getUser()
   }, [])
 
+  
   return (
     <div className="app">
- 
+      
       <Routes>
         <Route path='/'  element={!user ? <LoginPage/> : <Navigate to="/home" />} />
         <Route path='/register' element={!user ?<RegisterPage/>: <Navigate to="/home" />} />

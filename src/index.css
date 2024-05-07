@@ -21,3 +21,15 @@ body{
   color: white; 
   z-index: 10000;
 }
+
+.green-button{
+  background-color: rgb(0, 90, 0);
+}
+
+.red-button{
+  background-color: rgb(160, 0, 0);
+}
+
+.gray-button{
+  background-color: rgb(78, 78, 78);
+}
