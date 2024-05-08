@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Cookies from "js-cookie";
 import './styles/stockCard.css';
 import axios from 'axios';
+import './styles/buyStockCard.css';
 
 export type Stock = {
   Symbol: string;
@@ -13,7 +14,9 @@ export type Stock = {
 
 type Props = {
   stock: Stock;
-  handleClose: () => void
+  handleClose?: () => void;
+  handleOpenRegisterCard?: (name: string, symbol: string, price: number) => void;
+  handleReturn?: () => void;
 }
 
 const Card = ({stock, handleClose}: Props) => {
@@ -25,7 +28,6 @@ const Card = ({stock, handleClose}: Props) => {
   const refreshPage = () => {
     window.location.reload();
   }
-
 
   async function simStock() {
 
@@ -59,32 +61,40 @@ const Card = ({stock, handleClose}: Props) => {
   )
 }
 
-const StockCardToSim = ({stock}: {stock: Stock}) => {
+
+const StockCardToSim = ({stock, handleOpenRegisterCard, handleReturn}: Props ) => {
 
   const [card, setCard] = useState(false);
+  const stockSymbol = stock.Symbol.toUpperCase();
+  const stockName = stock.LongName;
   
   return (
-    <main>
-    {card && <Card handleClose={() => setCard(false)} stock={stock}/>}
-    <li className="stock">
-      <div className="stock-name">
-        <p className="stock-title">
-          {stock.LongName}
-        </p>
-        <p className="stock-symbol">
-          {stock.Symbol.toUpperCase()}
-        </p>                    
+    <>
+    {card && <Card 
+      stock={stock}
+      handleOpenRegisterCard={() => setCard(true)} 
+      handleClose={() => setCard(false)}
+    />}
+    <li className="stock ol-blocker">
+      <div className="stock-name margin-left">
+        <label > {stock.LongName}</label>
+        <p className="big-font">{stockSymbol}</p>
       </div>
-      <div className="stock-info">
-          <p>R$</p>
-          <p className="stockValue">{stock.Price ? stock.Price : 0}</p>
-      </div>
-      <div>                             
+      <div className='stock-value big-font'>
+        <p>R$</p>
+        <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
+      </div>      
+      <div className='new-stock-buttons'>                             
         <button className="buy-button green-button" onClick={() => setCard(true)}>Comprar</button>
-        <button className="register-stock-button gray-button"> Registrar </button>
+        <div className="alternative-buttons">
+          <button className="register-stock-button gray-button"             
+            onClick={() => {handleOpenRegisterCard && handleOpenRegisterCard(stockName, stockSymbol, stock.Price);}}
+          > Registrar </button>
+          <button className="register-stock-button gray-button" onClick={handleReturn}> Cancelar </button>
+        </div>
       </div>                        
     </li>    
-    </main>
+    </>
   )
 }
 

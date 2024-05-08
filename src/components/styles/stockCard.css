@@ -52,12 +52,14 @@
 
 .register-stock-button{
   margin-right: 30px;
-  margin-left: 10px;
   width: 100px;
-  height: 50px;
+  height: auto;
   font-weight: bold;
   background-color: rgb(88, 88, 88);
   color: white;
+  
+  justify-content: center;
+  align-items: center;
 }
 
 .stock-value{

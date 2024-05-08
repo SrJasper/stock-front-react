@@ -4,9 +4,12 @@ import './styles/registerCard.css';
 
 type Props = {
   handleClose: () => void;
+  stockName?: string;
+  stockSymbol?: string;
+  stockPrice?: number | undefined;
 }
 
-const RegisterStockCard = ({ handleClose }: Props) => {
+const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: Props) => {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   return (
@@ -17,14 +20,14 @@ const RegisterStockCard = ({ handleClose }: Props) => {
         </div>
         <div className="input-box padding-top">
           <label>Nome da ação</label>
-          <input type="text" />
+          <input type="text" value={stockName} />
         </div>
         <div className="input-box padding-top">
           <div className="input-row">
             <label>Simbolo da ação</label>
             <label className='mark'> ⓘ </label>
           </div>
-          <input type="text" />
+          <input type="text" value={stockSymbol}/>
         </div>
         <div className="input-box padding-top">
           <label>Quantidade</label>
@@ -32,7 +35,7 @@ const RegisterStockCard = ({ handleClose }: Props) => {
         </div>
         <div className="input-box padding-top">
           <label>Preço</label>
-          <input type="text" />
+          <input type="number" value={stockPrice}/>
         </div>
         <div className="input-box padding-top">
           <label>Data de compra</label>

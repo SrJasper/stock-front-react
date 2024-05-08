@@ -20,6 +20,10 @@ function HomePage() {
   const [search, setSearch] = useState("");
 
   const [stock, setStock] = useState();
+
+  const [stockPrice, setStockPrice] = useState<number | undefined>(0);
+  const [stockName, setStockName] = useState("");
+  const [stockSymbol, setStockSymbol] = useState("");
   const [dbstockDisplay, setDBStockDisplay] = useState(true);
   
   const [loading, setLoading] = useState(false);
@@ -43,7 +47,6 @@ function HomePage() {
   async function fetchStocks(e:FormEvent ,data: string) {
     e.preventDefault();
     setLoading(true);
-    setDBStockDisplay(false);
     const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
     setStock(res.data);
     setLoading(false);
@@ -87,49 +90,95 @@ function HomePage() {
     setSelectedSymbol(event.target.value);
   };
 
-  return(
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      fetchStocks(e, search);
+    }
+  };
+
+  return (
     <main>
       <div className="header-container">
         <h1>Stocks</h1>
         <div className="profile">
           <div className="user-name">Olá, {user?.name}</div>
-          <div className="user-options">            
-            <div >minha conta</div>
+          <div className="user-options">
+            <div>minha conta</div>
             <label>|</label>
-            <div className="exit-button" onClick={handleLogout}> sair </div>
+            <div className="exit-button" onClick={handleLogout}>
+              sair
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="market-body">        
-        
-        {loading && <LoadingCard/>}
-        {register && <RegisterStockCard handleClose={() => setRegister(false)}/>}
-                
+      <div className="market-body">
+        {loading && <LoadingCard />}
+        {register && <RegisterStockCard
+          handleClose={() => setRegister(false)}
+          stockName={stockName}
+          stockSymbol={stockSymbol}
+          stockPrice={stockPrice}       
+        />}
         <div className="search-tab">
-          <label>Procurar ação</label>
-            <input  type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
-            <button className="green-button" onClick={(e) => fetchStocks(e, search)}> pesquisar </button>
-            <button className="reg-button gray-button" onClick={registerCard}> Registrar ação </button>
-            
+          <div className="search-field">
+            <label>Procurar ação</label>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <button
+              className="green-button"
+              onClick={(e) => fetchStocks(e, search)}
+            >
+              pesquisar
+            </button>
+          </div>
+          <button className="gray-button reg-button" onClick={() => {
+              registerCard()
+              setStockName("")
+              setStockSymbol("")
+              setStockPrice(undefined);
+            }}>
+            Registrar ação
+          </button>
         </div>
 
         <div className="search-symbol">
           <select value={selectedSymbol} onChange={handleSymbolChange}>
             <option value="opcao1">Selecionar ação</option>
             {stockList.map((stock, index) => (
-              <option key={index} value={stock}>{stock}</option>
+              <option key={index} value={stock}>
+                {stock}
+              </option>
             ))}
           </select>
         </div>
 
         <ol className="stock-board">
-          {dbstockDisplay && <StockCardFromDB filterSymbol={selectedSymbol !== 'opcao1' ? selectedSymbol : undefined} />} 
-          {stock && <StockCardToSim stock={stock}/>}
+          {stock && (
+            <StockCardToSim
+              stock={stock}
+              handleOpenRegisterCard={(name, symbol, price) => {
+                setRegister(true);
+                setStockName(name);
+                setStockSymbol(symbol);
+                setStockPrice(price);
+              }}
+              handleReturn={() => {setStock(undefined);}}
+            />
+          )}
+          {dbstockDisplay && (
+            <StockCardFromDB
+              filterSymbol={selectedSymbol !== "opcao1" ? selectedSymbol : undefined}
+            />
+          )}
         </ol>
       </div>
     </main>
-  )
+  );
 }
 
 export default HomePage;
