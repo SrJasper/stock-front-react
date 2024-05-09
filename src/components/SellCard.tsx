@@ -4,7 +4,6 @@ import './styles/sellCard.css';
 import axios from 'axios';
 
 import { LoadingCard } from './LoadingCard';
-import { SellRegisteredStockCard } from './SellRegisteredStockCard';
 
 export type StockToSell = {
     stockName: string;

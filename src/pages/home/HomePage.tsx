@@ -24,7 +24,6 @@ function HomePage() {
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
   const [stockSymbol, setStockSymbol] = useState("");
-  const [dbstockDisplay, setDBStockDisplay] = useState(true);
   
   const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
@@ -171,11 +170,11 @@ function HomePage() {
               handleReturn={() => {setStock(undefined);}}
             />
           )}
-          {dbstockDisplay && (
+          {
             <StockCardFromDB
               filterSymbol={selectedSymbol !== "opcao1" ? selectedSymbol : undefined}
             />
-          )}
+          }
         </ol>
       </div>
     </main>
