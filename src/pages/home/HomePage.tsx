@@ -149,13 +149,14 @@ function HomePage() {
         <div className="search-symbol">
           <select value={selectedSymbol} onChange={handleSymbolChange}>
             <option value="opcao1">Selecionar ação</option>
-            {stockList.map((stock, index) => (
+            {stockList.filter((value, index, self) => self.indexOf(value) === index).map((stock, index) => (
               <option key={index} value={stock}>
                 {stock}
               </option>
             ))}
           </select>
         </div>
+
 
         <ol className="stock-board">
           {stock && (
