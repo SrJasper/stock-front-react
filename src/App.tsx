@@ -1,3 +1,5 @@
+import RecoverPassword from "./pages/recover/RecoverPassword.tsx"
+import RegisterPage from "./pages/register/RegisterPage.tsx"
 import {  Routes, Route, Navigate } from "react-router-dom"
 import LoginPage from "./pages/login/LoginPage.tsx"
 import RegisterPage from "./pages/register/RegisterPage.tsx"
@@ -20,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/'  element={!user ? <LoginPage/> : <Navigate to="/home" />} />
         <Route path='/register' element={!user ?<RegisterPage/>: <Navigate to="/home" />} />
+        <Route path='/recover' element={!user ?<RecoverPassword/>: <Navigate to="/home" />} />
         <Route path='/home' element={user ?<HomePage/> : <Navigate to="/" />} />
       </Routes>   
     </div>

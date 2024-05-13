@@ -47,8 +47,13 @@ function HomePage() {
     e.preventDefault();
     setLoading(true);
     const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
-    setStock(res.data);
-    setLoading(false);
+    if(res.data){
+      setStock(res.data);
+      setLoading(false);
+    } else{ 
+      setLoading(false);
+      alert("Símbolo não encontrado");
+    }
   }
 
   const [user, setUser] = useState<userInfoHeader>();

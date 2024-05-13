@@ -53,9 +53,6 @@ function RegisterPage(){
         </div>
         <input type="password" className='use-width' value={userPasswordConfirmation} onChange={(e) => setUserPasswordConfirmation(e.target.value)}/>
      
-        
-
-
         <div className="next-buttons padding-top">
             <button type="submit" className="green-button">register</button>
             <button type="button" className="gray-button" onClick={Login}>voltar</button>

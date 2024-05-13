@@ -15,7 +15,7 @@ function LoginPage() {
     navigate('/register');
   }
 
-  const {isLoading, error,login} = useAuth()
+  const {isLoading, error, login} = useAuth()
 
 
   async function handleSubmit(e:React.FormEvent){
@@ -44,10 +44,13 @@ function LoginPage() {
           </label>
           <input className='use-width' type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        {/* <div  className="pass-rec centralize">
-            <button type="button">Esqueceu a senha</button>
-        </div> */}
-        {error && error.message && <p> {error.message} </p>}
+        
+        {error && error.message &&
+          <div  className="pass-rec">
+            <p> {error.message} </p>
+            <a href="/recover">Esqueci a senha</a>
+          </div>
+        }
         <div className="next-buttons padding-top">
             <button className='gray-button' type='button' onClick={goToRegisterPage}>registrar</button>
             <button className='green-button' type='submit'>login</button>
