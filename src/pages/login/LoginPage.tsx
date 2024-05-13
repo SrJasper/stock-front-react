@@ -15,8 +15,7 @@ function LoginPage() {
     navigate('/register');
   }
 
-  const {isLoading, error, login} = useAuth()
-
+  const {isLoading, error, login} = useAuth();
 
   async function handleSubmit(e:React.FormEvent){
     e.preventDefault()

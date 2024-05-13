@@ -6,13 +6,6 @@
   background-color: rgb(17, 17, 17);
 }
 
-.register-form{
-  margin-top: 15%;
-  padding: 20px;
-  background-color: rgb(39, 39, 39);
-  width: auto;
-}
-
 input{
   width: 250px;
   padding: 8px;
@@ -50,14 +43,8 @@ input{
 }
 
 .pass-rec{
-  margin-top: 2px;
-}
-.pass-rec button{
-  border: none;
-  display: none;
-  background-color: rgb(39, 39, 39);
-  color: rgb(37, 209, 66);
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 button:active{
