@@ -18,8 +18,8 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
   async function registerStock() {
 
     const data = {
-      symbol: stockSymbol,
-      longName: stockName,
+      symbol: newStockSymbol,
+      longName: newStockName,
       qnt: quantity,
       price: newStockPrice,
     };
@@ -29,6 +29,8 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
     );
   }
 
+  
+  const [ newStockName, setNewStockName ] = useState(stockName || "");
   const [ newStockPrice, setNewStockPrice ] = useState<number>(stockPrice || 0);
   const [ newStockSymbol, setNewStockSymbol ] = useState(stockSymbol || "");  
   const [quantity, setQuantity] = useState(0);
@@ -41,7 +43,7 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
         </div>
         <div className="input-box padding-top">
           <label>Nome da ação</label>
-          <input type="text" value={stockName} />
+          <input type="text" value={stockName}  onChange={(e) => setNewStockName(String(e.target.value))}/>
         </div>
         <div className="input-box padding-top">
           <div className="input-row">
