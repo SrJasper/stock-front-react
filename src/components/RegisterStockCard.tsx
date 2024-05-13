@@ -12,7 +12,6 @@ type Props = {
 
 const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: Props) => {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-  const [quantity, setQuantity] = useState(0);
 
   const token = Cookies.get("refreshToken");
 
@@ -31,7 +30,8 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
   }
 
   const [ newStockPrice, setNewStockPrice ] = useState<number>(stockPrice || 0);
-  const [ newStockSymbol, setNewStockSymbol ] = useState(stockSymbol || 0);
+  const [ newStockSymbol, setNewStockSymbol ] = useState(stockSymbol || "");  
+  const [quantity, setQuantity] = useState(0);
 
   return (
     <div className="screen-blocker">
@@ -48,7 +48,7 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
             <label>Simbolo da ação</label>
             <label className='mark'> ⓘ </label>
           </div>
-          <input type="text" value={newStockSymbol} onChange={(e) => setNewStockSymbol(Number(e.target.value))}/>
+          <input type="text" value={newStockSymbol} onChange={(e) => setNewStockSymbol(String(e.target.value))}/>
         </div>
         <div className="input-box padding-top">
           <label>Quantidade</label>
