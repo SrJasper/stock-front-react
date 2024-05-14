@@ -6,22 +6,22 @@ import './styles/stockCard.css';
 import axios from 'axios';
 import './styles/buyStockCard.css';
 
-export type Stock = {
+export type StockToRequestSim = {
   Symbol: string;
   LongName: string;
-  Price: number
+  Price: number;
 }
 
 type Props = {
-  stock: Stock;
+  stock: StockToRequestSim;
   handleClose?: () => void;
   handleOpenRegisterCard?: (name: string, symbol: string, price: number) => void;
   handleReturn?: () => void;
 }
 
-const Card = ({stock, handleClose}: Props) => {
+const Card = ({ stock, handleClose }: Props) => {
 
-  const [qnt, setQnt] = useState(0);  
+  const [qnt, setQnt] = useState(0);
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("refreshToken")
 
@@ -40,62 +40,62 @@ const Card = ({stock, handleClose}: Props) => {
       qnt: qnt
     };
     setLoading(true);
-    await axios.post("https://stock-project-seven.vercel.app/stocks/newsim", data, {headers: {Authorization: `Bearer ${token}`}});    
+    await axios.post("https://stock-project-seven.vercel.app/stocks/newsim", data, { headers: { Authorization: `Bearer ${token}` } });
     refreshPage();
   }
 
   return (
     <main>
-    {loading && <LoadingCard/>}
-    <div className='screen-blocker'>
-      <div className="card">
-        <label> Quantidade à ser comprada </label><br />
-        <input type="number" value={qnt} onChange={(e) => setQnt(parseFloat(e.target.value))}/>
-        <div className="button-field">
-          <button className='sim-button green-button' onClick={simStock}> Comprar </button>
-          <button className='sim-button gray-button' onClick={handleClose}> Cancelar </button>
+      {loading && <LoadingCard />}
+      <div className='screen-blocker'>
+        <div className="card">
+          <label> Quantidade à ser comprada </label><br />
+          <input type="number" value={qnt} onChange={(e) => setQnt(parseFloat(e.target.value))} />
+          <div className="button-field">
+            <button className='sim-button green-button' onClick={simStock}> Comprar </button>
+            <button className='sim-button gray-button' onClick={handleClose}> Cancelar </button>
+          </div>
         </div>
       </div>
-    </div>
     </main>
   )
 }
 
 
-const StockCardToSim = ({stock, handleOpenRegisterCard, handleReturn}: Props ) => {
+const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) => {
 
   const [card, setCard] = useState(false);
   const stockSymbol = stock.Symbol.toUpperCase();
   const stockName = stock.LongName;
-  
+
   return (
     <>
-    {card && <Card 
-      stock={stock}
-      handleOpenRegisterCard={() => setCard(true)} 
-      handleClose={() => setCard(false)}
-    />}
-    <li className="stock ol-blocker">
-      <div className="stock-name margin-left">
-        <label > {stock.LongName}</label>
-        <p className="big-font">{stockSymbol}</p>
-      </div>
-      <div className='stock-value big-font'>
-        <p>R$</p>
-        <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
-      </div>      
-      <div className='new-stock-buttons'>                             
-        <button className="buy-button green-button" onClick={() => setCard(true)}>Comprar</button>
-        <div className="alternative-buttons">
-          <button className="register-stock-button gray-button"             
-            onClick={() => {handleOpenRegisterCard && handleOpenRegisterCard(stockName, stockSymbol, stock.Price);}}
-          > Registrar </button>
-          <button className="register-stock-button gray-button" onClick={handleReturn}> Cancelar </button>
+      {card && <Card
+        stock={stock}
+        handleOpenRegisterCard={() => setCard(true)}
+        handleClose={() => setCard(false)}
+      />}
+      <li className="stock ol-blocker">
+        <div className="stock-name margin-left">
+          <label > {stock.LongName}</label>
+          <p className="big-font">{stockSymbol}</p>
         </div>
-      </div>                        
-    </li>    
+        <div className='stock-value big-font'>
+          <p>R$</p>
+          <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
+        </div>
+        <div className='new-stock-buttons'>
+          <button className="buy-button green-button" onClick={() => setCard(true)}>Comprar</button>
+          <div className="alternative-buttons">
+            <button className="register-stock-button gray-button"
+              onClick={() => { handleOpenRegisterCard && handleOpenRegisterCard(stockName, stockSymbol, stock.Price); }}
+            > Registrar </button>
+            <button className="register-stock-button gray-button" onClick={handleReturn}> Cancelar </button>
+          </div>
+        </div>
+      </li>
     </>
   )
 }
 
-export  { StockCardToSim }
+export { StockCardToSim }

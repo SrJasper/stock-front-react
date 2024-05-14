@@ -20,11 +20,12 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
     const data = {
       symbol: newStockSymbol,
       longName: newStockName,
-      qnt: quantity,
       price: newStockPrice,
+      qnt: quantity,
+      operationDate: date,
     };
 
-    await axios.post("https://stock-project-seven.vercel.app/stocks/regsim", data, 
+    await axios.post("http://localhost:3000/stocks/regsim", data, 
     {headers: {Authorization: `Bearer ${token}`}}
     );
   }
@@ -43,7 +44,7 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
         </div>
         <div className="input-box padding-top">
           <label>Nome da ação</label>
-          <input type="text" value={stockName}  onChange={(e) => setNewStockName(String(e.target.value))}/>
+          <input type="text" value={newStockName} onChange={(e) => setNewStockName(String(e.target.value))}/>
         </div>
         <div className="input-box padding-top">
           <div className="input-row">
