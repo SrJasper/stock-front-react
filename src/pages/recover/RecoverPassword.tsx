@@ -14,7 +14,7 @@ function RecoverPassword() {
 
   async function RecoverPassword () {
     console.log('user: ', user);
-    const response = await axios.get("http://localhost:3000/users/info/" + user);
+    const response = await axios.get("https://stock-project-seven.vercel.app/users/info/" + user);
     console.log(response.data)
   }
 

@@ -10,9 +10,10 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyle.css';
 
-export type userInfoHeader = {
-  name: string,
-  email: string
+type userInfo = {
+  id: string;
+  email: string;
+  name?: string;
 }
 
 function HomePage() {
@@ -56,12 +57,13 @@ function HomePage() {
     }
   }
 
-  const [user, setUser] = useState<userInfoHeader>();
+  const [user, setUser] = useState<userInfo>();
   async function userInfo() {
     try {
-      const response = await axios.get("https://stock-project-seven.vercel.app/users/info",
+      const response = await axios.get("https://stock-project-seven.vercel.app/users/info/",
       {headers: {Authorization: `Bearer ${token}`}}
     );
+    console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

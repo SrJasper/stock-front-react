@@ -50,7 +50,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
     setLoading(true);
     const prices = [];
     for (const stockToBePriced of data) {      
-      const res = await axios.get(`http://localhost:3000/stocks/search/${stockToBePriced}`, {
+      const res = await axios.get(`https://stock-project-seven.vercel.app/stocks/search/${stockToBePriced}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       prices.push(res.data.Price);      

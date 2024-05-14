@@ -25,7 +25,7 @@ const RegisterStockCard = ({ handleClose, stockName, stockSymbol, stockPrice }: 
       operationDate: date,
     };
 
-    await axios.post("http://localhost:3000/stocks/regsim", data, 
+    await axios.post("https://stock-project-seven.vercel.app/stocks/regsim", data, 
     {headers: {Authorization: `Bearer ${token}`}}
     );
   }
