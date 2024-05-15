@@ -24,8 +24,9 @@
   font-size: smaller;
 }
 
-.user-options div{
+.user-options p{
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .user-options label{

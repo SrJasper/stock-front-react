@@ -102,6 +102,10 @@ function HomePage() {
     }
   };
 
+  function updateAccount() {
+    navigate("/update");
+  }
+
   return (
     <main>
       <div className="header-container">
@@ -109,11 +113,11 @@ function HomePage() {
         <div className="profile">
           <div className="user-name">Olá, {user?.name}</div>
           <div className="user-options">
-            <div>minha conta</div>
+            <p onClick={updateAccount}>minha conta</p>
             <label>|</label>
-            <div className="exit-button" onClick={handleLogout}>
+            <p className="exit-button" onClick={handleLogout}>
               sair
-            </div>
+            </p>
           </div>
         </div>
       </div>

@@ -11,6 +11,12 @@ body{
   background-color: rgb(17, 17, 17);
 }
 
+
+.use-width{
+  width:100%;
+}
+
+
 .loading-card {
   position: absolute;
   top: 50%;

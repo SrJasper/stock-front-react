@@ -38,10 +38,6 @@ input{
   gap: 10px;
 }
 
-.use-width{
-  width:100%;
-}
-
 .pass-rec{
   display: flex;
   flex-direction: column;
