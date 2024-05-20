@@ -15,7 +15,6 @@ const SellRegisteredStockCard = ({ stock, handleClose } : Props) => {
   function MakeCard(price: number) {
     stock.price = price;
     setCard(true);
-
   }
 
   const [price, setPrice] = useState(0);

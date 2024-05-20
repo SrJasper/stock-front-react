@@ -11,7 +11,7 @@ type Props = {
   handleClose: () => void;
 }
 
-const SellCard = ({ stock, handleClose}: Props) => {
+const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
     
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("refreshToken");
@@ -19,7 +19,7 @@ const SellCard = ({ stock, handleClose}: Props) => {
   const [card, setCard] = useState(false);
   const [stockInfo, setStockInfo] = useState<StockToSell>();
 
-  useEffect(() => {GotInfo()}, []);
+  useEffect(() => {GotInfo(); console.log("stock recebido", stock)}, [stock]);
   async function GotInfo() {
     setLoading(true);        
     try {
@@ -40,6 +40,7 @@ const SellCard = ({ stock, handleClose}: Props) => {
   }
   useEffect(() => {
       setCard(true);
+      //console.log(stockInfo);
   }, [stockInfo]);
 
   async function SellStock() {
@@ -134,8 +135,8 @@ const SellCard = ({ stock, handleClose}: Props) => {
         </div>
     </div>
     </>}
-</>
-)
+  </>
+  )
 }
 
 export { SellCard }

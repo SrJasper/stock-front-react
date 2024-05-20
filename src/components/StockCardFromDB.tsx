@@ -6,47 +6,29 @@ import { LoadingCard } from './LoadingCard';
 import { SellRegisteredStockCard } from './SellRegisteredStockCard';
 import { Stock } from './types';
 
-
-
 const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) => {
   const token = Cookies.get("refreshToken");
   const [card, setCard] = useState(false);
-
-  
+  const [cardReg, setCardReg] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [stocks, setStocks] = useState<Stock[]>([]);
-  const [stockToFindPrice, setStockToFindPrice] = useState([]);
+  const [stockToFindPrice, setStockToFindPrice] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
+
   const fetchData = async () => {
     try {
       const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
       {headers: {Authorization: `Bearer ${token}`}}
-    );
+      );
       setStocks(response.data);
       setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }
-  useEffect(() => {
-    fetchData();  
-  }, []);
+  };
 
-
-  
-  const [cardReg, setCardReg] = useState(false);
-  const [loading, setLoading] = useState(false);
-  async function SellStockCard(stock: Stock) {
-
-    if(stock.simulation){
-      setCard(true);
-    } else {    
-      setCardReg(true);
-    }
-  }
-
-
-  const [loaded, setLoaded] = useState(false);
-  const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
-  async function StockPriceFromAPI(data: string[]) {
+  const StockPriceFromAPI = async (data: string[]) => {
     setLoading(true);
     const prices = [];
     for (const stockToBePriced of data) {      
@@ -58,29 +40,40 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
     setStockPriceFromApi(prices);
     setLoaded(true);
     setLoading(false);
-  }
+  };
+
+  useEffect(() => {
+    fetchData();  
+  }, []);
+
   useEffect(() => {
     if (stockToFindPrice.length > 0 && !loaded) {
       StockPriceFromAPI(stockToFindPrice);
     }
   }, [stockToFindPrice, loaded]);
-  useEffect(() => {}, [stockPriceFromApi]);
- 
+
+  async function SellStockCard(stock: Stock) {
+    if(stock.simulation){
+      setCard(true);
+    } else {    
+      setCardReg(true);
+    }
+    console.log("stock enviado", stock);
+  }
 
   return (
     <>
+      {loading && <LoadingCard/>}
+      {card && stocks.find(s => s.simulation) && (
+        <SellCard stock={stocks.find(s => s.simulation)!} handleClose={() => setCard(false)} />
+      )}
+      {cardReg && stocks.find(s => !s.simulation) && (
+        <SellRegisteredStockCard stock={stocks.find(s => !s.simulation)!} handleClose={() => setCardReg(false)} />
+      )}
       {stocks.length > 0 ? (
         stocks
           .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
           .map((stock, index) => (
-          <>
-          {loading && <LoadingCard/>}          
-          {card && (
-            <SellCard stock={stock} handleClose={()=>setCard(false)}/>
-          )}
-          {cardReg && (
-            <SellRegisteredStockCard stock={stock} handleClose={() => setCardReg(false)} />
-          )}
             <li className="stock" key={stock.id}>
               <div className="stock-name margin-left">
                 <label > {stock.longName}</label>
@@ -89,14 +82,14 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
               
               <div className="stock-comparison">
                 <div className="stock-info value-bought">
-                  <label className='sotck-label' >valor da compra</label>
+                  <label className='stock-label' >valor da compra</label>
                   <div className='stock-value big-font'>
                     <p>R$</p>
-                    <p className='big-font'>{stock.price ? stock.price : 0}</p>
+                    <p className='big-font'> {stock.price ? stock.price : 0}</p>
                   </div>
                 </div>
                 <div className="stock-info value-to-sell">
-                  <label className='sotck-label' >valor atual</label>
+                  <label className='stock-label' >valor atual</label>
                   <div className='stock-value big-font'>
                     <p className='big-font'>{'R$'+stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
                   </div>
@@ -104,15 +97,15 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
               </div>
               
               <div>
-                {Number(stockPriceFromApi[index]) > stock.price ? (
-                  <button className="buy-button green-button" onClick={() => SellStockCard(stock)}>Vender</button>
-                ) : (
-                  <button className="buy-button red-button" onClick={() => SellStockCard(stock)}>Vender</button>
-                )}
+                <button
+                  className={`buy-button ${Number(stockPriceFromApi[index]) > stock.price ? "green-button" : "red-button"}`}
+                  onClick={() => SellStockCard(stock)}
+                >
+                  Vender
+                </button>
               </div>
             </li>
-          </>
-        ))
+          ))
         ) : (
           <p> Loading </p>
       )}

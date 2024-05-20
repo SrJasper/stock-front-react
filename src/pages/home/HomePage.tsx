@@ -63,7 +63,6 @@ function HomePage() {
       const response = await axios.get("https://stock-project-seven.vercel.app/users/info/",
       {headers: {Authorization: `Bearer ${token}`}}
     );
-    console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
