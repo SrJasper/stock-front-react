@@ -91,7 +91,8 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
                 <div className="stock-info value-to-sell">
                   <label className='stock-label' >valor atual</label>
                   <div className='stock-value big-font'>
-                    <p className='big-font'>{'R$'+stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
+                    <p>R$</p>
+                    <p className='big-font price-display'>{stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
                   </div>
                 </div>
               </div>
