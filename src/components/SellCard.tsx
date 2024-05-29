@@ -19,14 +19,14 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
   const [card, setCard] = useState(false);
   const [stockInfo, setStockInfo] = useState<StockToSell>();
 
-  useEffect(() => {GotInfo(); console.log("stock recebido", stock)}, [stock]);
+  useEffect(() => {GotInfo();}, [stock]);
   async function GotInfo() {
     setLoading(true);        
     try {
       const response = await axios.post("https://stock-project-seven.vercel.app/stocks/sell",
         {   
           id: stock.id,
-          sellPrice: stock.price * stock.qnt,
+          sellPrice: stock.price,
           provents: stock.provents,
           date: stock.operationDate
         },
@@ -40,7 +40,6 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
   }
   useEffect(() => {
       setCard(true);
-      //console.log(stockInfo);
   }, [stockInfo]);
 
   async function SellStock() {

@@ -58,7 +58,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
     } else {    
       setCardReg(true);
     }
-    console.log("stock enviado", stock);
   }
 
   return (

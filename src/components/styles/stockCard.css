@@ -6,10 +6,6 @@
   margin-bottom: 10px;
 }
 
-.margin-left{
-  margin-left: 50px;
-}
-
 .stock-name{
   display: flex;
   flex-direction: column;

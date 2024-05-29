@@ -39,3 +39,11 @@ body{
 .gray-button{
   background-color: rgb(78, 78, 78);
 }
+
+.margin-left{
+  margin-left: 50px;
+}
+
+.margin-top{
+  margin-top: 10px;
+}

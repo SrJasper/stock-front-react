@@ -38,7 +38,20 @@
 }
 
 .button-field{
-  margin-top: 10px;
   display: flex;
   justify-content: space-around;
+}
+
+.button-field button{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.button-left-margin{
+  margin-right: 5px;
+}
+
+.button-right-margin{
+  margin-left: 5px;
 }
