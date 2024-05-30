@@ -81,7 +81,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
                 <div className="information-text">
                     <span>
                         <span className='orientation-text'>R$</span>
-                        <span className="money-earned">{stockInfo.sellPrice}</span>
+                        <span className="money-earned">{stockInfo.sellPrice.toFixed(2)}</span>
                     </span>
                     <span className='orientation-text'>{stockInfo.sellPriceSingle}</span>
                 </div>
@@ -92,7 +92,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
                 <div className="information-text">
                     <span>
                         <span className='orientation-text'>R$</span>
-                        <span className="money-spent">{stockInfo.paidPrice}</span>
+                        <span className="money-spent">{stockInfo.paidPrice.toFixed(2)}</span>
                     </span>
                     <span className='orientation-text'>{stockInfo.paidPriceSingle}</span>
                 </div>

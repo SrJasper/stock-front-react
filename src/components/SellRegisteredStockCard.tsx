@@ -36,6 +36,10 @@ const SellRegisteredStockCard = ({ stock, handleClose } : Props) => {
         <label> Proventos </label><br />
         <input type="number" onChange={(e) => {setProvents(Number(e.target.value))}}/>
       </div>
+      <div className='margin-top'>
+        <label> Data da venda </label><br />
+        <input type="date" onChange={(e) => {setProvents(Number(e.target.value))}}/>
+      </div>
       <div className="button-field use-width">
         <button className='sim-button green-button use-width button-left-margin' onClick={() => MakeCard(price, provents)}> Vender </button>
         <button className='sim-button gray-button use-width button-margin-right' onClick={handleClose}> Cancelar </button>
