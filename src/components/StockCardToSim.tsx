@@ -65,7 +65,12 @@ const Card = ({ stock, handleClose }: Props) => {
 const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) => {
 
   const [card, setCard] = useState(false);
-  const stockSymbol = stock.Symbol.toUpperCase();
+  let stockSymbol: string;
+  if(stock.Symbol){
+    stockSymbol = stock.Symbol.toUpperCase();
+  } else{
+    stockSymbol = 'tá inventando essa merda né campeão';
+  }
   const stockName = stock.LongName;
 
   return (

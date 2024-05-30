@@ -93,7 +93,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
                 </div>
 
                 <div className="orientation-text padding-top">
-                    valor de compra (não cor)
+                    valor de compra (corrigido)
                 </div>
                 <div className="information-text">
                     <span>
