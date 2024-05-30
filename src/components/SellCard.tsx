@@ -8,10 +8,11 @@ import { Stock, StockToSell } from './types';
 
 type Props = {
   stock: Stock;
+  date?: Date;
   handleClose: () => void;
 }
 
-const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
+const SellCard: React.FC<Props> = ({ stock, date, handleClose })=> {
     
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("refreshToken");
@@ -23,6 +24,11 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
   async function GotInfo() {
     setLoading(true);        
     try {
+      console.log(
+      'id: ' + stock.id +
+      '\nsellPrice: ' + stock.price +
+      '\nprovents: ' + stock.provents +
+      '\ndate: ' + stock.operationDate);
       const response = await axios.post("https://stock-project-seven.vercel.app/stocks/sell",
         {   
           id: stock.id,
