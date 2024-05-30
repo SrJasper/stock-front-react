@@ -12,7 +12,7 @@ type Props = {
   handleClose: () => void;
 }
 
-const SellCard: React.FC<Props> = ({ stock, date, handleClose })=> {
+const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
     
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("refreshToken");
