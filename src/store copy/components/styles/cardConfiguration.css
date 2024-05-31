@@ -32,7 +32,6 @@
 .button-field{
   display: flex;
   justify-content: space-around;
-  gap: 10px;
 }
 
 .button-field button{

@@ -10,12 +10,12 @@
   justify-content: center; 
   align-items: center;
 }
-.separation-line{
+.mobile-separation-line{
   width: 100%;
   height: 3px;
   background-color: white;
   border-radius: 0%;
-  margin: 0 auto; /* Add this line to center the element horizontally */
+  margin: 0 auto;
 }
 
 .card {
@@ -32,7 +32,6 @@
 .button-field{
   display: flex;
   justify-content: space-around;
-  gap: 10px;
 }
 
 .button-field button{

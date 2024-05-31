@@ -1,0 +1,78 @@
+.stock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+}
+
+.stock-name{
+  display: flex;
+  flex-direction: column;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.stock-comparison{
+  display: flex;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: .5rem;
+  align-items: center;
+  width: 11rem;
+}
+
+
+
+.buy-button{
+  width: 150px;
+  height: 4rem;
+  font-weight: bold;
+  font-size: 1.7rem;
+  color: white;
+}
+
+.register-stock-button{
+  width: 100px;
+  height: auto;
+  font-weight: bold;
+  color: white;
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-value{
+  display:flex;
+}
+
+.stock-value-sim{
+  display:flex;
+  flex-direction: column;
+}
+
+.value-new-stock{
+  display:flex;
+}
+
+.sotck-label{
+  font-size: 20px;
+}
+
+.sim-button{
+  padding: 2%;
+}
+
+.stock-title{
+  font-size: 30px;
+  white-space: nowrap;
+}
+
+.stock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

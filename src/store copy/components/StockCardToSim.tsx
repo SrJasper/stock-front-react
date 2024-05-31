@@ -50,10 +50,10 @@ const Card = ({ stock, handleClose }: Props) => {
       <div className='screen-blocker'>
         <div className="card">
           <label> Quantidade à ser comprada </label><br />
-          <input className='default-input margin-top' type="number" value={qnt} onChange={(e) => setQnt(parseFloat(e.target.value))} />
+          <input type="number" value={qnt} onChange={(e) => setQnt(parseFloat(e.target.value))} />
           <div className="button-field">
-            <button className='use-width sim-button green-button' onClick={simStock}> Comprar </button>
-            <button className='use-width sim-button' onClick={handleClose}> Cancelar </button>
+            <button className='sim-button green-button' onClick={simStock}> Comprar </button>
+            <button className='sim-button' onClick={handleClose}> Cancelar </button>
           </div>
         </div>
       </div>
