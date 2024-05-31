@@ -3,9 +3,9 @@ import { RegisterStockCardMobile } from "../../componentsMobile/RegisterStockCar
 import { StockCardToSim } from "../../componentsMobile/StockCardToSimMobile";
 import StockCardFromDB from "../../componentsMobile/StockCardFromDBMobile";
 import { LoadingCard } from "../../componentsMobile/LoadingCardMobile";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../store/useAuth";
 import { FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../store/useAuth';
 import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyleMobile.css';

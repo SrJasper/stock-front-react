@@ -74,5 +74,4 @@ const useAuth = create<States & Actions>((set) => ({
 
 })
 )
-
 export {useAuth}
