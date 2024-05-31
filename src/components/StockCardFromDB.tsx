@@ -73,38 +73,39 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
         stocks
           .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
           .map((stock, index) => (
-            <li className="stock" key={stock.id}>
-              <div className="stock-name margin-left">
-                <label > {stock.longName}</label>
-                <p className="big-font">{stock.symbol}</p>
-              </div>
-              
-              <div className="stock-comparison">
-                <div className="stock-info value-bought">
-                  <label className='stock-label' >valor da compra</label>
-                  <div className='stock-value big-font'>
-                    <p>R$</p>
-                    <p className='big-font'> {stock.price ? stock.price : 0}</p>
+            <>
+              <hr className='separation-line'/> 
+              <li className="stock" key={stock.id}>
+                <div className="stock-name">
+                  <label > {stock.longName}</label>
+                  <p className="big-font">{stock.symbol}</p>
+                </div>
+                
+                <div className="stock-comparison">
+                  <div className="stock-info">
+                    <label className='stock-label' >valor da compra</label>
+                    <div className='stock-value big-font'>
+                      <p className='big-font red-font'> {stock.price ? stock.price : 0}</p>
+                    </div>
+                  </div>
+                  <div className="stock-info value-to-sell">
+                    <label className='stock-label' >valor atual</label>
+                    <div className='stock-value big-font'>
+                      <p className='big-font green-font'>{stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="stock-info value-to-sell">
-                  <label className='stock-label' >valor atual</label>
-                  <div className='stock-value big-font'>
-                    <p>R$</p>
-                    <p className='big-font price-display'>{stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
-                  </div>
+                
+                <div>
+                  <button
+                    className={`buy-button ${Number(stockPriceFromApi[index]) > stock.price ? "green-button" : "red-button"}`}
+                    onClick={() => SellStockCard(stock)}
+                  >
+                    Vender
+                  </button>
                 </div>
-              </div>
-              
-              <div>
-                <button
-                  className={`buy-button ${Number(stockPriceFromApi[index]) > stock.price ? "green-button" : "red-button"}`}
-                  onClick={() => SellStockCard(stock)}
-                >
-                  Vender
-                </button>
-              </div>
-            </li>
+              </li>
+            </>
           ))
         ) : (
           <p> Loading </p>

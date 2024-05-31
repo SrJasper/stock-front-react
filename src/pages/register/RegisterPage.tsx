@@ -54,7 +54,7 @@ function RegisterPage(){
      
         <div className="next-buttons padding-top">
             <button type="submit" className="green-button">register</button>
-            <button type="button" className="gray-button" onClick={Login}>voltar</button>
+            <button type="button" onClick={Login}>voltar</button>
         </div>
     </form>
     </main>

@@ -53,7 +53,7 @@ const SellRegisteredStockCard = ({ stock, handleClose } : Props) => {
       
       <div className="button-field use-width">
         <button className='sim-button green-button use-width button-left-margin' onClick={() => MakeCard(price, provents, sellDate)}> Vender </button>
-        <button className='sim-button gray-button use-width button-margin-right' onClick={handleClose}> Cancelar </button>
+        <button className='sim-button use-width button-margin-right' onClick={handleClose}> Cancelar </button>
       </div>
     </div>
   </div>

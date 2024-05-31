@@ -51,7 +51,7 @@ function LoginPage() {
           </div>
         }
         <div className="next-buttons padding-top">
-            <button className='gray-button' type='button' onClick={goToRegisterPage}>registrar</button>
+            <button type='button' onClick={goToRegisterPage}>registrar</button>
             <button className='green-button' type='submit'>login</button>
         </div>
       </form>

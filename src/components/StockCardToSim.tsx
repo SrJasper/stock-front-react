@@ -53,7 +53,7 @@ const Card = ({ stock, handleClose }: Props) => {
           <input type="number" value={qnt} onChange={(e) => setQnt(parseFloat(e.target.value))} />
           <div className="button-field">
             <button className='sim-button green-button' onClick={simStock}> Comprar </button>
-            <button className='sim-button gray-button' onClick={handleClose}> Cancelar </button>
+            <button className='sim-button' onClick={handleClose}> Cancelar </button>
           </div>
         </div>
       </div>
@@ -80,22 +80,26 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
         handleOpenRegisterCard={() => setCard(true)}
         handleClose={() => setCard(false)}
       />}
+      <hr className='separation-line'/>
       <li className="stock ol-blocker">
-        <div className="stock-name margin-left">
+        <div className="stock-name">
           <label > {stock.LongName}</label>
           <p className="big-font">{stockSymbol}</p>
         </div>
-        <div className='stock-value big-font'>
-          <p>R$</p>
-          <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
+        <div className='stock-value-sim'>
+          <p>Valor da compra</p>
+          <span className='value-new-stock'>
+            <p className='big-font'>R$</p>
+            <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
+          </span>
         </div>
         <div className='new-stock-buttons'>
-          <button className="buy-button green-button" onClick={() => setCard(true)}>Comprar</button>
+          <button className="buy-button margin-right green-button" onClick={() => setCard(true)}>Comprar</button>
           <div className="alternative-buttons">
-            <button className="register-stock-button gray-button"
+            <button className="register-stock-button"
               onClick={() => { handleOpenRegisterCard && handleOpenRegisterCard(stockName, stockSymbol, stock.Price); }}
             > Registrar </button>
-            <button className="register-stock-button gray-button" onClick={handleReturn}> Cancelar </button>
+            <button className="register-stock-button" onClick={handleReturn}> Cancelar </button>
           </div>
         </div>
       </li>

@@ -34,7 +34,7 @@ function RecoverPassword() {
         </div>
 
         <div className="next-buttons padding-top">
-          <button className='gray-button' type='submit' >recuperar e-mail</button>
+          <button type='submit' >recuperar e-mail</button>
           <button className='green-button' type='button' onClick={goToLoginPage}>voltar</button>
         </div>
       </form>

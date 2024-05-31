@@ -75,7 +75,7 @@ function RegisterPage(){
      
         <div className="next-buttons padding-top">
             <button type="submit" className="green-button">atualizar</button>
-            <button type="button" className="gray-button" onClick={goToHomePage}>voltar</button>
+            <button type="button" onClick={goToHomePage}>voltar</button>
         </div>
         <div>
           <button 

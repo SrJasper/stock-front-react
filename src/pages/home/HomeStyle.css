@@ -1,48 +1,41 @@
 .header-container{
-  background-color: green;
   display: flex;
   padding: 0;
-  margin: 0;
   width: 100%;
   justify-content: space-between;
 }
 
 .header-container h1{
-  padding: 2%;
+  font-size: 70px;
 }
 
 .profile{
   align-content: center;
-  margin-right: 3rem;
 }
 .user-name{
-  font-size: 20px;
+  font-size: 25px;
 }
 
-.user-options{
-  display: flex;
-  font-size: smaller;
-}
-
-.user-options p{
+.option-icon{
+  width: 30px;
   cursor: pointer;
-  text-decoration: underline;
 }
-
-.user-options label{
-  margin-left: 10px;
-  margin-right: 10px;
+.gear-icon{
+  margin-left: .7rem;
 }
-
+.exit-icon{
+  margin-left: 1rem;
+}
 .market-body{
   margin-top: 3%;
 }
 
 .search-tab{
   display:flex;
-  margin-left: 5%;
   align-items: center;
   justify-content:space-between;
+  margin-bottom: 10px;
+  height: 50px;
 }
 
 .search-field{
@@ -53,33 +46,52 @@
 
 .search-tab label{
   white-space: nowrap;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
 }
 
 .search-tab input{    
   margin-left: 5px;
   margin-right: 10px;
-  height: 35px;
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+  font-size: 1.5rem;
 }
 
 .search-tab button{
-  height: 35px;
   padding-left: 1%;
   padding-right: 1%;
-  font-size: medium;
-  font-weight: bold;
-  white-space: nowrap;
+  font-size: 1.5rem;
 }
 
 .reg-button{
-  margin-right: 1rem;
+  height: 56px;
 }
 
-.sell-button{
-  color:black;
-  height: 50px;
-  width: 50px;
-  margin-right: 20px;
+.search-ballon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #ffffff;
+  margin-left: 10px;
+  padding-right: 15px;
+}
+
+.search-ballon input{
+  border-top: none;
+  border-bottom:none;
+  border-left: none;
+  border-radius: 0%;
+  outline: none;
+}
+
+.search-button{
+  background-color: rgba(134, 98, 98, 0);
+  border: none;
+}
+
+.link-stocks{
+  font-size: 1.3rem;
 }
 
 .search-symbol{
@@ -89,9 +101,30 @@
 }
 
 .search-symbol select{
-  background-color: rgb(211, 211, 211);
-  color: black;
+  background-color: rgb(0, 0, 0);
+  padding-left: 10px;
+  width: 12.3rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border: 3px solid white;
+  color: white;
+
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;  
+  outline: none;
 }
+
+.search-symbol::after {
+  content: '\2b9f';
+  font-size: bold;
+  color: rgb(255, 255, 255);
+  position: relative;
+  right: 23px;
+  pointer-events: none;
+}
+
 .search-symbol select option {
-  color: black;
+  color: white;
 }

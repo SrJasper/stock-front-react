@@ -95,12 +95,6 @@ function HomePage() {
     setSelectedSymbol(event.target.value);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      fetchStocks(e, search);
-    }
-  };
-
   function updateAccount() {
     navigate("/update");
   }
@@ -108,15 +102,20 @@ function HomePage() {
   return (
     <main>
       <div className="header-container">
-        <h1>Stocks</h1>
+        <h1>Gestor de ações</h1>
         <div className="profile">
           <div className="user-name">Olá, {user?.name}</div>
-          <div className="user-options">
-            <p onClick={updateAccount}>minha conta</p>
-            <label>|</label>
-            <p className="exit-button" onClick={handleLogout}>
-              sair
-            </p>
+          <div>
+            <img
+              className="option-icon gear-icon"
+              onClick={updateAccount} 
+              src="/images/gear.png" alt="" 
+            />
+            <img
+              className="option-icon exit-icon"
+              onClick={handleLogout} 
+              src="/images/exit.png" alt="" 
+            />
           </div>
         </div>
       </div>
@@ -130,22 +129,30 @@ function HomePage() {
           stockPrice={stockPrice}       
         />}
         <div className="search-tab">
-          <div className="search-field">
+          <div className="search-field use-height">
             <label>Procurar ação</label>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <button
-              className="green-button"
-              onClick={(e) => fetchStocks(e, search)}
-            >
-              pesquisar
-            </button>
+            <div className="search-ballon">
+              <input
+                className="use-height"
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    fetchStocks(e, search);
+                  }
+                }}
+              />
+              <button
+                className="use-height search-button"
+                onClick={(e) => fetchStocks(e, search)}
+              >
+                pesquisar
+              </button>
+            </div>
           </div>
-          <button className="gray-button reg-button" onClick={() => {
+          
+          <button className="reg-button use-height" onClick={() => {
               registerCard()
               setStockName("")
               setStockSymbol("")
@@ -154,6 +161,13 @@ function HomePage() {
             Registrar ação
           </button>
         </div>
+
+        <a 
+          className="link-stocks"
+          href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
+          target="_blank" 
+          rel="noopener noreferrer">Ver lista de ações (ibovespa)
+        </a>
 
         <div className="search-symbol">
           <select value={selectedSymbol} onChange={handleSymbolChange}>
@@ -185,6 +199,7 @@ function HomePage() {
               filterSymbol={selectedSymbol !== "opcao1" ? selectedSymbol : undefined}
             />
           }
+          <hr className='separation-line'/>
         </ol>
       </div>
     </main>
