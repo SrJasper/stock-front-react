@@ -31,30 +31,30 @@ function RegisterPage(){
   return (
     <main>
       {isLoading && <LoadingCard/>}
-      <form onSubmit={handleSubmit} className="register-form">
-        <div className="title">
-            registrar nova conta
+      <form onSubmit={handleSubmit} className='register-form'>
+        <div className='title'>
+            Registrar nova conta
         </div>
-        <div className="orientation-text">
+        <div className='orientation-text'>
             nome
         </div>
-        <input className='use-width' type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
-        <div className="orientation-text padding-top">
+        <input className='use-width default-input' type='text' value={userName} onChange={(e) => setUserName(e.target.value)}/>
+        <div className='orientation-text padding-top'>
             e-mail
         </div>
-        <input className='use-width' type="text" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}/>
-        <div className="orientation-text padding-top">
+        <input className='use-width default-input' type='text' value={userEmail} onChange={(e) => setUserEmail(e.target.value)}/>
+        <div className='orientation-text padding-top'>
             senha
         </div>    
-        <input type="password" className='use-width' value={userPassword} onChange={(e) => setUserPassword(e.target.value)}/>
-        <div className="orientation-text padding-top">
+        <input type='password' className='use-width default-input' value={userPassword} onChange={(e) => setUserPassword(e.target.value)}/>
+        <div className='orientation-text padding-top'>
             confirme sua senha
         </div>
-        <input type="password" className='use-width' value={userPasswordConfirmation} onChange={(e) => setUserPasswordConfirmation(e.target.value)}/>
+        <input type='password' className='use-width default-input' value={userPasswordConfirmation} onChange={(e) => setUserPasswordConfirmation(e.target.value)}/>
      
-        <div className="next-buttons padding-top">
-            <button type="submit" className="green-button">register</button>
-            <button type="button" onClick={Login}>voltar</button>
+        <div className='next-buttons padding-top'>
+            <button type='submit' className='green-button small-font'>register</button>
+            <button type='button' className='small-font' onClick={Login}>voltar</button>
         </div>
     </form>
     </main>

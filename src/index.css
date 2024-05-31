@@ -22,13 +22,67 @@ body button{
   border: 3px solid white;
 }
 
-.use-heig{
+.screen-blocker{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.527);
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  z-index: 2;
 }
 
-.use-width{
-  width:100%;
+.screen-blocker-black{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  z-index: 2;
 }
 
+.register-form{
+  padding: 40px;
+  background-color: #000000;
+  border: 3px solid rgb(255, 255, 255);
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 350px;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.next-buttons{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  gap: 10px;
+}
+
+.default-input{
+  background-color: #000000;
+  border: 3px solid rgb(255, 255, 255);
+  color: white;
+  outline: none;
+}
 
 .loading-card {
   position: absolute;
@@ -42,12 +96,23 @@ body button{
   z-index: 10000;
 }
 
+.next-buttons button{
+  width: 70px;
+  cursor: pointer;
+  flex-grow: 0.5;
+  padding: 3px;
+}
+
+.orientation-text{
+  color:rgb(255, 255, 255);
+}
+
 .green-button{
   border: 3px solid rgb(0, 160, 0);
 }
 
 .red-button{
-  border : 3px solid rgb(223, 0, 0);
+  border: 3px solid rgb(223, 0, 0);
 }
 
 .red-font{
@@ -68,4 +133,16 @@ body button{
 
 .margin-top{
   margin-top: 10px;
+}
+
+.big-font{
+  font-size: 60px;
+}
+
+.small-font{
+  font-size: 20px;
+}
+
+.use-width{
+  width:100%;
 }

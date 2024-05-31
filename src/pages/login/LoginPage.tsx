@@ -24,24 +24,23 @@ function LoginPage() {
   }
 
   return (
-    <main className='login'>
-      
+    <main className='login'>      
       {isLoading && <LoadingCard/>}
       <form onSubmit={handleSubmit} className="register-form">
         <h1 className="title">
-            Stocks
+          Gestor de ações
         </h1>
         <div className="field-box">
           <label className="orientation-text">
               e-mail
           </label>
-          <input className='use-width' type="text" value={user} onChange={(e) => setUser(e.target.value)}/>
+          <input className='use-width default-input' type="text" value={user} onChange={(e) => setUser(e.target.value)}/>
         </div>
         <div className="field-box">
           <label className="orientation-text padding-top">
               senha
           </label>
-          <input className='use-width' type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input className='use-width default-input' type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
         
         {error && error.message &&
@@ -51,8 +50,8 @@ function LoginPage() {
           </div>
         }
         <div className="next-buttons padding-top">
-            <button type='button' onClick={goToRegisterPage}>registrar</button>
-            <button className='green-button' type='submit'>login</button>
+            <button className='small-font' type='button' onClick={goToRegisterPage}>registrar</button>
+            <button className='small-font green-button' type='submit'>login</button>
         </div>
       </form>
     </main>

@@ -77,19 +77,19 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
               <hr className='separation-line'/> 
               <li className="stock" key={stock.id}>
                 <div className="stock-name">
-                  <label > {stock.longName}</label>
+                  <label className='small-font'> {stock.longName}</label>
                   <p className="big-font">{stock.symbol}</p>
                 </div>
                 
                 <div className="stock-comparison">
                   <div className="stock-info">
-                    <label className='stock-label' >valor da compra</label>
+                    <label className='stock-label small-font'>valor da compra</label>
                     <div className='stock-value big-font'>
                       <p className='big-font red-font'> {stock.price ? stock.price : 0}</p>
                     </div>
                   </div>
                   <div className="stock-info value-to-sell">
-                    <label className='stock-label' >valor atual</label>
+                    <label className='stock-label small-font' >valor atual</label>
                     <div className='stock-value big-font'>
                       <p className='big-font green-font'>{stockPriceFromApi[index] ? Number(stockPriceFromApi[index]) : "Não"}</p>
                     </div>

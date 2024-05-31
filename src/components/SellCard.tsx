@@ -66,7 +66,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
       {card && stockInfo && 
       <> 
       <div>
-        <div className="screen-blocker">
+        <div className="screen-blocker-black">
           <form className="sell-stock-form">
 
             <div className="title">
@@ -132,9 +132,9 @@ const SellCard: React.FC<Props> = ({ stock, handleClose })=> {
                     )}
                 </div>
 
-                <div className="next-buttons padding-top">
-                    <button type="button" className="green-button" onClick={SellStock}>Vender</button>
-                    <button type="button" className="gray-button" onClick={handleClose}>Cancelar</button>
+                <div className="next-buttons">
+                    <button type="button" className="green-button small-font" onClick={SellStock}>Vender</button>
+                    <button type="button" className="red-button small-font" onClick={handleClose}>Cancelar</button>
                 </div>
             </form>
         </div>

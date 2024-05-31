@@ -89,7 +89,6 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
         <div className='stock-value-sim'>
           <p>Valor da compra</p>
           <span className='value-new-stock'>
-            <p className='big-font'>R$</p>
             <p className='big-font'>{stock.Price ? stock.Price : 0}</p>
           </span>
         </div>

@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: center;
   background-color: rgb(0, 0, 0);
-  margin-bottom: 10px;
 }
 
 .stock-name{
@@ -26,14 +25,13 @@
   width: 11rem;
 }
 
-.big-font{
-  font-size: 40px;
-}
+
 
 .buy-button{
-  width: 100px;
+  width: 150px;
   height: 4rem;
   font-weight: bold;
+  font-size: 1.7rem;
   color: white;
 }
 

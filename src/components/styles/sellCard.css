@@ -1,8 +1,9 @@
 .sell-stock-form{
   padding: 2%;
-  background-color: rgb(62, 62, 62);
+  border: 3px solid white;
   justify-content: center;
   align-items: center;
+  width: 350px;
 }
 
 .money-spent{
