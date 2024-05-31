@@ -31,10 +31,6 @@ function HomePage() {
 
   const token = Cookies.get("refreshToken");
 
-  function registerCard(){
-    setRegister(true);
-  }
-
   const navigate = useNavigate();
 
   const {logout} = useAuth()
