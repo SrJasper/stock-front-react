@@ -6,7 +6,7 @@ import {  Routes, Route, Navigate } from "react-router-dom"
 import LoginPage from "./pages/login/LoginPage.tsx"
 import HomePage from "./pages/home/HomePage.tsx"
 import HomePageMobile from "./pages/home/HomePageMobile.tsx"
-import { useAuth } from "./store/useAuth.ts"
+import { useAuth } from './store/useAuth.ts'
 import { useEffect, useState } from "react"
 import './indexMobile.css'
 
