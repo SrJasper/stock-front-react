@@ -38,15 +38,15 @@ const SellRegisteredStockCard = ({ stock, handleClose } : Props) => {
     <div className="card">
       <div>
         <label> Preço à ser vendida </label><br />
-        <input type="number" onChange={(e) => {setPrice(Number(e.target.value))}}/>
+        <input className='default-input' type="number" onChange={(e) => {setPrice(Number(e.target.value))}}/>
       </div>
       <div className='margin-top'>
         <label> Proventos </label><br />
-        <input type="number" onChange={(e) => {setProvents(Number(e.target.value))}}/>
+        <input className='default-input' type="number" onChange={(e) => {setProvents(Number(e.target.value))}}/>
       </div>
       <div className='margin-top'>
         <label> Data da venda </label><br />
-        <input type="date" 
+        <input className='default-input' type="date" 
         defaultValue={new Date().toISOString().split('T')[0]} 
         onChange={(e) => {setSellDate(new Date(e.target.value))}}/>
       </div>

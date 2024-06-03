@@ -12,6 +12,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
   const [cardReg, setCardReg] = useState(false);
   const [loading, setLoading] = useState(false);
   const [stocks, setStocks] = useState<Stock[]>([]);
+  const [stockToPass, setStockToPass] = useState<Stock>();
   const [stockToFindPrice, setStockToFindPrice] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
@@ -53,6 +54,8 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
   }, [stockToFindPrice, loaded]);
 
   async function SellStockCard(stock: Stock) {
+    console.log(stock);
+    setStockToPass(stock);
     if(stock.simulation){
       setCard(true);
     } else {    
@@ -63,8 +66,11 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
   return (
     <>
       {loading && <LoadingCard/>}
-      {card && stocks.find(s => s.simulation) && (
+      {/* {card && stocks.find(s => s.simulation) && (
         <SellCard stock={stocks.find(s => s.simulation)!} handleClose={() => setCard(false)} />
+      )} */}
+      {card && stockToPass && (
+        <SellCard stock={stockToPass} handleClose={() => setCard(false)} />
       )}
       {cardReg && stocks.find(s => !s.simulation) && (
         <SellRegisteredStockCard stock={stocks.find(s => !s.simulation)!} handleClose={() => setCardReg(false)} />
@@ -108,7 +114,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
             </>
           ))
         ) : (
-          <p> Loading </p>
+          <p> Não foram encontradas ações nessa conta </p>
       )}
     </>
   );

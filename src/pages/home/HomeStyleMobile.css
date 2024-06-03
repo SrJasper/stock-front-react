@@ -58,7 +58,6 @@
 
 .mobile-search-tab input{    
   margin-left: 5px;
-  margin-right: 10px;
   background-color: black;
   color: white;
   border: 3px solid white;
@@ -66,8 +65,8 @@
 }
 
 .mobile-search-tab button{
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
   font-size: 1.5rem;
 }
 
@@ -86,6 +85,7 @@
   border-left: none;
   border-radius: 0%;
   outline: none;
+  padding: 0px;
 }
 
 .mobile-search-button{

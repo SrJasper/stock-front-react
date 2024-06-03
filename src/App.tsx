@@ -1,14 +1,16 @@
+import RecoverPasswordMobile from "./pages/recover/RecoverPasswordMobile.tsx"
+import UpdatePageMobile from "./pages/updateAccount/UpdatePageMobile.tsx"
 import RecoverPassword from "./pages/recover/RecoverPassword.tsx"
 import UpdatePage from "./pages/updateAccount/UpdatePage.tsx"
-import UpdatePageMobile from "./pages/updateAccount/UpdatePageMobile.tsx"
 import RegisterPage from "./pages/register/RegisterPage.tsx"
+import HomePageMobile from "./pages/home/HomePageMobile.tsx"
 import {  Routes, Route, Navigate } from "react-router-dom"
 import LoginPage from "./pages/login/LoginPage.tsx"
 import HomePage from "./pages/home/HomePage.tsx"
-import HomePageMobile from "./pages/home/HomePageMobile.tsx"
 import { useAuth } from './store/useAuth.ts'
 import { useEffect, useState } from "react"
 import './indexMobile.css'
+import RegisterPageMobile from "./pages/register/RegisterPageMobile.tsx"
 
 function App() {
 
@@ -54,8 +56,8 @@ function App() {
       <div className="app">      
       <Routes>
       <Route path='/'  element={!user ? <LoginPage/> : <Navigate to="/home" />} />
-      <Route path='/recover' element={!user ?<RecoverPassword/>: <Navigate to="/home" />} />
-      <Route path='/register' element={!user ?<RegisterPage/>: <Navigate to="/home" />} />
+      <Route path='/recover' element={!user ?<RecoverPasswordMobile/>: <Navigate to="/home" />} />
+      <Route path='/register' element={!user ?<RegisterPageMobile/>: <Navigate to="/home" />} />
       <Route path='/update' element={<UpdatePageMobile/>} />
       <Route path='/home' element={user ?<HomePageMobile/> : <Navigate to="/" />} />
       </Routes>   

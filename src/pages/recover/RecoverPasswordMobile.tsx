@@ -22,7 +22,7 @@ function RecoverPassword() {
 
   return (
     <main>
-      <form onSubmit={RecoverPassword} className='register-form'>
+      <form onSubmit={RecoverPassword} className='mobile-register-form'>
         <h1 className='title'>
           Stocks
         </h1>
