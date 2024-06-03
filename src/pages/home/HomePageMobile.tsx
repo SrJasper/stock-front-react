@@ -97,21 +97,6 @@ function HomePage() {
     navigate("/update");
   }
 
-  useEffect(() => {
-    if(!noStock || stock !== undefined){
-      console.log('Deveria mostrar a linha');
-    } else{
-      console.log('Não deveria mostrar a linha');
-    }
-  }, [noStock]);
-  useEffect(() => {
-    if(!noStock || stock !== undefined){
-      console.log('Deveria mostrar a linha');
-    } else{
-      console.log('Não deveria mostrar a linha');
-    }
-  }, [stock]);
-
   return (
     <main>
       <div className="mobile-header-container">
@@ -166,16 +151,16 @@ function HomePage() {
           </div>
         </div>
 
-        {/* OIA -------------------------------------------------- */}
+       
         <div
-            className="link-stocks">
+            className="mobile-link-stocks">
           <a 
             href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
             target="_blank" 
             rel="noopener noreferrer">Ver lista de ações (ibovespa)
           </a>
         </div>
-        {/* OIA -------------------------------------------------- */}
+        
 
         {
           !noStock &&

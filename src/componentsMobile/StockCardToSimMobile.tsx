@@ -62,12 +62,24 @@ const Card = ({ stock, handleClose }: Props) => {
 }
 
 const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) => {
+ 
   const [card, setCard] = useState(false);
   let stockSymbol: string;
-  if (stock.Symbol) {
+  if(stock.Symbol){
     stockSymbol = stock.Symbol.toUpperCase();
-  } else {
-    stockSymbol = 'tá inventando essa merda né campeão';
+  } else{
+    return(
+      <>
+        <div className='mobile-no-stock-card'>
+            <h2>Símbolo não encontrado</h2>
+            <p>
+              Você pode olhar no link para ver uma lista com símbolos
+              de ações disponíveis ou tentar novamente com outro símbolo.
+            </p>
+            <button className='register-stock-button' onClick={handleReturn}> voltar </button>
+        </div>
+      </>
+    )
   }
   const stockName = stock.LongName;
 

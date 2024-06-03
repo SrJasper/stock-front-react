@@ -72,11 +72,12 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
     return(
       <>
         <div className='no-stock-card'>
-            <h2>Símbolo não encontrado</h2>
-            <p>
-              Você pode olhar no link para ver uma lista com símbolos
-              de ações disponíveis ou tentar novamente com outro símbolo.
-            </p>
+          <h2>Símbolo não encontrado</h2>
+          <p>
+            Você pode olhar no link para ver uma lista com símbolos
+            de ações disponíveis ou tentar novamente com outro símbolo.
+          </p>
+          <button className='register-stock-button' onClick={handleReturn}> voltar </button>
         </div>
       </>
     )

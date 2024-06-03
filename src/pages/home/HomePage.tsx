@@ -90,6 +90,11 @@ function HomePage() {
 
   useEffect(() => {}, [stockList]);
   useEffect(() => {}, [user]);
+  
+  function isJsonObject(obj: any) {
+    return obj !== null && typeof obj === 'object' && !Array.isArray(obj);
+  }
+  
 
   const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
 
@@ -188,7 +193,7 @@ function HomePage() {
         }
 
         {
-          (!noStock || stock !== undefined) 
+          (!noStock || isJsonObject(stock)) 
           && 
           <hr className='separation-line'/>
         }   

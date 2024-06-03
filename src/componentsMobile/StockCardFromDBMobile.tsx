@@ -84,7 +84,7 @@ const StockCardFromDBMobile: React.FC<{ filterSymbol?: string }> = ({ filterSymb
 
                 <div className='mobile-stock-comparison'>
                   <div className='mobile-stock-info'>
-                    <label className='mobile-stock-label'>valor da compra</label>
+                    <label className='mobile-stock-label'>valor compra</label>
                     <div className='mobile-stock-value mobile-value-font'>
                       <p className='mobile-big-font red-font'> {stock.price ? stock.price : 0}</p>
                     </div>
