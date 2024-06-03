@@ -15,7 +15,6 @@
 .user-name{
   font-size: 25px;
 }
-
 .option-icon{
   width: 30px;
   cursor: pointer;
@@ -92,6 +91,7 @@
 
 .link-stocks{
   font-size: 1.3rem;
+  margin-bottom: 2rem;
 }
 
 .search-symbol{

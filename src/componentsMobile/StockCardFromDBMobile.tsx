@@ -76,10 +76,9 @@ const StockCardFromDBMobile: React.FC<{ filterSymbol?: string }> = ({ filterSymb
           .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
           .map((stock, index) => (
             <>
-              <hr className='mobile-separation-line' />
               <li className='mobile-stock' key={stock.id}>
                 <div className='mobile-stock-name'>
-                  <label className='mobile-small-symbol-name'> {stock.longName}</label>
+                  <label className='mobile-small-symbol-name'> {stock.longName.slice(0, 20)} </label>
                   <p className='mobile-symbol-name'>{stock.symbol}</p>
                 </div>
 
@@ -107,10 +106,12 @@ const StockCardFromDBMobile: React.FC<{ filterSymbol?: string }> = ({ filterSymb
                   </button>
                 </div>
               </li>
+              
+            <hr className='separation-line' />
             </>
           ))
       ) : (
-        <p> Loading </p>
+        <></>
       )}
     </>
   );

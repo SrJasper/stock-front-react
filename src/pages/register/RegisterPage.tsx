@@ -36,7 +36,7 @@ function RegisterPage(){
             Registrar nova conta
         </div>
         <div className='orientation-text'>
-            nome
+            apelido
         </div>
         <input className='use-width default-input' type='text' value={userName} onChange={(e) => setUserName(e.target.value)}/>
         <div className='orientation-text padding-top'>

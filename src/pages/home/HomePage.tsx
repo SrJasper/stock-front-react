@@ -3,9 +3,10 @@ import { RegisterStockCard } from "../../components/RegisterStockCard";
 import { StockCardToSim } from "../../components/StockCardToSim";
 import StockCardFromDB from "../../components/StockCardFromDB";
 import { LoadingCard } from "../../components/LoadingCard";
+import { NoStockCard } from "../../components/NoStockCard";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
-import { FormEvent, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyle.css';
@@ -21,6 +22,7 @@ function HomePage() {
   const [search, setSearch] = useState("");
 
   const [stock, setStock] = useState();
+  const [noStock, setNoStock] = useState(true);
 
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
@@ -44,17 +46,16 @@ function HomePage() {
     logout()
   }
 
-  async function fetchStocks(e:FormEvent ,data: string) {
+  async function serachNewStock(e:FormEvent ,data: string) {
     e.preventDefault();
     setLoading(true);
-    const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
-    if(res.data){
+    try {
+      const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
       setStock(res.data);
-      setLoading(false);
-    } else{ 
-      setLoading(false);
-      alert("Símbolo não encontrado");
+    } catch (error) {      
+      alert("Escreva algo para buscar");
     }
+    setLoading(false);
   }
 
   const [user, setUser] = useState<userInfo>();
@@ -75,9 +76,10 @@ function HomePage() {
       const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
       {headers: {Authorization: `Bearer ${token}`}}
     );
+      setNoStock(false);
       setStockList(response.data.map((item: { symbol: string }) => item.symbol));
     } catch (error) {
-      console.error('Error fetching data:', error);
+      setNoStock(true);
     }
   }
 
@@ -102,7 +104,7 @@ function HomePage() {
   return (
     <main>
       <div className="header-container">
-        <h1>Gestor de ações</h1>
+        <h1>Monitor de ações</h1>
         <div className="profile">
           <div className="user-name">Olá, {user?.name}</div>
           <div>
@@ -139,13 +141,13 @@ function HomePage() {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    fetchStocks(e, search);
+                    serachNewStock(e, search);
                   }
                 }}
               />
               <button
                 className="use-height search-button"
-                onClick={(e) => fetchStocks(e, search)}
+                onClick={(e) => serachNewStock(e, search)}
               >
                 pesquisar
               </button>
@@ -162,24 +164,34 @@ function HomePage() {
           </button>
         </div>
 
-        <a 
-          className="link-stocks"
-          href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
-          target="_blank" 
-          rel="noopener noreferrer">Ver lista de ações (ibovespa)
-        </a>
+        <div
+            className="link-stocks">
+          <a 
+            href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
+            target="_blank" 
+            rel="noopener noreferrer">Ver lista de ações (ibovespa)
+          </a>
+        </div>        
 
-        <div className="search-symbol">
-          <select value={selectedSymbol} onChange={handleSymbolChange}>
-            <option value="opcao1">Selecionar ação</option>
-            {stockList.filter((value, index, self) => self.indexOf(value) === index).map((stock, index) => (
-              <option key={index} value={stock}>
-                {stock}
-              </option>
-            ))}
-          </select>
-        </div>
+        {
+          !noStock &&
+          <div className="search-symbol">
+            <select value={selectedSymbol} onChange={handleSymbolChange}>
+              <option value="opcao1">Selecionar ação</option>
+              {stockList.filter((value, index, self) => self.indexOf(value) === index).map((stock, index) => (
+                <option key={index} value={stock}>
+                  {stock}
+                </option>
+              ))}
+            </select>
+          </div>
+        }
 
+        {
+          (!noStock || stock !== undefined) 
+          && 
+          <hr className='separation-line'/>
+        }   
 
         <ol className="stock-board">
           {stock && (
@@ -199,7 +211,10 @@ function HomePage() {
               filterSymbol={selectedSymbol !== "opcao1" ? selectedSymbol : undefined}
             />
           }
-          <hr className='separation-line'/>
+          {
+            noStock && !stock && <NoStockCard/>
+          }
+          
         </ol>
       </div>
     </main>

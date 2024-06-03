@@ -78,11 +78,10 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
         handleOpenRegisterCard={() => setCard(true)}
         handleClose={() => setCard(false)}
       />}
-      <hr className='separation-line' />
       <li className='mobile-buy-card ol-blocker'>
         <div className='mobile-upper-info use-width'>
           <div className='mobile-stock-name'>
-            <label className='mobile-stock-long-name'> {stock.LongName}</label>
+            <label className='mobile-stock-long-name'> {stock.LongName.slice(0, 20)}</label>
             <p className='mobile-symbol-font'>{stockSymbol}</p>
           </div>
           <div className='mobile-stock-name'>
@@ -101,7 +100,8 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
             <button className='register-stock-button use-width' onClick={handleReturn}> Cancelar </button>
           </div>
         </div>
-      </li>
+      </li>      
+      <hr className='separation-line' />
     </>
   )
 }

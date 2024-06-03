@@ -54,7 +54,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
   }, [stockToFindPrice, loaded]);
 
   async function SellStockCard(stock: Stock) {
-    console.log(stock);
     setStockToPass(stock);
     if(stock.simulation){
       setCard(true);
@@ -80,7 +79,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
           .filter(stock => !filterSymbol || stock.symbol.includes(filterSymbol))
           .map((stock, index) => (
             <>
-              <hr className='separation-line'/> 
               <li className="stock" key={stock.id}>
                 <div className="stock-name">
                   <label className='small-font'> {stock.longName}</label>
@@ -111,10 +109,11 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol }) 
                   </button>
                 </div>
               </li>
+              <hr className='separation-line'/>
             </>
           ))
         ) : (
-          <p> Não foram encontradas ações nessa conta </p>
+        <></>
       )}
     </>
   );

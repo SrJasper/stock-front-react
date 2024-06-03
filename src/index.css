@@ -156,3 +156,18 @@ input[type=number] {
 .use-width{
   width:100%;
 }
+
+.green-text{
+  color: rgb(0, 160, 0);
+}
+
+.blue-text{
+  color: rgb(70, 70, 202);
+
+}
+
+.black{
+  background-color: #000000;
+  color:#000000;
+  border: none;
+}

@@ -69,7 +69,17 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
   if(stock.Symbol){
     stockSymbol = stock.Symbol.toUpperCase();
   } else{
-    stockSymbol = 'tá inventando essa merda né campeão';
+    return(
+      <>
+        <div className='no-stock-card'>
+            <h2>Símbolo não encontrado</h2>
+            <p>
+              Você pode olhar no link para ver uma lista com símbolos
+              de ações disponíveis ou tentar novamente com outro símbolo.
+            </p>
+        </div>
+      </>
+    )
   }
   const stockName = stock.LongName;
 
@@ -80,7 +90,6 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
         handleOpenRegisterCard={() => setCard(true)}
         handleClose={() => setCard(false)}
       />}
-      <hr className='separation-line'/>
       <li className="stock ol-blocker">
         <div className="stock-name">
           <label > {stock.LongName}</label>
@@ -102,6 +111,7 @@ const StockCardToSim = ({ stock, handleOpenRegisterCard, handleReturn }: Props) 
           </div>
         </div>
       </li>
+      <hr className='separation-line'/>
     </>
   )
 }

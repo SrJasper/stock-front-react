@@ -9,6 +9,7 @@ import { useAuth } from '../../store/useAuth.ts';
 import Cookies from "js-cookie";
 import axios from "axios";
 import './HomeStyleMobile.css';
+import { NoStockCardMobile } from "../../componentsMobile/NoStockCardMobile.tsx";
 
 type userInfo = {
   id: string;
@@ -21,6 +22,7 @@ function HomePage() {
   const [search, setSearch] = useState("");
 
   const [stock, setStock] = useState();
+  const [noStock, setNoStock] = useState(true);
 
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
@@ -40,17 +42,16 @@ function HomePage() {
     logout()
   }
 
-  async function fetchStocks(e:FormEvent ,data: string) {
+  async function searchNewStock(e:FormEvent ,data: string) {
     e.preventDefault();
     setLoading(true);
-    const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
-    if(res.data){
+    try {
+      const res = await axios.get("https://stock-project-seven.vercel.app/stocks/search/" + data, {headers: {Authorization: `Bearer ${token}`}})
       setStock(res.data);
-      setLoading(false);
-    } else{ 
-      setLoading(false);
-      alert("Símbolo não encontrado");
+    } catch (error) {      
+      alert("Escreva algo para buscar");
     }
+    setLoading(false);
   }
 
   const [user, setUser] = useState<userInfo>();
@@ -71,9 +72,10 @@ function HomePage() {
       const response = await axios.get("https://stock-project-seven.vercel.app/stocks/listall", 
       {headers: {Authorization: `Bearer ${token}`}}
     );
+      setNoStock(false);
       setStockList(response.data.map((item: { symbol: string }) => item.symbol));
     } catch (error) {
-      console.error('Error fetching data:', error);
+      setNoStock(true);
     }
   }
 
@@ -95,10 +97,25 @@ function HomePage() {
     navigate("/update");
   }
 
+  useEffect(() => {
+    if(!noStock || stock !== undefined){
+      console.log('Deveria mostrar a linha');
+    } else{
+      console.log('Não deveria mostrar a linha');
+    }
+  }, [noStock]);
+  useEffect(() => {
+    if(!noStock || stock !== undefined){
+      console.log('Deveria mostrar a linha');
+    } else{
+      console.log('Não deveria mostrar a linha');
+    }
+  }, [stock]);
+
   return (
     <main>
       <div className="mobile-header-container">
-        <h1>Gestor de <br /> ações</h1>
+        <h1>Monitor de <br /> ações</h1>
         <div className="mobile-profile">
           <div className="mobile-user-name">Olá, {user?.name}</div>
           <div>
@@ -135,13 +152,13 @@ function HomePage() {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    fetchStocks(e, search);
+                    searchNewStock(e, search);
                   }
                 }}
               />
               <button
                 className="mobile-use-height search-button"
-                onClick={(e) => fetchStocks(e, search)}
+                onClick={(e) => searchNewStock(e, search)}
               >
                 pesquisar
               </button>
@@ -149,23 +166,36 @@ function HomePage() {
           </div>
         </div>
 
-        <a 
-          className="mobile-link-stocks"
-          href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
-          target="_blank" 
-          rel="noopener noreferrer">Ver lista de ações (ibovespa)
-        </a>
-
-        <div className="mobile-search-symbol">
-          <select value={selectedSymbol} onChange={handleSymbolChange}>
-            <option value="opcao1">Selecionar ação</option>
-            {stockList.filter((value, index, self) => self.indexOf(value) === index).map((stock, index) => (
-              <option key={index} value={stock}>
-                {stock}
-              </option>
-            ))}
-          </select>
+        {/* OIA -------------------------------------------------- */}
+        <div
+            className="link-stocks">
+          <a 
+            href="https://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-composicao-da-carteira.htm" 
+            target="_blank" 
+            rel="noopener noreferrer">Ver lista de ações (ibovespa)
+          </a>
         </div>
+        {/* OIA -------------------------------------------------- */}
+
+        {
+          !noStock &&
+          <div className="mobile-search-symbol">
+            <select value={selectedSymbol} onChange={handleSymbolChange}>
+              <option value="opcao1">Selecionar ação</option>
+              {stockList.filter((value, index, self) => self.indexOf(value) === index).map((stock, index) => (
+                <option key={index} value={stock}>
+                  {stock}
+                </option>
+              ))}
+            </select>
+          </div>
+        }
+
+        {
+          (!noStock || stock !== undefined) 
+          && 
+          <hr className='separation-line'/>
+        }   
 
 
         <ol className="mobile-stock-board">
@@ -186,7 +216,9 @@ function HomePage() {
               filterSymbol={selectedSymbol !== "opcao1" ? selectedSymbol : undefined}
             />
           }
-          <hr className='mobile-separation-line'/>
+          {
+            noStock && !stock && <NoStockCardMobile/>
+          }
         </ol>
       </div>
     </main>
