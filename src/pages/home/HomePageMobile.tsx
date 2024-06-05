@@ -6,8 +6,6 @@ import { LoadingCard } from "../../componentsMobile/LoadingCardMobile";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth.ts";
-import Cookies from "js-cookie";
-import axios from "axios";
 import "./HomeStyleMobile.css";
 import { NoStockCardMobile } from "../../componentsMobile/NoStockCardMobile.tsx";
 import { api } from "../../config/api.ts";

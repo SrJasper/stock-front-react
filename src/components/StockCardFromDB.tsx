@@ -11,7 +11,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
 }) => {
   const [card, setCard] = useState(false);
   const [cardReg, setCardReg] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [stockToPass, setStockToPass] = useState<Stock>();
   const [stockToFindPrice, setStockToFindPrice] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +31,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const { data, isLoading } = useQuery("fetchStocks", fetchData);
 
   const StockPriceFromAPI = async (data: string[]) => {
-    setLoading(true);
     const prices = [];
     for (const stockToBePriced of data) {
       const res = await api.get(`/stocks/search/${stockToBePriced}`);
@@ -40,7 +38,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
     }
     setStockPriceFromApi(prices);
     setLoaded(true);
-    setLoading(false);
   };
 
   useEffect(() => {

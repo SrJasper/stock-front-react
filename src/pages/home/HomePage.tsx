@@ -9,8 +9,6 @@ import Gear from "../../assets/images/gear.png";
 import Exit from "../../assets/images/exit.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
-import Cookies from "js-cookie";
-import axios from "axios";
 import "./HomeStyle.css";
 import { api } from "../../config/api";
 
@@ -61,9 +59,7 @@ function HomePage() {
   const [user, setUser] = useState<userInfo>();
   async function userInfo() {
     try {
-      const response = await api.get(
-        "https://stock-project-seven.vercel.app/users/info/"
-      );
+      const response = await api.get("api/users/info/");
       setUser(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -73,9 +69,7 @@ function HomePage() {
   const [stockList, setStockList] = useState([]);
   async function listStocks() {
     try {
-      const response = await api.get(
-        "https://stock-project-seven.vercel.app/stocks/listall"
-      );
+      const response = await api.get("api/stocks/listall");
       setNoStock(false);
       setStockList(
         response.data.map((item: { symbol: string }) => item.symbol)

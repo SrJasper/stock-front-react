@@ -1,7 +1,6 @@
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
 import { useState } from "react";
-import Cookies from "js-cookie";
 import "./styles/stockCard.css";
 import "./styles/buyStockCard.css";
 import { api } from "../config/api";
