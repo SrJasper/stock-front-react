@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   box-sizing: border-box;
   border-radius: 5px;
@@ -11,7 +11,7 @@
   src: url(../public/poppins-font/Poppins-Medium.ttf);
 }
 
-body{
+body {
   /* background-color: rgb(17, 17, 17); */
   margin: 20px 50px 10px 50px;
   @media (max-width: 1024px) {
@@ -20,55 +20,55 @@ body{
   background-color: black;
 }
 
-body button{
+body button {
   background-color: black;
   border: 3px solid white;
 }
 
-input{
+input {
   color: white;
 }
 
-.default-input{
+.default-input {
   background-color: #000000;
   border: 3px solid rgb(255, 255, 255);
   color: white;
-  outline: none;  
+  outline: none;
   width: 250px;
   padding: 8px;
 }
 
-.screen-blocker{
+.screen-blocker {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.527);
+  background-color: rgba(0, 0, 0, 0.8);
 
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 
   z-index: 2;
 }
 
-.screen-blocker-black{
+.screen-blocker-black {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0, 0.8);
 
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 
   z-index: 2;
 }
 
-.register-form{
+.register-form {
   padding: 40px;
   background-color: #000000;
   border: 3px solid rgb(255, 255, 255);
@@ -77,22 +77,21 @@ input{
   width: 350px;
 }
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.next-buttons{
+.next-buttons {
   display: flex;
   justify-content: space-between;
   padding-top: 8px;
   gap: 10px;
 }
-
 
 .loading-card {
   position: absolute;
@@ -100,74 +99,73 @@ input[type=number] {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgb(0, 0, 0);
-  padding: 20px; 
+  padding: 20px;
   color: white;
   border: 3px solid white;
   z-index: 10000;
 }
 
-.next-buttons button{
+.next-buttons button {
   width: 70px;
   cursor: pointer;
   flex-grow: 0.5;
   padding: 3px;
 }
 
-.orientation-text{
-  color:rgb(255, 255, 255);
+.orientation-text {
+  color: rgb(255, 255, 255);
 }
 
-.green-button{
+.green-button {
   border: 3px solid rgb(0, 160, 0);
 }
 
-.red-button{
+.red-button {
   border: 3px solid rgb(223, 0, 0);
 }
 
-.red-font{
+.red-font {
   color: rgb(223, 0, 0);
 }
 
-.green-font{
+.green-font {
   color: rgb(0, 160, 0);
 }
 
-.margin-left{
+.margin-left {
   margin-left: 30px;
 }
 
-.margin-right{
+.margin-right {
   margin-right: 10px;
 }
 
-.margin-top{
+.margin-top {
   margin-top: 10px;
 }
 
-.big-font{
+.big-font {
   font-size: 60px;
 }
 
-.small-font{
+.small-font {
   font-size: 20px;
 }
 
-.use-width{
-  width:100%;
+.use-width {
+  width: 100%;
 }
 
-.green-text{
+.green-text {
   color: rgb(0, 160, 0);
 }
 
-.blue-text{
+.blue-text {
   color: rgb(70, 70, 202);
-
 }
 
-.black{
+.black {
   background-color: #000000;
-  color:#000000;
+  color: #000000;
   border: none;
 }

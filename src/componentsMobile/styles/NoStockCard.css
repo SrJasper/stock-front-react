@@ -1,27 +1,27 @@
-.mobile-no-stock-card{
+.mobile-no-stock-card {
   color: white;
   border: 3px solid white;
 
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: .5rem 0px .5rem;
+  margin: 0.5rem 0px 0.5rem;
   padding: 1rem 1.5rem 0.5rem;
 }
 
-.mobile-no-stock-card h2{
+.mobile-no-stock-card h2 {
   font-size: 20px;
   text-align: center;
 }
 
-.mobile-no-stock-card p{
+.mobile-no-stock-card p {
   text-align: justify;
   font-size: 12px;
   padding-bottom: 10px;
 }
 
-.mobile-padding-line{
+.mobile-padding-line {
   width: 100%;
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -29,23 +29,23 @@
   height: 3px;
 }
 
-.mobile-gap-line{  
+.mobile-gap-line {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.mobile-horizontal-texts{
+.mobile-horizontal-texts {
   display: flex;
   justify-content: space-between;
   text-align: justify;
   gap: 1.5rem;
 }
 
-.mobile-horizontal-texts div h2{
+.mobile-horizontal-texts div h2 {
   text-align: center;
   width: 100%;
 }
 
-.mobile-horizontal-texts div{
+.mobile-horizontal-texts div {
   flex: 1;
 }

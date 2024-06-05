@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
 import { create } from "zustand";
 import Cookies from "js-cookie";
+import { api } from "../config/api";
 
 export interface ILoginCredentials {
   email: string;
@@ -17,61 +17,60 @@ export interface IRegisterCredentials {
 
 type States = {
   user?: string;
-  error?: {message?: string}
-  isLoading: boolean
-}
+  error?: { message?: string };
+  isLoading: boolean;
+};
 
 type Actions = {
-  login: (credentials: ILoginCredentials) => Promise<void>
-  register: (credentials: IRegisterCredentials) => Promise<void>
-  resetErrors: () => void
-  logout: () => void
-  getUser: () => void
-}
-
+  login: (credentials: ILoginCredentials) => Promise<void>;
+  register: (credentials: IRegisterCredentials) => Promise<void>;
+  resetErrors: () => void;
+  logout: () => void;
+  getUser: () => Promise<string>;
+};
 
 const useAuth = create<States & Actions>((set) => ({
-  user: undefined ,
+  user: undefined,
   error: undefined,
   isLoading: false,
   login: async (credentials: ILoginCredentials) => {
-    set(() => ({isLoading: true}))
+    set(() => ({ isLoading: true }));
     try {
-      const res = await axios.post("https://stock-project-seven.vercel.app/auth/login", credentials)
+      const res = await api.post("/auth/login", credentials);
 
-      Cookies.set("refreshToken", res.data)
+      Cookies.set("refreshToken", res.data);
 
-      const token =  Cookies.get("refreshToken")
-      set(() => ({user:token}))
+      const token = Cookies.get("refreshToken");
+
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      set(() => ({ user: token }));
     } catch (err: any) {
-      set(() => ({error: err.response.data}))
+      set(() => ({ error: err.response.data }));
     } finally {
-      set(() => ({isLoading: false}))
+      set(() => ({ isLoading: false }));
     }
   },
   register: async (credentials) => {
-    set(() => ({isLoading: true}))
+    set(() => ({ isLoading: true }));
     try {
-    await axios.post("https://stock-project-seven.vercel.app/users", credentials)
-  
+      await api.post("/users", credentials);
     } catch (err: any) {
-      set(() => ({error: err.response.data}))
+      set(() => ({ error: err.response.data }));
     } finally {
-      set(() => ({isLoading: false}))
+      set(() => ({ isLoading: false }));
     }
   },
   resetErrors: () => {
-    set(() => ({error: undefined}))
+    set(() => ({ error: undefined }));
   },
   logout: () => {
-    Cookies.remove("refreshToken")
-    set(() => ({user: undefined}))
+    Cookies.remove("refreshToken");
+    set(() => ({ user: undefined }));
   },
-  getUser: () => {
-    const token = Cookies.get("refreshToken")
-    set(() => ({user: token}))
-  }
-
-})
-)
-export {useAuth}
+  getUser: async () => {
+    const token = Cookies.get("refreshToken");
+    set(() => ({ user: token }));
+    return String(token);
+  },
+}));
+export { useAuth };
