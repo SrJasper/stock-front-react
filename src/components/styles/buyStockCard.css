@@ -1,11 +1,10 @@
 .new-stock-buttons {
   display: flex;
   @media(max-width: 765px) {
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin-top: 0.63rem;
-    gap: 0.63rem;
+    gap: .63rem;
     width: 100%;
   }
 }
@@ -22,4 +21,8 @@
   height: 1.8rem;
   margin-top: 0.1rem;
   margin-bottom: 0.1rem;
+}
+
+.margin-line-bottom{
+  margin-bottom: 1.2rem;
 }

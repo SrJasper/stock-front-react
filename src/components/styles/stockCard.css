@@ -8,8 +8,50 @@
 .stock-name {
   display: flex;
   flex-direction: column;
+}
+
+.stock div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock-blocks {
+  gap: 1.88rem;
+}
+
+.stock-blocks div {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 765px) {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.upper-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.upper-info div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
   padding-top: 2%;
   padding-bottom: 2%;
+  text-align: center;
+  @media (max-width: 765px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.upper-info div label {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .stock-comparison {
@@ -33,15 +75,15 @@
 }
 
 .buy-button {
-  width: 9.38rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   height: 4rem;
   font-weight: bold;
   font-size: 1.7rem;
   color: white;
   @media (max-width: 765px) {
-    height: 3.5rem;
-    margin-bottom: 0.63rem;
-    width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -72,7 +114,7 @@
 }
 
 .sotck-label {
-  font-size: 20px;
+  font-size: 1.25rem;
   @media (max-width: 765px) {
     font-size: auto;
     height: 0.63rem;
@@ -84,7 +126,7 @@
 }
 
 .stock-title {
-  font-size: 30px;
+  font-size: 1.88rem;
   white-space: nowrap;
 }
 

@@ -1,7 +1,7 @@
 * {
   padding: 0;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 0.31rem;
   font-family: "Poppins-Medium";
   color: white;
 }
@@ -13,11 +13,11 @@
 
 body {
   /* background-color: rgb(17, 17, 17); */
-  margin: 20px 50px 10px 50px;
+  margin:  1.25rem 3.13rem 0.63rem 3.13rem;
   background-color: black;
-  
+
   @media (max-width: 765px) {
-    margin: 20px 30px 10px 30px;
+    margin:  1.25rem 30px 0.63rem 30px;
   }
 }
 
@@ -35,8 +35,8 @@ input {
   border: 3px solid rgb(255, 255, 255);
   color: white;
   outline: none;
-  width: 250px;
-  padding: 8px;
+  width: 23.13rem;
+  padding: .5px;
 }
 
 .screen-blocker {
@@ -52,9 +52,8 @@ input {
   align-items: center;
 
   z-index: 2;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
 }
-
 
 .screen-blocker-black {
   position: fixed;
@@ -72,19 +71,19 @@ input {
 }
 
 .register-form {
-  padding: 40px;
+  padding: 2.50rem;
   background-color: #000000;
   border: 3px solid rgb(255, 255, 255);
   margin: 0 auto;
-  margin-top: 100px;
-  width: 350px;
+  margin-top: 6.25rem;
+  width: 33.13rem;
   @media (max-width: 765px) {
-    padding: 20px;
+    padding:  1.25rem;
     background-color: #000000;
     border: 3px solid rgb(255, 255, 255);
     margin: 0 auto;
-    margin-top: 100px;
-    width: 270px;
+    margin-top: 6.25rem;
+    width: 16.88rem;
   }
 }
 
@@ -100,8 +99,8 @@ input[type="number"] {
 .next-buttons {
   display: flex;
   justify-content: space-between;
-  padding-top: 8px;
-  gap: 10px;
+  padding-top: .5rem;
+  gap: .63rem;
 }
 
 .loading-card {
@@ -110,17 +109,17 @@ input[type="number"] {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgb(0, 0, 0);
-  padding: 20px;
+  padding:  1.25rem;
   color: white;
   border: 3px solid white;
   z-index: 10000;
 }
 
 .next-buttons button {
-  width: 70px;
+  width: 4.38rem;
   cursor: pointer;
   flex-grow: 0.5;
-  padding: 3px;
+  padding: .19rem;
 }
 
 .orientation-text {
@@ -144,27 +143,70 @@ input[type="number"] {
 }
 
 .margin-left {
-  margin-left: 30px;
+  margin-left: 1.88rem;
 }
 
 .margin-right {
-  margin-right: 10px;
+  margin-right: 0.63rem;
 }
 
 .margin-top {
-  margin-top: 10px;
+  margin-top: 0.63rem;
+}
+
+.margin-down {
+  margin-bottom: 0.63rem;
+}
+
+.margin-down-pc {
+  margin-bottom: 0.63rem;
+  @media (max-width: 765px) {
+    margin-bottom: 0px;
+  }
 }
 
 .big-font {
-  font-size: 60px;
+  display: flex;
+  font-size: 3.75rem;
+  height: 4.06rem;
+  align-items: center;
+  @media (max-width: 765px) {
+    justify-content: center;
+  }
 }
 
 .small-font {
-  font-size: 20px;
+  display: flex;
+  font-size: 1.25rem;
+  align-items: center;
+  @media (max-width: 765px) {
+    text-align:center;
+  }
+}
+
+
+.text-centralize {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .use-width {
   width: 100%;
+}
+
+@media (max-width: 765px) {
+  .use-width-mobile {
+    width: 100%;
+  }
+}
+
+
+.use-height {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .green-text {
@@ -181,6 +223,6 @@ input[type="number"] {
   border: none;
 }
 
-.border{  
+.border {
   border: 3px solid white;
 }

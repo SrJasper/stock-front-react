@@ -1,11 +1,11 @@
 @media (max-width: 765px) {
   .mobile-symbol-name {
     font-size: 4.5rem;
-    height: 100px;
+    height: 6.25rem;
   }
   .mobile-small-symbol-name {
     font-size: 1.5rem;
-    height: 15px;
+    height: 0.94rem;
   }
   .mobile-value-font {
     font-size: 3rem;
@@ -40,22 +40,17 @@
 
   .mobile-upper-info {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
   }
 
   .mobile-symbol-font {
-    font-size: 50px;
+    font-size: 3.13rem;
   }
   
-  .mobile-sotck-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .mobile-sotck-long-name {
-    height: 10px;
+    height: 0.63rem;
   }
 }

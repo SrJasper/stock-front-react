@@ -19,7 +19,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const fetchData = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
-
       setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
       return response.data;
     } catch (error) {
@@ -62,9 +61,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   return (
     <>
       {isLoading && <LoadingCard />}
-      {/* {card && stocks.find(s => s.simulation) && (
-        <SellCard stock={stocks.find(s => s.simulation)!} handleClose={() => setCard(false)} />
-      )} */}
       {card && stockToPass && (
         <SellCard stock={stockToPass} handleClose={() => setCard(false)} />
       )}
@@ -83,14 +79,14 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
             <>
               <li className="stock" key={stock.id}>
                 <div className="stock-name">
-                  <label className="small-font"> {stock.longName}</label>
-                  <p className="big-font">{stock.symbol}</p>
+                  <label className="small-font margin-top"> {stock.longName}</label>
+                  <p className="big-font margin-down">{stock.symbol}</p>
                 </div>
 
                 <div className="stock-comparison">
                   <div className="stock-info">
                     <label className="stock-label small-font">
-                      valor da compra
+                      compra
                     </label>
                     <div className="stock-value big-font">
                       <p className="big-font red-font">
@@ -115,7 +111,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
 
                 <div>
                   <button
-                    className={`buy-button ${
+                    className={`margin-down buy-button ${
                       Number(stockPriceFromApi[index]) > stock.price
                         ? "green-button"
                         : "red-button"

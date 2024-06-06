@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
-import axios from 'axios';
+import { api } from '../../config/api';
 
 
 function RecoverPassword() {
@@ -14,7 +14,7 @@ function RecoverPassword() {
 
   async function RecoverPassword(e: FormEvent) {
     e.preventDefault();
-    const response = await axios.post('https://stock-project-seven.vercel.app/users/recovery', {
+    const response = await api.post('/users/recovery', {
       email: user
     });
     console.log(response.data)

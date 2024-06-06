@@ -6,74 +6,111 @@
 }
 
 .header-container h1 {
-  font-size: 70px;
-}
-
-@media (max-width: 768px) {
-  .header-container h1 {
-    font-size: 30px;
+  font-size: 4.38rem;
+  @media (max-width: 765px) {
+    font-size: 1.88rem;
     text-justify: center;
-    text-align: center;
+    text-align: center; 
   }
 }
 
 .profile {
   align-content: center;
+  text-align: center;
 }
 
 .user-name {
-  font-size: 25px;
+  font-size: 1.56rem;
+  @media (max-width: 765px) {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
 }
 .option-icon {
-  width: 30px;
+  width: 1.88rem;
   cursor: pointer;
+  @media (max-width: 765px) {
+    width: 1.56rem;
+  }
 }
 .gear-icon {
   margin-left: 0.7rem;
 }
 .exit-icon {
   margin-left: 1rem;
+  @media (max-width: 765px) {
+    margin-left: 0.7rem;
+  
+  }
 }
 .market-body {
   margin-top: 3%;
+}
+
+@media (max-width: 765px) {
+  .market-body a {
+    font-size: 0.94rem;
+  }
 }
 
 .search-tab {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
-  height: 50px;
+  margin-bottom: 0.63rem;
+  height: 3.13rem;
+  @media (max-width: 765px) {
+    justify-content: center;
+    margin-top: 1.88rem;
+  }
 }
 
 .search-field {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 765px) {
+    flex: 1;
+    flex-direction: column;
+  }
 }
 
 .search-tab label {
   white-space: nowrap;
-  font-size: 2.2rem;
+  font-size: 2rem;
+  @media (max-width: 765px) {
+    font-size: 1.5rem;
+  }
 }
 
 .search-tab input {
-  margin-left: 5px;
-  margin-right: 10px;
+  margin-left: 0.31rem;
+  margin-right: 0.63rem;
   background-color: black;
   color: white;
   border: 3px solid white;
   font-size: 1.5rem;
+  @media (max-width: 765px) {
+    margin-right: 0%;
+  }
 }
 
 .search-tab button {
   padding-left: 1%;
   padding-right: 1%;
   font-size: 1.5rem;
+  @media (max-width: 765px) {
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 1.5rem;
+  }
 }
 
 .reg-button {
-  height: 56px;
+  height: 3.50rem;
+  @media (max-width: 765px) {
+    display: none;
+  }
 }
 
 .search-ballon {
@@ -81,8 +118,14 @@
   justify-content: center;
   align-items: center;
   border: 3px solid #ffffff;
-  margin-left: 10px;
-  padding-right: 15px;
+  margin-left: 0.63rem;
+  padding-right: 0.94rem;
+  width: 20rem;
+  @media (max-width: 765px) {
+    padding-right: 0.94rem;
+    padding: 0px;
+    width: 100%;
+  }
 }
 
 .search-ballon input {
@@ -91,6 +134,9 @@
   border-left: none;
   border-radius: 0%;
   outline: none;
+  @media (max-width: 765px) {
+    padding: 0px;
+  }
 }
 
 .search-button {
@@ -101,17 +147,31 @@
 .link-stocks {
   font-size: 1.3rem;
   margin-bottom: 2rem;
+  @media (max-width: 765px) {
+    margin-bottom: 0%;
+    margin-top: 1.5rem;
+    margin-left: .6rem;
+  }
 }
-
+@media (max-width: 765px) {
+  .link-stocks a{
+    font-size: 1.3rem;
+  } 
+}
 .search-symbol {
   padding-top: 2%;
-  padding-bottom: 10px;
+  padding-bottom: 0.63rem;
   color: rgb(125, 47, 47);
+  @media (max-width: 765px) {
+    padding-top: 10%;
+    padding-bottom: 0.63rem;
+    color: rgb(125, 47, 47);
+  }
 }
 
 .search-symbol select {
   background-color: rgb(0, 0, 0);
-  padding-left: 10px;
+  padding-left: 0.63rem;
   width: 12.3rem;
   height: 2.5rem;
   font-size: 1.2rem;
@@ -122,6 +182,13 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
+
+  @media (max-width: 765px) {
+    padding-left: 0.31rem;
+    width: 8.6rem;
+    height: 2rem;
+    font-size: 0.8rem;  
+  }
 }
 
 .search-symbol::after {
@@ -131,6 +198,12 @@
   position: relative;
   right: 23px;
   pointer-events: none;
+  @media (max-width: 765px) {
+    content: "";
+    font-size: 0.63rem;
+    right: 19px;
+    top: -1px;
+  }
 }
 
 .search-symbol select option {

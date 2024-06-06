@@ -22,7 +22,7 @@
   margin-top: 3rem;
   margin-bottom: 3rem;
   background-color: white;
-  height: 3px;
+  height: .19rem;
 }
 
 .gap-line {
@@ -35,6 +35,9 @@
   justify-content: space-between;
   text-align: justify;
   gap: 1.5rem;
+  @media (max-width: 765px) {
+    flex-direction: column;
+  }
 }
 
 .horizontal-texts div h2 {

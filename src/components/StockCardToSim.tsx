@@ -48,7 +48,7 @@ const Card = ({ stock, handleClose }: Props) => {
     <main>
       {loading && <LoadingCard />}
       <div className="screen-blocker">
-        <div className="card">
+        <div className="card border">
           <label> Quantidade à ser comprada </label>
           <br />
           <input
@@ -114,19 +114,20 @@ const StockCardToSim = ({
         />
       )}
       <li className="stock ol-blocker">
-        <div className="stock-name">
-          <label> {stock.LongName}</label>
-          <p className="big-font">{stockSymbol}</p>
+        <div className="stock-blocks use-width">
+          <div className="use-width margin-top margin-down-pc">
+            <label> {stock.LongName} </label>
+            <label className="big-font"> {stock.Symbol.toUpperCase()} </label>
+          </div>
+          <div className="use-width text-centralize margin-top margin-down-pc">
+            <label className="use-height "> valor </label>
+            <label className="big-font"> {stock.Price ? stock.Price : 0} </label>
+          </div>
         </div>
-        <div className="stock-value-sim">
-          <p>Valor da compra</p>
-          <span className="value-new-stock">
-            <p className="big-font">{stock.Price ? stock.Price : 0}</p>
-          </span>
-        </div>
-        <div className="new-stock-buttons">
+
+        <div className="new-stock-buttons margin-line-bottom">
           <button
-            className="buy-button margin-right green-button"
+            className="buy-button margin-right green-button use-width"
             onClick={() => setCard(true)}
           >
             Comprar
@@ -142,7 +143,7 @@ const StockCardToSim = ({
               {" "}
               Registrar{" "}
             </button>
-            <button className="register-stock-button" onClick={handleReturn}>
+            <button className="register-stock-button margin-down" onClick={handleReturn}>
               {" "}
               Cancelar{" "}
             </button>

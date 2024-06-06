@@ -5,8 +5,8 @@ import StockCardFromDB from "../../components/StockCardFromDB";
 import { LoadingCard } from "../../components/LoadingCard";
 import { NoStockCard } from "../../components/NoStockCard";
 import { FormEvent, useEffect, useState } from "react";
-import Gear from "../../assets/images/gear.png";
-import Exit from "../../assets/images/exit.png";
+import Gear from "../../../public/images/gear.png";
+import Exit from "../../../public/images/exit.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
 import "./HomeStyle.css";
@@ -44,6 +44,23 @@ function HomePage() {
     logout();
   }
 
+  const [stockList, setStockList] = useState([]);
+  async function listStocks() {
+    try {
+      const response = await api.get("/stocks/listall");
+      if (response.data.length === 0) {
+        console.log("No stocks found");
+      } else {
+        setNoStock(false);
+        setStockList(
+          response.data.map((item: { symbol: string }) => item.symbol)
+        );
+      }
+    } catch (error) {
+      setNoStock(true);
+    }
+  }
+
   async function serachNewStock(e: FormEvent, data: string) {
     e.preventDefault();
     setLoading(true);
@@ -59,23 +76,10 @@ function HomePage() {
   const [user, setUser] = useState<userInfo>();
   async function userInfo() {
     try {
-      const response = await api.get("api/users/info/");
+      const response = await api.get("/users/info/");
       setUser(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
-    }
-  }
-
-  const [stockList, setStockList] = useState([]);
-  async function listStocks() {
-    try {
-      const response = await api.get("api/stocks/listall");
-      setNoStock(false);
-      setStockList(
-        response.data.map((item: { symbol: string }) => item.symbol)
-      );
-    } catch (error) {
-      setNoStock(true);
     }
   }
 
@@ -87,6 +91,20 @@ function HomePage() {
   function isJsonObject(obj: any) {
     return obj !== null && typeof obj === "object" && !Array.isArray(obj);
   }
+
+  useEffect(() => {
+    // console.log(
+    //   "Lista de Stocks é vazia? ",
+    //   noStock,
+    //   "\nTem algum stock sendo procurado? ",
+    //   stock
+    // );
+    // if(noStock && !isJsonObject(stock)){
+    //   console.log("Deveria mostrar o NoStockCard");
+    // } else {
+    //   console.log("Deveria mostrar o StockCardToSim");
+    // }
+  }, [noStock, stock]);
 
   const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
 
@@ -132,11 +150,11 @@ function HomePage() {
           />
         )}
         <div className="search-tab">
-          <div className="search-field use-height">
+          <div className="search-field">
             <label>Procurar ação</label>
             <div className="search-ballon">
               <input
-                className="use-height"
+                className="use-width"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -147,7 +165,7 @@ function HomePage() {
                 }}
               />
               <button
-                className="use-height search-button"
+                className=" search-button"
                 onClick={(e) => serachNewStock(e, search)}
               >
                 pesquisar
@@ -156,7 +174,7 @@ function HomePage() {
           </div>
 
           <button
-            className="reg-button use-height"
+            className="reg-button"
             onClick={() => {
               registerCard();
               setStockName("");
@@ -212,13 +230,13 @@ function HomePage() {
               }}
             />
           )}
-          {
+          {!noStock && (
             <StockCardFromDB
               filterSymbol={
                 selectedSymbol !== "opcao1" ? selectedSymbol : undefined
               }
             />
-          }
+          )}
           {noStock && !stock && <NoStockCard />}
         </ol>
       </div>
