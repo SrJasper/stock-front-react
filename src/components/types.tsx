@@ -10,6 +10,13 @@ export type StockToSell = {
   taxes: number
 }
 
+export type StockToRequestSim = {
+  Symbol: string;
+  LongName: string;
+  Price: number;
+  qnt?: number;
+};
+
 export type Stock = {
   id: number;
   operationDate: string;

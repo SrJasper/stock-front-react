@@ -1,3 +1,4 @@
+import { StockToRequestSim } from "../components/types";
 import { api } from "../config/api";
 
 function useStocks() {
@@ -10,6 +11,18 @@ function useStocks() {
     }
   }
 
+  async function useNewSimStock( stock: StockToRequestSim) {
+    const symbol = stock.Symbol.toUpperCase();
+
+    const data = {
+      symbol: symbol,
+      price: stock.Price,
+      longName: stock.LongName,
+      qnt: stock.qnt,
+    };
+    await api.post("/stocks/newsim", data);
+  }
+
   //exemplo de função de compra de ações
   async function buyStock(data: any) {
     try {
@@ -20,7 +33,7 @@ function useStocks() {
     }
   }
 
-  return { SellStock, buyStock };
+  return { SellStock, useNewSimStock, buyStock};
 }
 
 export { useStocks };

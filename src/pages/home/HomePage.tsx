@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
 import "./HomeStyle.css";
 import { api } from "../../config/api";
+import { useQuery } from "react-query";
 
 type userInfo = {
   id: string;
@@ -21,7 +22,7 @@ type userInfo = {
 function HomePage() {
   const [search, setSearch] = useState("");
 
-  const [stock, setStock] = useState();
+  const [stockToBuy, setStockToBuy] = useState();
   const [noStock, setNoStock] = useState(true);
 
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
@@ -61,17 +62,19 @@ function HomePage() {
     }
   }
 
-  async function serachNewStock(e: FormEvent, data: string) {
+  async function searchNewStock(e: FormEvent, data: string) {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await api.get("/stocks/search/" + data);
-      setStock(res.data);
+      setStockToBuy(res.data);
     } catch (error) {
       alert("Escreva algo para buscar");
     }
     setLoading(false);
   }
+
+  //const { data , isLoading  } = useQuery("stockToBuy", searchNewStock);
 
   const [user, setUser] = useState<userInfo>();
   async function userInfo() {
@@ -91,20 +94,6 @@ function HomePage() {
   function isJsonObject(obj: any) {
     return obj !== null && typeof obj === "object" && !Array.isArray(obj);
   }
-
-  useEffect(() => {
-    // console.log(
-    //   "Lista de Stocks é vazia? ",
-    //   noStock,
-    //   "\nTem algum stock sendo procurado? ",
-    //   stock
-    // );
-    // if(noStock && !isJsonObject(stock)){
-    //   console.log("Deveria mostrar o NoStockCard");
-    // } else {
-    //   console.log("Deveria mostrar o StockCardToSim");
-    // }
-  }, [noStock, stock]);
 
   const [selectedSymbol, setSelectedSymbol] = useState<string>("opcao1");
 
@@ -160,13 +149,13 @@ function HomePage() {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    serachNewStock(e, search);
+                    searchNewStock(e, search);
                   }
                 }}
               />
               <button
                 className=" search-button"
-                onClick={(e) => serachNewStock(e, search)}
+                onClick={(e) => searchNewStock(e, search)}
               >
                 pesquisar
               </button>
@@ -211,14 +200,14 @@ function HomePage() {
           </div>
         )}
 
-        {(!noStock || isJsonObject(stock)) && (
+        {(!noStock || isJsonObject(stockToBuy)) && (
           <hr className="separation-line" />
         )}
 
         <ol className="stock-board">
-          {stock && (
+          {stockToBuy && (
             <StockCardToSim
-              stock={stock}
+              stock={stockToBuy}
               handleOpenRegisterCard={(name, symbol, price) => {
                 setRegister(true);
                 setStockName(name);
@@ -226,7 +215,7 @@ function HomePage() {
                 setStockPrice(price);
               }}
               handleReturn={() => {
-                setStock(undefined);
+                setStockToBuy(undefined);
               }}
             />
           )}
@@ -237,7 +226,7 @@ function HomePage() {
               }
             />
           )}
-          {noStock && !stock && <NoStockCard />}
+          {noStock && !stockToBuy && <NoStockCard />}
         </ol>
       </div>
     </main>

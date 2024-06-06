@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { LoadingCard } from "./LoadingCard";
-import "./styles/sellCard.css";
-import { Stock, StockToSell } from "./types";
-import { api } from "../config/api";
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
+import { Stock, StockToSell } from "./types";
+import { useEffect, useState } from "react";
+import { LoadingCard } from "./LoadingCard";
+import { api } from "../config/api";
+import "./styles/sellCard.css";
 
 type Props = {
   stock: Stock;
@@ -45,7 +45,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
 
   const query = useQueryClient();
 
-  const { isLoading, mutateAsync } = useMutation("sellStock", SellStock, {
+  const { isLoading, mutateAsync } = useMutation("fetchStock", SellStock, {
     onSuccess: () => {
       query.invalidateQueries("fetchStocks");
       handleClose();

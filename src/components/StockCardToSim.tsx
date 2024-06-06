@@ -1,15 +1,11 @@
+import { useMutation, useQueryClient } from "react-query";
+import { useStocks } from "../hooks/useStocks";
+import { StockToRequestSim } from "./types";
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
+import "./styles/buyStockCard.css";
 import { useState } from "react";
 import "./styles/stockCard.css";
-import "./styles/buyStockCard.css";
-import { api } from "../config/api";
-
-export type StockToRequestSim = {
-  Symbol: string;
-  LongName: string;
-  Price: number;
-};
 
 type Props = {
   stock: StockToRequestSim;
@@ -17,36 +13,32 @@ type Props = {
   handleOpenRegisterCard?: (
     name: string,
     symbol: string,
-    price: number
+    price: number,
   ) => void;
   handleReturn?: () => void;
 };
 
 const Card = ({ stock, handleClose }: Props) => {
   const [qnt, setQnt] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const { useNewSimStock } = useStocks();
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
+  //mutation
+  const query = useQueryClient();
+  const { isLoading, mutateAsync } = useMutation("simStock", useNewSimStock, {
+    onSuccess: () => {
+      query.refetchQueries("fetchStocks");
+      handleClose && handleClose();
+    },
+  });
 
-  async function simStock() {
-    const symbol = stock.Symbol.toUpperCase();
-
-    const data = {
-      symbol: symbol,
-      price: stock.Price,
-      longName: stock.LongName,
-      qnt: qnt,
-    };
-    setLoading(true);
-    await api.post("/stocks/newsim", data);
-    refreshPage();
+  async function handleSubmit() {
+    stock.qnt = qnt;
+    await mutateAsync(stock);
   }
 
   return (
     <main>
-      {loading && <LoadingCard />}
+      {isLoading && <LoadingCard />}
       <div className="screen-blocker">
         <div className="card border">
           <label> Quantidade à ser comprada </label>
@@ -60,7 +52,7 @@ const Card = ({ stock, handleClose }: Props) => {
           <div className="button-field">
             <button
               className="use-width sim-button green-button"
-              onClick={simStock}
+              onClick={ handleSubmit }
             >
               {" "}
               Comprar{" "}
@@ -121,7 +113,10 @@ const StockCardToSim = ({
           </div>
           <div className="use-width text-centralize margin-top margin-down-pc">
             <label className="use-height "> valor </label>
-            <label className="big-font"> {stock.Price ? stock.Price : 0} </label>
+            <label className="big-font">
+              {" "}
+              {stock.Price ? stock.Price : 0}{" "}
+            </label>
           </div>
         </div>
 
@@ -137,13 +132,16 @@ const StockCardToSim = ({
               className="register-stock-button"
               onClick={() => {
                 handleOpenRegisterCard &&
-                  handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
+                handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
               }}
             >
               {" "}
               Registrar{" "}
             </button>
-            <button className="register-stock-button margin-down" onClick={handleReturn}>
+            <button
+              className="register-stock-button margin-down"
+              onClick={handleReturn}
+            >
               {" "}
               Cancelar{" "}
             </button>

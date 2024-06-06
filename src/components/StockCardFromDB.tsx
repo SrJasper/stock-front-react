@@ -16,7 +16,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const [loaded, setLoaded] = useState(false);
   const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
 
-  const fetchData = async (): Promise<Stock[]> => {
+  const listStocks = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
       setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
@@ -27,7 +27,11 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
     }
   };
 
-  const { data, isLoading } = useQuery("fetchStocks", fetchData);
+  const { data, isLoading } = useQuery("fetchStocks", listStocks);
+
+  useEffect(() => {
+    StockPriceFromAPI(stockToFindPrice);
+  }, [data]);
 
   const StockPriceFromAPI = async (data: string[]) => {
     const prices = [];
@@ -40,7 +44,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   };
 
   useEffect(() => {
-    fetchData();
+    listStocks();
   }, []);
 
   useEffect(() => {
@@ -79,15 +83,16 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
             <>
               <li className="stock" key={stock.id}>
                 <div className="stock-name">
-                  <label className="small-font margin-top"> {stock.longName}</label>
+                  <label className="small-font margin-top">
+                    {" "}
+                    {stock.longName}
+                  </label>
                   <p className="big-font margin-down">{stock.symbol}</p>
                 </div>
 
                 <div className="stock-comparison">
                   <div className="stock-info">
-                    <label className="stock-label small-font">
-                      compra
-                    </label>
+                    <label className="stock-label small-font">compra</label>
                     <div className="stock-value big-font">
                       <p className="big-font red-font">
                         {" "}
@@ -103,7 +108,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                       <p className="big-font green-font">
                         {stockPriceFromApi[index]
                           ? Number(stockPriceFromApi[index])
-                          : "Não"}
+                          : "--"}
                       </p>
                     </div>
                   </div>
