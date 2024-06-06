@@ -1,23 +1,29 @@
-.register-stock-form{
-  padding: 4%;
-  width: 350px;
+.register-stock-form {
+  padding-top: 2.5%;
+  width: 21.88rem;
   height: auto;
-  border: 3px solid rgb(255, 255, 255);
   justify-content: center;
   align-items: center;
+  @media (max-width: 765px) {
+    padding: 4%;
+    width: 21.88rem;
+  }
 }
 
-.padding-top{
+.padding-top {
   margin-top: 5%;
 }
 
-.title{
+.title {
   font-size: 20px;
   white-space: nowrap;
-  color:rgb(37, 209, 66);
+  color: rgb(37, 209, 66);
   display: flex;
-  justify-content: center;  
-  padding-bottom: 10px;  
+  justify-content: center;
+  padding-bottom: 0.04rem;
+  @media (max-width: 765px) {
+    padding-bottom: 0.63rem;
+  }
 }
 
 .input-row {
@@ -25,41 +31,44 @@
   justify-content: space-between;
 }
 
-.mark{
+.mark {
   margin-left: 3.5rem;
 }
 
-.pass-rec{
+.pass-rec {
   margin-top: 2px;
 }
 
-.pass-rec button{
+/* Existe mesmo? ------------------------------ */
+.pass-rec button {
   border: none;
   display: none;
   background-color: rgb(39, 39, 39);
   color: rgb(37, 209, 66);
   cursor: pointer;
 }
+/* Existe mesmo? ------------------------------ */
 
-button:active{
+/* Está no local certo? ------------------------ */
+button:active {
   opacity: 0.8;
 }
+/* Está no local certo? ------------------------ */
 
-.error{
+.error {
   color: red;
   font-size: small;
   font-weight: bold;
-  display:none;
+  display: none;
 }
 
-
-.register-buttons{
+.register-buttons {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
-.register-buttons button{
-  width: 90px;
-  height: 30px;
-  font-size: 20px;
+.register-buttons button {
+  width: 5.63rem;
+  height: 1.88rem;
+  font-size: 1.25rem;
 }

@@ -1,78 +1,98 @@
-.stock{
+.stock {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgb(0, 0, 0);
 }
 
-.stock-name{
+.stock-name {
   display: flex;
   flex-direction: column;
   padding-top: 2%;
   padding-bottom: 2%;
 }
 
-.stock-comparison{
+.stock-comparison {
   display: flex;
+  @media (max-width: 765px) {
+    gap: 2.5rem;
+  }
 }
 
 .stock-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: .5rem;
   align-items: center;
+  margin-left: 0.5rem;
   width: 11rem;
+  @media (max-width: 765px) {
+    margin-left: 0%;
+    width: auto;
+  }
 }
 
-
-
-.buy-button{
-  width: 150px;
+.buy-button {
+  width: 9.38rem;
   height: 4rem;
   font-weight: bold;
   font-size: 1.7rem;
   color: white;
+  @media (max-width: 765px) {
+    height: 3.5rem;
+    margin-bottom: 0.63rem;
+    width: 100%;
+  }
 }
 
-.register-stock-button{
-  width: 100px;
+.register-stock-button {
+  width: 6.25rem;
   height: auto;
   font-weight: bold;
   color: white;
-  
+
   justify-content: center;
   align-items: center;
+  @media (max-width: 765px) {
+    width: 100%;
+  }
 }
 
-.stock-value{
-  display:flex;
+.stock-value {
+  display: flex;
 }
 
-.stock-value-sim{
-  display:flex;
+.stock-value-sim {
+  display: flex;
   flex-direction: column;
 }
 
-.value-new-stock{
-  display:flex;
+.value-new-stock {
+  display: flex;
 }
 
-.sotck-label{
+.sotck-label {
   font-size: 20px;
+  @media (max-width: 765px) {
+    font-size: auto;
+    height: 0.63rem;
+  }
 }
 
-.sim-button{
+.sim-button {
   padding: 2%;
 }
 
-.stock-title{
+.stock-title {
   font-size: 30px;
   white-space: nowrap;
 }
 
-.stock{
+.stock {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 765px) {
+    flex-direction: column;
+  }
 }

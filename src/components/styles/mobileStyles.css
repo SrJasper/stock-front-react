@@ -1,0 +1,61 @@
+@media (max-width: 765px) {
+  .mobile-symbol-name {
+    font-size: 4.5rem;
+    height: 100px;
+  }
+  .mobile-small-symbol-name {
+    font-size: 1.5rem;
+    height: 15px;
+  }
+  .mobile-value-font {
+    font-size: 3rem;
+  }
+  
+  .no-stock-card h2 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+  
+  .no-stock-card p {
+    font-size: 0.75rem;
+    text-align: justify;
+    padding-bottom: 0.63rem;
+  }
+
+  .mobile-horizontal-texts {
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    gap: 1.5rem;
+  }
+
+  .mobile-horizontal-texts div h2 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .mobile-horizontal-texts div {
+    flex: 1;
+  }
+
+  .mobile-upper-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile-symbol-font {
+    font-size: 50px;
+  }
+  
+  .mobile-sotck-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-sotck-long-name {
+    height: 10px;
+  }
+}

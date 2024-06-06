@@ -1,16 +1,23 @@
-.no-stock-card{
+.no-stock-card {
   color: white;
   border: 3px solid white;
 
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   margin: 1rem 5rem 0px 5rem;
   padding: 2rem 2rem 3rem;
+
+  @media (max-width: 765px) {
+    margin: 0.5rem 0rem 0.5rem;
+    padding: 1rem 1.5rem 0.5rem;
+  }
 }
 
-.padding-line{
+
+
+.padding-line {
   width: 100%;
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -18,23 +25,23 @@
   height: 3px;
 }
 
-.gap-line{  
+.gap-line {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.horizontal-texts{
+.horizontal-texts {
   display: flex;
   justify-content: space-between;
   text-align: justify;
   gap: 1.5rem;
 }
 
-.horizontal-texts div h2{
+.horizontal-texts div h2 {
   text-align: center;
   width: 100%;
 }
 
-.horizontal-texts div{
+.horizontal-texts div {
   flex: 1;
 }
