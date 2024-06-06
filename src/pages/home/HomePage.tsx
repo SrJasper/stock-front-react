@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
 import "./HomeStyle.css";
 import { api } from "../../config/api";
-import { useQuery } from "react-query";
 
 type userInfo = {
   id: string;
