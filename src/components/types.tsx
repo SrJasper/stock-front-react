@@ -7,10 +7,10 @@ export type StockToSell = {
   sellPrice: number;
   profit: number;
   proportionalProfit: string;
-  taxes: number
-}
+  taxes: number;
+};
 
-export type StockToRequestSim = {
+export type StockToBuy = {
   Symbol: string;
   LongName: string;
   Price: number;

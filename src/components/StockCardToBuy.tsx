@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
-import { StockToRequestSim } from "./types";
+import { StockToBuy } from "./types";
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
 import "./styles/buyStockCard.css";
@@ -8,12 +8,12 @@ import { useState } from "react";
 import "./styles/stockCard.css";
 
 type Props = {
-  stock: StockToRequestSim;
+  stock: StockToBuy;
   handleClose?: () => void;
   handleOpenRegisterCard?: (
     name: string,
     symbol: string,
-    price: number,
+    price: number
   ) => void;
   handleReturn?: () => void;
 };
@@ -27,13 +27,15 @@ const Card = ({ stock, handleClose }: Props) => {
   const { isLoading, mutateAsync } = useMutation("simStock", useNewSimStock, {
     onSuccess: () => {
       query.refetchQueries("fetchStocks");
+      query.invalidateQueries('stockToBuy');
       handleClose && handleClose();
     },
   });
 
   async function handleSubmit() {
-    stock.qnt = qnt;
+    stock.qnt = qnt;    
     await mutateAsync(stock);
+    query.setQueryData("stockToBuy", undefined);
   }
 
   return (
@@ -52,7 +54,7 @@ const Card = ({ stock, handleClose }: Props) => {
           <div className="button-field">
             <button
               className="use-width sim-button green-button"
-              onClick={ handleSubmit }
+              onClick={handleSubmit}
             >
               {" "}
               Comprar{" "}
@@ -68,7 +70,7 @@ const Card = ({ stock, handleClose }: Props) => {
   );
 };
 
-const StockCardToSim = ({
+const StockCardToBuy = ({
   stock,
   handleOpenRegisterCard,
   handleReturn,
@@ -153,4 +155,4 @@ const StockCardToSim = ({
   );
 };
 
-export { StockCardToSim };
+export { StockCardToBuy };

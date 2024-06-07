@@ -21,14 +21,10 @@ type userInfo = {
 
 function HomePage() {
   const [search, setSearch] = useState("");
-
-  //const [stockToBuy, setStockToBuy] = useState<StockToBuy | undefined>();
   const [noStock, setNoStock] = useState(true);
-
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
   const [stockSymbol, setStockSymbol] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
 
@@ -36,8 +32,12 @@ function HomePage() {
     setRegister(true);
   }
 
-  const navigate = useNavigate();
+  useEffect(()=>{
+    listStocks();
+    userInfo();
+  }, [])
 
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   function handleLogout() {
@@ -62,21 +62,20 @@ function HomePage() {
     }
   }
 
-  const query = useQueryClient();
-  const stockToBuy = query.getQueryData<StockToBuy>("stockToBuy");
-
-  // async function handleReturn() {
-  //   console.log("Deveria fechar o card");
-  //   await query.invalidateQueries("stockToBuy");
-  //   console.log(query.getQueryData("stockToBuy"));
-  // }
+  const queryClient = useQueryClient();
+  const { data: stockToBuy, refetch } = useQuery<StockToBuy | undefined>(
+    "stockToBuy",
+    () => queryClient.getQueryData<StockToBuy>("stockToBuy"),
+    { enabled: false }
+  );
 
   async function searchNewStock(e: FormEvent, data: string) {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await api.get("/stocks/search/" + data);
-      query.setQueryData("stockToBuy", res.data); //aqui deveria criar o card
+      queryClient.setQueryData("stockToBuy", res.data);
+      refetch();
     } catch (error) {
       alert("Escreva algo para pesquisar!");
     }
@@ -92,11 +91,6 @@ function HomePage() {
       console.error("Error fetching data:", error);
     }
   }
-
-  useEffect(() => {
-    listStocks();
-    userInfo();
-  }, []);
 
   function isJsonObject(obj: any) {
     return obj !== null && typeof obj === "object" && !Array.isArray(obj);
@@ -161,7 +155,7 @@ function HomePage() {
                 }}
               />
               <button
-                className=" search-button"
+                className="search-button"
                 onClick={(e) => searchNewStock(e, search)}
               >
                 pesquisar
@@ -222,9 +216,7 @@ function HomePage() {
                 setStockPrice(price);
               }}
               handleReturn={() => {
-                query.setQueryData("stockToBuy", undefined);//aqui deveria fechar
-                query.invalidateQueries("stockToBuy");
-                console.log('deveria fechar o card');
+                queryClient.setQueryData("stockToBuy", undefined);
               }}
             />
           )}

@@ -16,6 +16,10 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const [loaded, setLoaded] = useState(false);
   const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
 
+  useEffect(() => {
+    listStocks();
+  }, []);
+
   const listStocks = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
@@ -30,11 +34,13 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const { data, isLoading } = useQuery("fetchStocks", listStocks);
 
   useEffect(() => {
-    StockPriceFromAPI(stockToFindPrice);
-  }, [data]);
+    console.log("chamou o useEffect");
+    GetPriceFromAPI(stockToFindPrice);
+  }, [data, stockToFindPrice]);
 
-  const StockPriceFromAPI = async (data: string[]) => {
+  const GetPriceFromAPI = async (data: string[]) => {
     const prices = [];
+    console.log("entrou no GetPriceFromAPI");
     for (const stockToBePriced of data) {
       const res = await api.get(`/stocks/search/${stockToBePriced}`);
       prices.push(res.data.Price);
@@ -44,12 +50,8 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   };
 
   useEffect(() => {
-    listStocks();
-  }, []);
-
-  useEffect(() => {
     if (stockToFindPrice.length > 0 && !loaded) {
-      StockPriceFromAPI(stockToFindPrice);
+      GetPriceFromAPI(stockToFindPrice);
     }
   }, [stockToFindPrice, loaded]);
 
@@ -87,44 +89,46 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                     {" "}
                     {stock.longName}
                   </label>
-                  <p className="big-font margin-down">{stock.symbol}</p>
+                  <p className="big-font margin-down use-width">{stock.symbol}</p>
                 </div>
 
-                <div className="stock-comparison">
-                  <div className="stock-info">
-                    <label className="stock-label small-font">compra</label>
-                    <div className="stock-value big-font">
-                      <p className="big-font red-font">
-                        {" "}
-                        {stock.price ? stock.price : 0}
-                      </p>
+                <div className="stock-info-display">
+                  <div className="stock-comparison">
+                    <div className="stock-info">
+                      <label className="stock-label small-font">compra</label>
+                      <div className="stock-value big-font">
+                        <p className="big-font red-font">
+                          {" "}
+                          {stock.price ? stock.price : 0}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="stock-info value-to-sell">
+                      <label className="stock-label small-font">
+                        valor atual
+                      </label>
+                      <div className="stock-value big-font">
+                        <p className="big-font green-font">
+                          {stockPriceFromApi[index]
+                            ? Number(stockPriceFromApi[index])
+                            : "--"}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="stock-info value-to-sell">
-                    <label className="stock-label small-font">
-                      valor atual
-                    </label>
-                    <div className="stock-value big-font">
-                      <p className="big-font green-font">
-                        {stockPriceFromApi[index]
-                          ? Number(stockPriceFromApi[index])
-                          : "--"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
-                <div>
-                  <button
-                    className={`margin-down buy-button ${
-                      Number(stockPriceFromApi[index]) > stock.price
-                        ? "green-button"
-                        : "red-button"
-                    }`}
-                    onClick={() => SellStockModal(stock)}
-                  >
-                    Vender
-                  </button>
+                  <div>
+                    <button
+                      className={`buy-button ${
+                        Number(stockPriceFromApi[index]) > stock.price
+                          ? "green-button"
+                          : "red-button"
+                      }`}
+                      onClick={() => SellStockModal(stock)}
+                    >
+                      Vender
+                    </button>
+                  </div>
                 </div>
               </li>
               <hr className="separation-line" />
