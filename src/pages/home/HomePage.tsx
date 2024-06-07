@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegisterStockCard } from "../../components/RegisterStockCard";
-import { StockCardToSim } from "../../components/StockCardToSim";
+import { StockCardToBuy } from "../../components/StockCardToBuy";
 import StockCardFromDB from "../../components/StockCardFromDB";
 import { LoadingCard } from "../../components/LoadingCard";
 import { NoStockCard } from "../../components/NoStockCard";
@@ -11,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
 import "./HomeStyle.css";
 import { api } from "../../config/api";
+import { StockToBuy } from "../../components/types";
+import { useQuery, useQueryClient } from "react-query";
 
 type userInfo = {
   id: string;
@@ -21,7 +22,7 @@ type userInfo = {
 function HomePage() {
   const [search, setSearch] = useState("");
 
-  const [stockToBuy, setStockToBuy] = useState();
+  //const [stockToBuy, setStockToBuy] = useState<StockToBuy | undefined>();
   const [noStock, setNoStock] = useState(true);
 
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
@@ -61,19 +62,26 @@ function HomePage() {
     }
   }
 
+  const query = useQueryClient();
+  const stockToBuy = query.getQueryData<StockToBuy>("stockToBuy");
+
+  // async function handleReturn() {
+  //   console.log("Deveria fechar o card");
+  //   await query.invalidateQueries("stockToBuy");
+  //   console.log(query.getQueryData("stockToBuy"));
+  // }
+
   async function searchNewStock(e: FormEvent, data: string) {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await api.get("/stocks/search/" + data);
-      setStockToBuy(res.data);
+      query.setQueryData("stockToBuy", res.data); //aqui deveria criar o card
     } catch (error) {
-      alert("Escreva algo para buscar");
+      alert("Escreva algo para pesquisar!");
     }
     setLoading(false);
   }
-
-  //const { data , isLoading  } = useQuery("stockToBuy", searchNewStock);
 
   const [user, setUser] = useState<userInfo>();
   async function userInfo() {
@@ -205,7 +213,7 @@ function HomePage() {
 
         <ol className="stock-board">
           {stockToBuy && (
-            <StockCardToSim
+            <StockCardToBuy
               stock={stockToBuy}
               handleOpenRegisterCard={(name, symbol, price) => {
                 setRegister(true);
@@ -214,7 +222,9 @@ function HomePage() {
                 setStockPrice(price);
               }}
               handleReturn={() => {
-                setStockToBuy(undefined);
+                query.setQueryData("stockToBuy", undefined);//aqui deveria fechar
+                query.invalidateQueries("stockToBuy");
+                console.log('deveria fechar o card');
               }}
             />
           )}
