@@ -111,7 +111,7 @@ const StockCardToBuy = ({
         <div className="stock-blocks use-width">
           <div className="use-width margin-top margin-down-pc">
             <label> {stock.LongName} </label>
-            <label className="big-font"> {stock.Symbol.toUpperCase()} </label>
+            <label className="big-font use-width"> {stock.Symbol.toUpperCase()} </label>
           </div>
           <div className="use-width text-centralize margin-top margin-down-pc">
             <label className="use-height "> valor </label>
