@@ -12,6 +12,7 @@ import "./HomeStyle.css";
 import { api } from "../../config/api";
 import { StockToBuy } from "../../components/types";
 import { useQuery, useQueryClient } from "react-query";
+import { useTranslation } from "react-i18next";
 
 type userInfo = {
   id: string;
@@ -20,6 +21,12 @@ type userInfo = {
 };
 
 function HomePage() {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
   const [search, setSearch] = useState("");
   const [noStock, setNoStock] = useState(true);
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
@@ -109,9 +116,9 @@ function HomePage() {
   return (
     <main>
       <div className="header-container">
-        <h1>Monitor de ações</h1>
+        <h1>{t("site-title")/*Monitor de ações*/}</h1>
         <div className="profile">
-          <div className="user-name">Olá, {user?.name}</div>
+          <div className="user-name">{t("hello")/*Olá*/}, {user?.name}</div>
           <div>
             <img
               className="option-icon gear-icon"
@@ -141,7 +148,9 @@ function HomePage() {
         )}
         <div className="search-tab">
           <div className="search-field">
-            <label>Procurar ação</label>
+            <label>
+              {t("search-stock")/* Procurar ação */}
+            </label>
             <div className="search-ballon">
               <input
                 className="use-width"
@@ -158,7 +167,7 @@ function HomePage() {
                 className="search-button"
                 onClick={(e) => searchNewStock(e, search)}
               >
-                pesquisar
+                {t("search")/* pesquisar */}
               </button>
             </div>
           </div>
@@ -172,7 +181,7 @@ function HomePage() {
               setStockPrice(undefined);
             }}
           >
-            Registrar ação
+            {t("register-stock")/* Registrar ação */}
           </button>
         </div>
 
@@ -182,14 +191,16 @@ function HomePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Ver lista de ações (ibovespa)
+            {t("stock-list")/* Ver lista de ações (ibovespa) */}
           </a>
         </div>
 
         {!noStock && (
           <div className="search-symbol">
             <select value={selectedSymbol} onChange={handleSymbolChange}>
-              <option value="opcao1">Selecionar ação</option>
+              <option value="opcao1">
+                {t("stock-select")/* Selecionar ação */}
+              </option>
               {stockList
                 .filter((value, index, self) => self.indexOf(value) === index)
                 .map((stock, index) => (

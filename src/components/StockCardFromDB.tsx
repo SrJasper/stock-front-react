@@ -5,10 +5,17 @@ import { SellRegisteredStockCard } from "./SellRegisteredStockCard";
 import { Stock } from "./types";
 import { api } from "../config/api";
 import { useQuery } from "react-query";
+import { useTranslation } from "react-i18next";
 
 const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   filterSymbol,
 }) => {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
   const [card, setCard] = useState(false);
   const [cardReg, setCardReg] = useState(false);
   const [stockToPass, setStockToPass] = useState<Stock>();
@@ -95,17 +102,18 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                 <div className="stock-info-display">
                   <div className="stock-comparison">
                     <div className="stock-info">
-                      <label className="stock-label small-font">compra</label>
+                      <label className="stock-label small-font">
+                        {t("bought")/* compra */}
+                      </label>
                       <div className="stock-value big-font">
                         <p className="big-font red-font">
-                          {" "}
                           {stock.price ? stock.price : 0}
                         </p>
                       </div>
                     </div>
                     <div className="stock-info value-to-sell">
                       <label className="stock-label small-font">
-                        valor atual
+                        {t("current-value")/* valor atual */}
                       </label>
                       <div className="stock-value big-font">
                         <p className="big-font green-font">
@@ -126,7 +134,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                       }`}
                       onClick={() => SellStockModal(stock)}
                     >
-                      Vender
+                      {t("sell")/* Vender */}
                     </button>
                   </div>
                 </div>

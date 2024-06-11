@@ -1,10 +1,16 @@
 import { LoadingCard } from '../../components/LoadingCard';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './RegisterStyle.css';
+import { useTranslation } from 'react-i18next';
 
 function RegisterPage(){
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
 
   const navigate = useNavigate();
   const Login = () => {
@@ -33,30 +39,30 @@ function RegisterPage(){
       {isLoading && <LoadingCard/>}
       <form onSubmit={handleSubmit} className='register-form'>
         <div className='title'>
-            Registrar nova conta
+          {t("register-title")/* {Registrar nova conta} */}
         </div>
         <div className='orientation-text'>
-            apelido
+          {t("register-nickname")/* apelido */}
         </div>
         <input className='use-width default-input' type='text' value={userName} onChange={(e) => setUserName(e.target.value)}/>
         <div className='orientation-text padding-top'>
-            e-mail
+          e-mail
         </div>
         <input className='use-width default-input' type='text' value={userEmail} onChange={(e) => setUserEmail(e.target.value)}/>
         <div className='orientation-text padding-top'>
-            senha
+          {t("password")/* senha */}
         </div>    
         <input type='password' className='use-width default-input' value={userPassword} onChange={(e) => setUserPassword(e.target.value)}/>
         <div className='orientation-text padding-top'>
-            confirme sua senha
+          {t("confirm-password")/* confirme sua senha */}
         </div>
         <input type='password' className='use-width default-input' value={userPasswordConfirmation} onChange={(e) => setUserPasswordConfirmation(e.target.value)}/>
      
         <div className='next-buttons padding-top'>
-            <button type='submit' className='green-button small-font'>register</button>
-            <button type='button' className='small-font' onClick={Login}>voltar</button>
+          <button type='submit' className='green-button small-font'>{t("register")/*register*/}</button>
+          <button type='button' className='small-font' onClick={Login}>{t("back")/*voltar*/}</button>
         </div>
-    </form>
+      </form>
     </main>
   );
 }

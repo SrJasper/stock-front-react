@@ -160,6 +160,12 @@ input[type="number"] {
   margin-bottom: 0.63rem;
 }
 
+.mobile-maring-down{
+  @media (max-width: 765px) {
+    margin-bottom: 0.63rem;
+  }
+}
+
 .margin-down-pc {
   margin-bottom: 0.63rem;
   @media (max-width: 765px) {

@@ -1,0 +1,73 @@
+{
+  "translation": {
+    "site-title": "Monitor de ações",
+    "password": "senha",
+    "hello": "Olá",
+    "name": "nome",
+    "update": "atualizar",
+    "recover": "recuperar",
+    "back": "voltar",
+    "register": "registrar",
+    "search": "pesquisar",
+    "buy": "Comprar",
+    "sell": "Vender",
+    "cancel": "Cancelar",
+    "value": "valor",
+    "bought": "compra",
+    "price": "Preço",
+    "qnt": "Quantidade",
+
+    "sell-info-title": "Informações da venda",
+    "sell-price": "Preço a ser vendida",
+    "sell-earnings": "Proventos",
+    "sell-date": "Data da venda",
+    "sell-value": "Valor da venda",
+    "bougth-value": "Valor da compra (corrigido)",
+    "taxes": "Impostos",
+    "profit": "Lucro",
+    "profit-percentage": "Porcentagem de lucro",
+
+    "bought-date": "Data da compra",
+    "current-value": "valor atual",
+    "forgot-password": "Esqueci a senha",
+    "serach-stock": "Procurar ação",
+
+    "register-title": "Registrar nova conta",
+    "register-stock-title": "Registrar nova ação",
+    "register-nickname": "apelido",
+    "register-stock": "Registrar ação",
+
+    "stock-list": "Ver lista de ações (ibovespa)",
+    "stock-select": "Selecionar ação",
+    "stock-name": "Nome da ação",
+    "stock-symbol": "Símbolo da ação",
+
+    
+    "search-stock": "Procurar ação",
+    "confirm-password": "confirme sua senha",
+    "delete-account": "deletar conta",
+    "qnt-buy": "Quantidade a ser comprada",
+    "update-title": "Atualizar dados da conta",
+
+    "symbol-not-found-title": "Simbolo não encontrado",
+    "symbol-not-found-text": "Você pode olhar no link para ver uma lista com símbolos de ações disponíveis ou tentar novamente com outro símbolo.",
+
+    "no-stock-card-title-one": "Parece que você ainda não tem simulações",
+    "no-stock-card-text-one": "Para fazer uma nove simulação, procure por uma ação pelo simbolo no balão de procurar ação à cima. Se não souber o simbolo, clique no link 'Ver lista de ações (ibovespa)' para ver uma lista de ações disponíveis.",
+    "no-stock-card-title-two": "Sobre o site",
+    "no-stock-card-text-two": "O Monitor de ações é um site que permite que você interaja com ações da bolsa de valores realizando simulações ou registros reais.",
+    "no-stock-card-text-three": "Ao escolher um ativo pelo link 'Ver lista de ações (ibovespa)', você terá a opção de realizar uma simulação ou de registrar a ação (que pode ser real) em sua carteira no site. E ao realizar a venda o site mostrará um card com informações sobre a rentabilidade da ação realizando alguns cálculos para mostrar informações de venda relevantes para o investidor sem que ele tenha que se dar ao trabalho de fazer isso.",
+    "simulation": "Simulação",
+    "simulation-text-one": "A simulação é uma forma de você acompanhar o desempenho de uma ação sem precisar investir dinheiro real.",
+    "simulation-text-two": "Para realizar uma simulação, procure pelo simbolo da ação no balão de procurar ação e clique em 'Comprar'. Ao fazer isso, um balão aparecerá pedindo que informe a quantidade de ações que deseja comprar. Após informar a quantidade, clique em 'Comprar' novamente e a simulação será realizada.",
+    "simulation-text-three": "Para realizar a venda, clique em 'Vender' a plataforma irá mostrar um card com informações sobre a rentabilidade da simulação. Esse cartão leva em consideração valores que o usuário não poderá controlar, como data de compra e venda, preço de venda e compra e proventos. Depois disso, se o usuário 'estiver satisfeito' com a simulação, é só clicar novamente em 'vender' e pronto.",
+    "simulation-text-four": "Esse é o tipo mais rápido de interação com o site e não requer que o usuário coloque mais informações para monitorar a ação, entretanto também, data de compra e venda, preço de compra e venda e proventos serão valores serão automaticos, isto é, estão fora do controle do usuário.",
+    "simulation-text-five": "Essa é uma alternativa para quem deseja 'brincar de investir' usando ações reais pela plataforma.",
+    "reg-title": "Registro",
+    "register-text-one": "O registro é uma forma de você adicionar ações reais à sua carteira no site.",
+    "register-text-two": "Para registrar uma ação tem dois jeitos, procure pelo símbolo da ação no balão de procurar ação e clique em 'Registrar' ou você pode clicar em 'Registrar ação' (O segundo jeito está apenas disponível em computadores).",
+    "register-text-three": "Ao fazer isso, um balão aparecerá pedindo que informe o nome da ação, o símbolo, a quantidade, o preço e o dia em que a ação foi comprada. Esses valores já virão preenchidos caso a ação seja registrada a partir de uma pesquisa pelo balão de pesquisa, mas podem ser alterados (caso o usuário modifique o nome e símbolo da ação, o processo de buscar os dados automaticamente poderá ficar comprometido). Após informar os valores, clique em Registrar e a ação será registrada.",
+    "register-text-four": "Para realizar a venda, clique em Vender. A plataforma irá mostrar um card que pede para que o usuário complete algumas informações sobre a venda para que as informações de rentabilidade sejam calculadas com mais precisão. Após informar os valores, clique em Vender, e aparecerá um card com informações do mesmo jeito que as simulações, mas com valores que o usuário informou.",
+    "register-text-five": "Esse é o tipo mais completo de interação com o site e requer que o usuário coloque mais informações para monitorar a ação. Também pode ser usado para 'brincar de investir', mas pode ser usado como um registrador de ações reais, informando ao usuário informações reais sobre ações que ele possui em sua carteira. Podendo ser usada como uma ferramenta real de monitoramento de ações."
+  }
+}

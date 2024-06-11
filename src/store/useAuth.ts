@@ -45,7 +45,7 @@ const useAuth = create<States & Actions>((set) => ({
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       set(() => ({ user: token }));
     } catch (err: any) {
-      set(() => ({ error: err.response.data }));
+      set(() => ({ error: err.response.data })); //Aqui é onde é mostrado qual erro está acontecendo
     } finally {
       set(() => ({ isLoading: false }));
     }

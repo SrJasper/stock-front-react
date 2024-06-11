@@ -12,7 +12,7 @@
 
 .stock div {
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   align-items: center;
   @media (max-width: 765px) {
     justify-content: center;
@@ -80,8 +80,8 @@
   }
 }
 
-.stock-info-display{
-  @media (max-width: 765px){
+.stock-info-display {
+  @media (max-width: 765px) {
     display: flex;
     flex-direction: column;
   }
@@ -97,7 +97,7 @@
   @media (max-width: 765px) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
   }
 }
 

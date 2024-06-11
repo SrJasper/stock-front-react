@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { LoadingCard } from "./LoadingCard";
 import { api } from "../config/api";
 import "./styles/sellCard.css";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   stock: Stock;
@@ -13,6 +14,12 @@ type Props = {
 };
 
 const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
   const { SellStock } = useStocks();
 
   const [card, setCard] = useState(false);
@@ -67,16 +74,20 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
                 className="sell-stock-form black "
                 style={{ border: "2px solid #fff" }}
               >
-                <div className="title">Informações de venda</div>
+                <div className="title">
+                  {t("sell-info-title")/* Informações da venda */}
+                </div>
 
-                <div className="orientation-text">nome da ação</div>
+                <div className="orientation-text">
+                  {t("stock-name")/* nome da ação */}
+                </div>
                 <div className="information-text">
                   <span>{stockInfo.stockName}</span>
                   <span>{stockInfo.stockSymbol}</span>
                 </div>
 
                 <div className="orientation-text padding-top">
-                  valor de venda
+                  {t("sell-value")/* valor de venda */}
                 </div>
                 <div className="information-text">
                   <span>
@@ -91,7 +102,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
                 </div>
 
                 <div className="orientation-text padding-top">
-                  valor de compra (corrigido)
+                  {t("bought-value")/* valor de compra (corrigido) */}
                 </div>
                 <div className="information-text">
                   <span>
@@ -104,13 +115,17 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
                     {stockInfo.paidPriceSingle}
                   </span>
                 </div>
-                <div className="orientation-text padding-top">Impostos</div>
+                <div className="orientation-text padding-top">
+                  {t("taxes")/* Impostos */}
+                </div>
                 <div className="money-spent">
                   <span className="orientation-text">R$</span>{" "}
                   {stockInfo.taxes.toFixed(2)}
                 </div>
 
-                <div className="orientation-text padding-top">lucro</div>
+                <div className="orientation-text padding-top">
+                  {t("profit")/* lucro */}
+                </div>
                 <div>
                   <span className="orientation-text">R$ </span>
                   {stockInfo.profit > 0 ? (
@@ -125,7 +140,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
                 </div>
 
                 <div className="orientation-text padding-top">
-                  Porcentagem de lucro
+                  {t("profit-percentage")/* Porcentagem de lucro */}
                 </div>
                 <div className="information-text">
                   {stockInfo.profit > 0 ? (
@@ -145,14 +160,14 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
                     className="green-button small-font"
                     onClick={handleSubmit}
                   >
-                    Vender
+                    {t("sell")/* Vender */}
                   </button>
                   <button
                     type="button"
                     className="red-button small-font"
                     onClick={handleClose}
                   >
-                    Cancelar
+                    {t("cancel")/* Cancelar */}
                   </button>
                 </div>
               </form>

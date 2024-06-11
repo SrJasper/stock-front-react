@@ -1,9 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { api } from '../../config/api';
+import { useTranslation } from 'react-i18next';
 
 
 function RecoverPassword() {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
 
   const [user, setUser] = useState('');
 
@@ -24,7 +30,7 @@ function RecoverPassword() {
     <main>
       <form onSubmit={RecoverPassword} className='register-form'>
         <h1 className='title'>
-          Stocks
+          {t("site-title") /* Gestor de ações */}
         </h1>
         <div className='field-box'>
           <label className='orientation-text'>
@@ -34,8 +40,8 @@ function RecoverPassword() {
         </div>
 
         <div className='next-buttons padding-top'>
-          <button type='submit' >recuperar</button>
-          <button className='green-button' type='button' onClick={goToLoginPage}>voltar</button>
+          <button type='submit' >{t("recover")/*recuperar*/}</button>
+          <button className='green-button' type='button' onClick={goToLoginPage}>{t("back")/*voltar*/}</button>
         </div>
       </form>
 

@@ -4,8 +4,9 @@ import { StockToBuy } from "./types";
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
 import "./styles/buyStockCard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/stockCard.css";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   stock: StockToBuy;
@@ -19,6 +20,11 @@ type Props = {
 };
 
 const Card = ({ stock, handleClose }: Props) => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, [i18n]);
+
   const [qnt, setQnt] = useState(0);
   const { useNewSimStock } = useStocks();
 
@@ -27,13 +33,13 @@ const Card = ({ stock, handleClose }: Props) => {
   const { isLoading, mutateAsync } = useMutation("simStock", useNewSimStock, {
     onSuccess: () => {
       query.refetchQueries("fetchStocks");
-      query.invalidateQueries('stockToBuy');
+      query.invalidateQueries("stockToBuy");
       handleClose && handleClose();
     },
   });
 
   async function handleSubmit() {
-    stock.qnt = qnt;    
+    stock.qnt = qnt;
     await mutateAsync(stock);
     query.setQueryData("stockToBuy", undefined);
   }
@@ -43,7 +49,7 @@ const Card = ({ stock, handleClose }: Props) => {
       {isLoading && <LoadingCard />}
       <div className="screen-blocker">
         <div className="card border">
-          <label> Quantidade à ser comprada </label>
+          <label>{t("qnt-buy") /* Quantidade à ser comprada */}</label>
           <br />
           <input
             className="default-input margin-top"
@@ -56,12 +62,10 @@ const Card = ({ stock, handleClose }: Props) => {
               className="use-width sim-button green-button"
               onClick={handleSubmit}
             >
-              {" "}
-              Comprar{" "}
+              {t("buy") /* Comprar */}
             </button>
             <button className="use-width sim-button" onClick={handleClose}>
-              {" "}
-              Cancelar{" "}
+              {t("cancel") /*Cancelar*/}
             </button>
           </div>
         </div>
@@ -75,6 +79,12 @@ const StockCardToBuy = ({
   handleOpenRegisterCard,
   handleReturn,
 }: Props) => {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, [i18n]);
+  
   const [card, setCard] = useState(false);
   let stockSymbol: string;
   if (stock.Symbol) {
@@ -83,14 +93,19 @@ const StockCardToBuy = ({
     return (
       <>
         <div className="no-stock-card">
-          <h2>Símbolo não encontrado</h2>
+          <h2>
+            {t("symbol-not-found-title")/* Símbolo não encontrado */}
+          </h2>
           <p>
-            Você pode olhar no link para ver uma lista com símbolos de ações
-            disponíveis ou tentar novamente com outro símbolo.
+            {t("symbol-not-found-text")/* 
+            Você pode olhar no link 
+            para ver uma lista com símbolos
+            de ações disponíveis ou tentar
+            novamente com outro símbolo. 
+            */}
           </p>
           <button className="register-stock-button" onClick={handleReturn}>
-            {" "}
-            voltar{" "}
+            {t("back")/* voltar */}
           </button>
         </div>
       </>
@@ -110,11 +125,16 @@ const StockCardToBuy = ({
       <li className="stock ol-blocker">
         <div className="stock-blocks use-width">
           <div className="use-width margin-top margin-down-pc">
-            <label> {stock.LongName} </label>
-            <label className="big-font use-width"> {stock.Symbol.toUpperCase()} </label>
+            <label className="use-width"> {stock.LongName} </label>
+            <label className="big-font use-width">
+              {" "}
+              {stock.Symbol.toUpperCase()}{" "}
+            </label>
           </div>
           <div className="use-width text-centralize margin-top margin-down-pc">
-            <label className="use-height "> valor </label>
+            <label className="use-height ">
+              {t("value")/* valor */}
+            </label>
             <label className="big-font">
               {" "}
               {stock.Price ? stock.Price : 0}{" "}
@@ -122,30 +142,28 @@ const StockCardToBuy = ({
           </div>
         </div>
 
-        <div className="new-stock-buttons margin-line-bottom">
+        <div className="new-stock-buttons mobile-maring-down">
           <button
             className="buy-button margin-right green-button use-width"
             onClick={() => setCard(true)}
           >
-            Comprar
+            {t("buy")/* Comprar */}
           </button>
           <div className="alternative-buttons">
             <button
               className="register-stock-button"
               onClick={() => {
                 handleOpenRegisterCard &&
-                handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
+                  handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
               }}
             >
-              {" "}
-              Registrar{" "}
+              {t("register")/* Registrar */}
             </button>
             <button
               className="register-stock-button margin-down"
               onClick={handleReturn}
             >
-              {" "}
-              Cancelar{" "}
+              {t("cancel")/* Cancelar */}
             </button>
           </div>
         </div>

@@ -1,10 +1,18 @@
 import { LoadingCard } from "../../components/LoadingCard";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LoginStyle.css";
 
 function LoginPage() {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
+
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +34,7 @@ function LoginPage() {
     <main className="login">
       {isLoading && <LoadingCard />}
       <form onSubmit={handleSubmit} className="register-form">
-        <h1 className="title">Gestor de ações</h1>
+        <h1 className="title">{t("site-title") /* Gestor de ações */}</h1>
         <div className="field-box">
           <label className="orientation-text">e-mail</label>
           <input
@@ -37,7 +45,7 @@ function LoginPage() {
           />
         </div>
         <div className="field-box">
-          <label className="orientation-text padding-top">senha</label>
+          <label className="orientation-text padding-top">{t("password")/*senha*/}</label>
           <input
             className="use-width default-input"
             type="password"
@@ -48,8 +56,8 @@ function LoginPage() {
 
         {error && error.message && (
           <div className="pass-rec">
-            <p> {error.message} </p>
-            <a href="/recover">Esqueci a senha</a>
+            <p> {error.message} </p> {/* TRADUZIR */}
+            <a href="/recover">{t("forgot-password")/*Esqueci a senha*/}</a>
           </div>
         )}
         <div className="next-buttons padding-top">
@@ -58,7 +66,7 @@ function LoginPage() {
             type="button"
             onClick={goToRegisterPage}
           >
-            registrar
+            {t("register")/*registrar*/}
           </button>
           <button className="small-font green-button" type="submit">
             login

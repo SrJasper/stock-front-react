@@ -1,10 +1,18 @@
 import { LoadingCard } from "../../components/LoadingCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./UpdateStyle.css";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../config/api";
+import { useTranslation } from "react-i18next";
 
 function RegisterPage() {
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
+  
   const navigate = useNavigate();
   const goToHomePage = () => {
     navigate("/Home");
@@ -47,7 +55,7 @@ function RegisterPage() {
     <main>
       {loading && <LoadingCard />}
       <form onSubmit={handleSubmit} className="register-form">
-        <div className="title">Atualizar dados da conta</div>
+        <div className="title">{t("update-title")/*Atualizar dados da conta*/}</div>
         <div className="orientation-text">nome</div>
         <input
           className="use-width default-input"
@@ -55,14 +63,14 @@ function RegisterPage() {
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
-        <div className="orientation-text padding-top">senha</div>
+        <div className="orientation-text padding-top">{t("password")/*senha*/}</div>
         <input
           type="password"
           className="use-width default-input"
           value={userPassword}
           onChange={(e) => setUserPassword(e.target.value)}
         />
-        <div className="orientation-text padding-top">confirme sua senha</div>
+        <div className="orientation-text padding-top">{t("confirm-password")/*confirme sua senha*/}</div>
         <input
           type="password"
           className="use-width default-input"
@@ -72,10 +80,10 @@ function RegisterPage() {
 
         <div className="next-buttons padding-top">
           <button type="submit" className="green-button small-font">
-            atualizar
+            {t("update")/* atualizar */}
           </button>
           <button type="button" className="small-font" onClick={goToHomePage}>
-            voltar
+            {t("back")/* voltar */}
           </button>
         </div>
         <div>
@@ -84,7 +92,7 @@ function RegisterPage() {
             className="red-button dell-button use-width small-font"
             onClick={dellStocks}
           >
-            deletar registros
+            {t("delete-account")/* deletar conta */}
           </button>
         </div>
       </form>

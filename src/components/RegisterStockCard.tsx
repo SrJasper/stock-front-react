@@ -1,6 +1,7 @@
 import "./styles/registerCard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../config/api";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   handleClose: () => void;
@@ -15,6 +16,14 @@ const RegisterStockCard = ({
   stockSymbol,
   stockPrice,
 }: Props) => {
+
+  
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage('en');
+  }, [i18n]);
+
+  
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   async function registerStock() {
@@ -37,9 +46,13 @@ const RegisterStockCard = ({
   return (
     <div className="screen-blocker">
       <form className="register-stock-form black border">
-        <div className="title">Registrar nova ação</div>
+        <div className="title">
+          {t("register-stock-title")/* Registrar nova ação */}
+        </div>
         <div className="padding-top">
-          <label>Nome da ação</label>
+          <label>
+            {t("stock-name")/* Nome da ação */}
+          </label>
           <input
             className="default-input use-width"
             type="text"
@@ -49,8 +62,10 @@ const RegisterStockCard = ({
         </div>
         <div className="padding-top">
           <div className="input-row">
-            <label>Simbolo da ação</label>
-            <label className="mark"> ⓘ </label>
+            <label>
+              {t("stock-symbol")/* Simbolo da ação */}
+            </label>
+            {/* <label className="mark"> ⓘ </label> */}
           </div>
           <input
             className="default-input use-width"
@@ -60,7 +75,9 @@ const RegisterStockCard = ({
           />
         </div>
         <div className="padding-top">
-          <label>Quantidade</label>
+          <label>
+            {t("qnt")/* Quantidade */}
+          </label>
           <input
             className="default-input use-width"
             type="number"
@@ -69,7 +86,9 @@ const RegisterStockCard = ({
           />
         </div>
         <div className="padding-top">
-          <label>Preço</label>
+          <label>
+            {t("price")/* Preço */}
+          </label>
           <input
             className="default-input use-width"
             type="number"
@@ -78,7 +97,9 @@ const RegisterStockCard = ({
           />
         </div>
         <div className="padding-top">
-          <label>Data de compra</label>
+          <label>
+            {t("bought-date")/* Data de compra */}
+          </label>
           <input
             className="default-input use-width"
             type="date"
@@ -95,14 +116,14 @@ const RegisterStockCard = ({
               handleClose();
             }}
           >
-            registrar
+            {t("register")/* registrar */}
           </button>
           <button
             type="button"
             className="use-width small-font"
             onClick={handleClose}
           >
-            cancelar
+            {t("cancel")/* cancelar */}
           </button>
         </div>
       </form>
