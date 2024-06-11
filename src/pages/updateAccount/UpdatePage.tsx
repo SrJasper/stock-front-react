@@ -1,4 +1,4 @@
-import { LoadingCard } from "../../components/LoadingCard";
+  import { LoadingCard } from "../../components/LoadingCard";
 import { useEffect, useState } from "react";
 import "./UpdateStyle.css";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,6 @@ import { useTranslation } from "react-i18next";
 
 function RegisterPage() {
 
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
-
-  
   const navigate = useNavigate();
   const goToHomePage = () => {
     navigate("/Home");
@@ -21,22 +15,30 @@ function RegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [userPasswordConfirmation, setUserPasswordConfirmation] = useState("");
+  const [language, setLanguage] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const data = {
       name: userName,
-      password: userPassword,
+      language: language,
+      password: password,
     };
 
-    if (userPassword !== userPasswordConfirmation) {
+    if (password !== passwordConfirmation) {
       alert("Senhas não conferem");
       return;
     } else {
       setLoading(true);
+      console.log(data);
       await api.patch("/users/patch/", data);
     }
     goToHomePage();
@@ -56,26 +58,39 @@ function RegisterPage() {
       {loading && <LoadingCard />}
       <form onSubmit={handleSubmit} className="register-form">
         <div className="title">{t("update-title")/*Atualizar dados da conta*/}</div>
-        <div className="orientation-text">nome</div>
-        <input
-          className="use-width default-input"
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
+        
+        <div className='line-display'>
+          <div>
+            <div className='orientation-text'>
+              {t("register-nickname")/* apelido */}
+            </div>
+            <input className='use-width default-input' type='text' value={userName} onChange={(e) => setUserName(e.target.value)}/>
+          </div>      
+          <div className=''>
+            <div className='orientation-text'>
+              {t("register-language")/* Idioma */}
+            </div>
+            <select className='default-select use-width' value={language} onChange={(e) => setLanguage(e.target.value)}>
+              <option value="en">en</option>
+              <option value="pt">pt</option>
+            </select>
+
+          </div>
+        </div>
+
         <div className="orientation-text padding-top">{t("password")/*senha*/}</div>
         <input
           type="password"
           className="use-width default-input"
-          value={userPassword}
-          onChange={(e) => setUserPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <div className="orientation-text padding-top">{t("confirm-password")/*confirme sua senha*/}</div>
         <input
           type="password"
           className="use-width default-input"
-          value={userPasswordConfirmation}
-          onChange={(e) => setUserPasswordConfirmation(e.target.value)}
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
 
         <div className="next-buttons padding-top">

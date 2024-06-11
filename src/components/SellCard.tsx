@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
-import { Stock, StockToSell } from "./types";
+import { Stock, StockToSell, User } from "./types";
 import { useEffect, useState } from "react";
 import { LoadingCard } from "./LoadingCard";
 import { api } from "../config/api";
@@ -9,16 +9,20 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
   stock: Stock;
+  user: User;
   date?: Date;
   handleClose: () => void;
 };
 
-const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
+const SellCard: React.FC<Props> = ({ stock, user, handleClose }) => {
 
   const { t, i18n } = useTranslation();
   useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
+    if(user){
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user])
 
   const { SellStock } = useStocks();
 
@@ -55,6 +59,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
   const { isLoading, mutateAsync } = useMutation("fetchStock", SellStock, {
     onSuccess: () => {
       query.invalidateQueries("fetchStocks");
+      console.log("Deveria ter arualizaado o fetchStocks");
       handleClose();
     },
   });
@@ -65,7 +70,7 @@ const SellCard: React.FC<Props> = ({ stock, handleClose }) => {
 
   return (
     <>
-      {isLoading && <LoadingCard />}
+      {isLoading && <LoadingCard user={user} />}
       {card && stockInfo && (
         <>
           <div>

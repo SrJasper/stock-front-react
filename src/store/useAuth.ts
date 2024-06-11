@@ -11,6 +11,7 @@ export interface ILoginCredentials {
 export interface IRegisterCredentials {
   name: string;
   email: string;
+  language: string;
   password: string;
   confirmPassword: string;
 }

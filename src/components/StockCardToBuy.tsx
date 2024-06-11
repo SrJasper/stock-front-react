@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
-import { StockToBuy } from "./types";
+import { StockToBuy, User } from "./types";
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
 import "./styles/buyStockCard.css";
@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
   stock: StockToBuy;
+  user: User;
   handleClose?: () => void;
   handleOpenRegisterCard?: (
     name: string,
@@ -19,7 +20,8 @@ type Props = {
   handleReturn?: () => void;
 };
 
-const Card = ({ stock, handleClose }: Props) => {
+const Card = ({ stock, user, handleClose }: Props) => {
+
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage("en");
@@ -46,7 +48,7 @@ const Card = ({ stock, handleClose }: Props) => {
 
   return (
     <main>
-      {isLoading && <LoadingCard />}
+      {isLoading && <LoadingCard user={user}/>}
       <div className="screen-blocker">
         <div className="card border">
           <label>{t("qnt-buy") /* Quantidade à ser comprada */}</label>
@@ -76,14 +78,18 @@ const Card = ({ stock, handleClose }: Props) => {
 
 const StockCardToBuy = ({
   stock,
+  user,
   handleOpenRegisterCard,
   handleReturn,
 }: Props) => {
 
-  const { t, i18n } = useTranslation();
   useEffect(() => {
-    i18n.changeLanguage("en");
-  }, [i18n]);
+    if(user){
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user])
+  const { t, i18n } = useTranslation();
   
   const [card, setCard] = useState(false);
   let stockSymbol: string;
@@ -118,6 +124,7 @@ const StockCardToBuy = ({
       {card && (
         <Card
           stock={stock}
+          user={user}
           handleOpenRegisterCard={() => setCard(true)}
           handleClose={() => setCard(false)}
         />

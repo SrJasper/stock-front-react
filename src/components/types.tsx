@@ -28,3 +28,10 @@ export type Stock = {
   ownerId: number;
   simulation: boolean;
 };
+
+export type User = {
+  id: number;
+  name: string;
+  language: string;
+  email: string;
+}

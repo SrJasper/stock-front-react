@@ -30,12 +30,22 @@ input {
   color: white;
 }
 
+.default-select{
+  background-color: #000000;
+  border: 3px solid rgb(255, 255, 255);
+  color: white;
+  outline: none;
+  height: 2rem;
+  padding: 0.5px;
+}
+
 .default-input {
   background-color: #000000;
   border: 3px solid rgb(255, 255, 255);
   color: white;
   outline: none;
   width: 23.13rem;
+  height: 2rem;
   padding: 0.5px;
 }
 
@@ -76,7 +86,7 @@ input {
   border: 3px solid rgb(255, 255, 255);
   margin: 0 auto;
   margin-top: 6.25rem;
-  width: 33.13rem;
+  width: 23.13rem;
   @media (max-width: 765px) {
     padding: 1.25rem;
     background-color: #000000;
@@ -122,6 +132,14 @@ input[type="number"] {
   width: 50%;
   padding: 0.19rem;
   justify-content: center;
+}
+
+.line-display{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.63rem;
 }
 
 .orientation-text {

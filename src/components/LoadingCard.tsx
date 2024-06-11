@@ -1,20 +1,26 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { User } from "./types";
 
-const LoadingCard = () => {
+type Props = {
+  user?: User;
+};
+
+const LoadingCard = ({ user }: Props) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
+    if (user) {
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user]);
   return (
     <div className="screen-blocker">
       <div className="loading-card">
-        <label> 
-          {t("loading")/* Carregando */}
-        </label>
+        <label>{t("loading") /* Carregando */}</label>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export {LoadingCard}
+export { LoadingCard };

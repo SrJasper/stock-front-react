@@ -14,35 +14,37 @@ import { StockToBuy } from "../../components/types";
 import { useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 
-type userInfo = {
-  id: string;
-  email: string;
-  name?: string;
-};
-
 function HomePage() {
+  async function getUserInfo() {
+    const response = await api.get("/users/info/");
+    return response.data;
+  }
 
-  const { t, i18n } = useTranslation();
+  const { data: user, isLoading } = useQuery("fetchUser", getUserInfo);
   useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
+    if (user) {
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user]);
+  const { t, i18n } = useTranslation();
 
   const [search, setSearch] = useState("");
   const [noStock, setNoStock] = useState(true);
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
   const [stockSymbol, setStockSymbol] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
 
   function registerCard() {
     setRegister(true);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     listStocks();
-    userInfo();
-  }, [])
+    getUserInfo();
+  }, []);
 
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -78,7 +80,7 @@ function HomePage() {
 
   async function searchNewStock(e: FormEvent, data: string) {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     try {
       const res = await api.get("/stocks/search/" + data);
       queryClient.setQueryData("stockToBuy", res.data);
@@ -86,17 +88,7 @@ function HomePage() {
     } catch (error) {
       alert("Escreva algo para pesquisar!");
     }
-    setLoading(false);
-  }
-
-  const [user, setUser] = useState<userInfo>();
-  async function userInfo() {
-    try {
-      const response = await api.get("/users/info/");
-      setUser(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    // setLoading(false);
   }
 
   function isJsonObject(obj: any) {
@@ -116,9 +108,11 @@ function HomePage() {
   return (
     <main>
       <div className="header-container">
-        <h1>{t("site-title")/*Monitor de ações*/}</h1>
+        <h1>{t("site-title") /*Monitor de ações*/}</h1>
         <div className="profile">
-          <div className="user-name">{t("hello")/*Olá*/}, {user?.name}</div>
+          <div className="user-name">
+            {t("hello") /*Olá*/}, {user?.name}
+          </div>
           <div>
             <img
               className="option-icon gear-icon"
@@ -137,10 +131,11 @@ function HomePage() {
       </div>
 
       <div className="market-body">
-        {loading && <LoadingCard />}
+        {isLoading && <LoadingCard user={user} />}
         {register && (
           <RegisterStockCard
             handleClose={() => setRegister(false)}
+            user={user}
             stockName={stockName}
             stockSymbol={stockSymbol}
             stockPrice={stockPrice}
@@ -148,9 +143,7 @@ function HomePage() {
         )}
         <div className="search-tab">
           <div className="search-field">
-            <label>
-              {t("search-stock")/* Procurar ação */}
-            </label>
+            <label>{t("search-stock") /* Procurar ação */}</label>
             <div className="search-ballon">
               <input
                 className="use-width"
@@ -167,7 +160,7 @@ function HomePage() {
                 className="search-button"
                 onClick={(e) => searchNewStock(e, search)}
               >
-                {t("search")/* pesquisar */}
+                {t("search") /* pesquisar */}
               </button>
             </div>
           </div>
@@ -181,7 +174,7 @@ function HomePage() {
               setStockPrice(undefined);
             }}
           >
-            {t("register-stock")/* Registrar ação */}
+            {t("register-stock") /* Registrar ação */}
           </button>
         </div>
 
@@ -191,7 +184,7 @@ function HomePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("stock-list")/* Ver lista de ações (ibovespa) */}
+            {t("stock-list") /* Ver lista de ações (ibovespa) */}
           </a>
         </div>
 
@@ -199,7 +192,7 @@ function HomePage() {
           <div className="search-symbol">
             <select value={selectedSymbol} onChange={handleSymbolChange}>
               <option value="opcao1">
-                {t("stock-select")/* Selecionar ação */}
+                {t("stock-select") /* Selecionar ação */}
               </option>
               {stockList
                 .filter((value, index, self) => self.indexOf(value) === index)
@@ -220,6 +213,7 @@ function HomePage() {
           {stockToBuy && (
             <StockCardToBuy
               stock={stockToBuy}
+              user={user}
               handleOpenRegisterCard={(name, symbol, price) => {
                 setRegister(true);
                 setStockName(name);
@@ -236,9 +230,10 @@ function HomePage() {
               filterSymbol={
                 selectedSymbol !== "opcao1" ? selectedSymbol : undefined
               }
+              user={user}
             />
           )}
-          {noStock && !stockToBuy && <NoStockCard />}
+          {noStock && !stockToBuy && <NoStockCard user={user} />}
         </ol>
       </div>
     </main>

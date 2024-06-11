@@ -2,9 +2,11 @@ import "./styles/registerCard.css";
 import { useEffect, useState } from "react";
 import { api } from "../config/api";
 import { useTranslation } from "react-i18next";
+import { User } from "./types";
 
 type Props = {
   handleClose: () => void;
+  user: User;
   stockName?: string;
   stockSymbol?: string;
   stockPrice?: number | undefined;
@@ -12,6 +14,7 @@ type Props = {
 
 const RegisterStockCard = ({
   handleClose,
+  user,
   stockName,
   stockSymbol,
   stockPrice,
@@ -20,8 +23,11 @@ const RegisterStockCard = ({
   
   const { t, i18n } = useTranslation();
   useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
+    if(user){
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user])
 
   
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);

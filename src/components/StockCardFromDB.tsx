@@ -2,19 +2,27 @@ import { useState, useEffect } from "react";
 import { SellCard } from "./SellCard";
 import { LoadingCard } from "./LoadingCard";
 import { SellRegisteredStockCard } from "./SellRegisteredStockCard";
-import { Stock } from "./types";
+import { Stock, User } from "./types";
 import { api } from "../config/api";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 
-const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
-  filterSymbol,
-}) => {
+type Props = {
+  filterSymbol?: string;
+  user: User;
+};
 
+const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
+  filterSymbol,
+  user,
+}: Props) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
-    i18n.changeLanguage('en');
-  }, [i18n]);
+    if (user) {
+      console.log(user);
+      i18n.changeLanguage(user.language);
+    }
+  }, [user]);
 
   const [card, setCard] = useState(false);
   const [cardReg, setCardReg] = useState(false);
@@ -30,8 +38,12 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const listStocks = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
-      setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
-      return response.data;
+      if(response.data.length !== 0){
+        setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
+        return response.data;
+      } else {
+        return response.data;
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
@@ -73,13 +85,18 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
 
   return (
     <>
-      {isLoading && <LoadingCard />}
+      {isLoading && <LoadingCard user={user} />}
       {card && stockToPass && (
-        <SellCard stock={stockToPass} handleClose={() => setCard(false)} />
+        <SellCard
+          stock={stockToPass}
+          user={user}
+          handleClose={() => setCard(false)}
+        />
       )}
       {cardReg && data?.find((s) => !s.simulation) && (
         <SellRegisteredStockCard
           stock={data?.find((s) => !s.simulation)!}
+          user={user}
           handleClose={() => setCardReg(false)}
         />
       )}
@@ -96,14 +113,16 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                     {" "}
                     {stock.longName}
                   </label>
-                  <p className="big-font margin-down use-width">{stock.symbol}</p>
+                  <p className="big-font margin-down use-width">
+                    {stock.symbol}
+                  </p>
                 </div>
 
                 <div className="stock-info-display">
                   <div className="stock-comparison">
                     <div className="stock-info">
                       <label className="stock-label small-font">
-                        {t("bought")/* compra */}
+                        {t("bought") /* compra */}
                       </label>
                       <div className="stock-value big-font">
                         <p className="big-font red-font">
@@ -113,7 +132,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                     </div>
                     <div className="stock-info value-to-sell">
                       <label className="stock-label small-font">
-                        {t("current-value")/* valor atual */}
+                        {t("current-value") /* valor atual */}
                       </label>
                       <div className="stock-value big-font">
                         <p className="big-font green-font">
@@ -134,7 +153,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                       }`}
                       onClick={() => SellStockModal(stock)}
                     >
-                      {t("sell")/* Vender */}
+                      {t("sell") /* Vender */}
                     </button>
                   </div>
                 </div>
