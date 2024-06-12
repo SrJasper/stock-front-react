@@ -19,7 +19,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {
-      console.log(user);
       i18n.changeLanguage(user.language);
     }
   }, [user]);
@@ -38,7 +37,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
   const listStocks = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
-      if(response.data.length !== 0){
+      if (response.data.length !== 0) {
         setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
         return response.data;
       } else {
@@ -53,13 +52,11 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
   const { data, isLoading } = useQuery("fetchStocks", listStocks);
 
   useEffect(() => {
-    console.log("chamou o useEffect");
     GetPriceFromAPI(stockToFindPrice);
   }, [data, stockToFindPrice]);
 
   const GetPriceFromAPI = async (data: string[]) => {
     const prices = [];
-    console.log("entrou no GetPriceFromAPI");
     for (const stockToBePriced of data) {
       const res = await api.get(`/stocks/search/${stockToBePriced}`);
       prices.push(res.data.Price);
@@ -76,6 +73,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
 
   async function SellStockModal(stock: Stock) {
     setStockToPass(stock);
+    console.log(stock)
     if (stock.simulation) {
       setCard(true);
     } else {
@@ -93,9 +91,9 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
           handleClose={() => setCard(false)}
         />
       )}
-      {cardReg && data?.find((s) => !s.simulation) && (
+      {cardReg && stockToPass && (
         <SellRegisteredStockCard
-          stock={data?.find((s) => !s.simulation)!}
+          stock={stockToPass}
           user={user}
           handleClose={() => setCardReg(false)}
         />
@@ -109,11 +107,16 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
             <>
               <li className="stock" key={stock.id}>
                 <div className="stock-name">
-                  <label className="small-font margin-top">
-                    {" "}
+                  <label className="small-font margin-top use-width">
                     {stock.longName}
                   </label>
-                  <p className="big-font margin-down use-width">
+                  <p
+                    className={`
+                    big-font 
+                    margin-down 
+                    use-width 
+                    ${!stock.simulation ? "registered-stock" : ""}`}
+                  >
                     {stock.symbol}
                   </p>
                 </div>

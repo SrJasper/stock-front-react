@@ -14,7 +14,6 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {
-      console.log(user);
       i18n.changeLanguage(user.language);
     }
   }, [user]);
@@ -49,7 +48,10 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
           stock={stock}
           user={user}
           date={sellDate}
-          handleClose={() => setCard(false)}
+          handleClose={() => {
+            setCard(false)
+            handleClose();
+          }}
         />
       )}
       <div className="screen-blocker-lower">
@@ -92,17 +94,17 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
           <div className="button-field use-width">
             <button
               className="sim-button green-button use-width button-left-margin"
-              onClick={() => MakeCard(price, provents, sellDate)}
+              onClick={() => { 
+                MakeCard(price, provents, sellDate);
+              }}
             >
-              {" "}
-              {t("sell") /*Vender*/}{" "}
+              {t("sell") /*Vender*/}
             </button>
             <button
               className="sim-button use-width button-margin-right"
               onClick={handleClose}
             >
-              {" "}
-              {t("cancel") /*Cancelar*/}{" "}
+              {t("cancel") /*Cancelar*/}
             </button>
           </div>
         </div>

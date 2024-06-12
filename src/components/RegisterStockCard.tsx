@@ -40,7 +40,6 @@ const RegisterStockCard = ({
       qnt: quantity,
       operationDate: date,
     };
-
     await api.post("/stocks/regsim", data);
   }
 

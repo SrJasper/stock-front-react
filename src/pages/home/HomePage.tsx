@@ -23,7 +23,6 @@ function HomePage() {
   const { data: user, isLoading } = useQuery("fetchUser", getUserInfo);
   useEffect(() => {
     if (user) {
-      console.log(user);
       i18n.changeLanguage(user.language);
     }
   }, [user]);
@@ -59,7 +58,7 @@ function HomePage() {
     try {
       const response = await api.get("/stocks/listall");
       if (response.data.length === 0) {
-        console.log("No stocks found");
+        setNoStock(true);
       } else {
         setNoStock(false);
         setStockList(

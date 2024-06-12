@@ -152,3 +152,7 @@
     flex-direction: column;
   }
 }
+
+.registered-stock{
+  color: #FFD700;
+}
