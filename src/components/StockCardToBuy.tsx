@@ -161,7 +161,7 @@ const StockCardToBuy = ({
               className="register-stock-button"
               onClick={() => {
                 handleOpenRegisterCard &&
-                  handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
+                handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
               }}
             >
               {t("register")/* Registrar */}

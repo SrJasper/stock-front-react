@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../config/api";
 import { useTranslation } from "react-i18next";
 import { User } from "./types";
+import { useMutation, useQueryClient } from "react-query";
 
 type Props = {
   handleClose: () => void;
@@ -27,9 +28,10 @@ const RegisterStockCard = ({
       console.log(user);
       i18n.changeLanguage(user.language);
     }
-  }, [user])
+  }, [user]);
 
-  
+  const query = useQueryClient();
+
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   async function registerStock() {
@@ -41,6 +43,7 @@ const RegisterStockCard = ({
       operationDate: date,
     };
     await api.post("/stocks/regsim", data);
+    query.refetchQueries("fetchStocks");
   }
 
   const [newStockName, setNewStockName] = useState(stockName || "");
