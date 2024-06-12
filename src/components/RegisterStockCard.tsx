@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../config/api";
 import { useTranslation } from "react-i18next";
 import { User } from "./types";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 
 type Props = {
   handleClose: () => void;
