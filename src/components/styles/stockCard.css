@@ -163,3 +163,7 @@
 .registered-stock{
   color: #FFD700;
 }
+
+.buy-button-height{
+  height: 64px;
+}

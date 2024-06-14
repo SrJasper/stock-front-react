@@ -161,7 +161,7 @@ const StockCardToBuy = ({
         <div className="new-stock-buttons mobile-maring-down">
           <div className="use-height use-width buy-button-height">
             <button
-              className="buy-button margin-right green-button use-width"
+              className="buy-button buy-button-height margin-right green-button use-width"
               onClick={() => setCard(true)}
               >
               {t("buy")/* Comprar */}
