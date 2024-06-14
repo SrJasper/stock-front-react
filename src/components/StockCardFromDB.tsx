@@ -73,7 +73,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
 
   async function SellStockModal(stock: Stock) {
     setStockToPass(stock);
-    console.log(stock)
     if (stock.simulation) {
       setCard(true);
     } else {
