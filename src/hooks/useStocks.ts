@@ -2,15 +2,17 @@ import { StockToBuy } from "../components/types";
 import { api } from "../config/api";
 
 function useStocks() {
-  async function useSellStock(id: number) {
+
+  async function useSellStock({ id, qnt }: { id: number; qnt?: number }) {
+    console.log("id: ", id, "\nqnt: ", qnt);
     try {
-      await api.delete(`/stocks/delone/${id}`);
+      await api.post(`/stocks/sell/`, { id: id, qnt: qnt });
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
     }
   }
-
+  
   async function useNewSimStock(stock: StockToBuy) {
     const symbol = stock.Symbol.toUpperCase();
 
@@ -21,7 +23,7 @@ function useStocks() {
       qnt: stock.qnt,
     };
     await api.post("/stocks/newsim", data);
-  }  
+  }
 
   //exemplo de função de compra de ações
   async function buyStock(data: any) {
@@ -33,7 +35,7 @@ function useStocks() {
     }
   }
 
-  return { SellStock: useSellStock, useNewSimStock, buyStock };
+  return { useSellStock, useNewSimStock, buyStock};
 }
 
 export { useStocks };

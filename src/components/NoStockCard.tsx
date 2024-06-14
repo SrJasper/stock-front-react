@@ -11,7 +11,6 @@ const NoStockCard = ({ user }: Props) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {
-      console.log(user);
       i18n.changeLanguage(user.language);
     }
   }, [user]);

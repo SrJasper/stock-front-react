@@ -87,16 +87,24 @@
   }
 }
 
+
+
 .buy-button {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  height: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   font-weight: bold;
   font-size: 1.7rem;
   color: white;
   @media (max-width: 765px) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+}
+.qnt-text{
+  font-size: .7rem;
+  color: gray;
+  padding-bottom: .3rem;
+  @media (max-width: 765px) {
   }
 }
 

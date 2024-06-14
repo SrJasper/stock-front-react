@@ -22,6 +22,7 @@
     "sell-earnings": "Earnings",
     "sell-date": "Sell date",
     "sell-value": "Sell price",
+    "sell-qnt": "Quantity to sell",
     "bougth-value": "Bought price (corrected)",
     "taxes": "Taxes",
     "profit": "Profit",

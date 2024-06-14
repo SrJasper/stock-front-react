@@ -22,11 +22,13 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
 
   function MakeCard(
     price: number,
+    qnt: number,
     provents: number,
     sellDate: Date | undefined
   ) {
     stock.price = price;
     stock.provents = provents;
+    stock.qnt = qnt;
     if (sellDate) {
       const date = new Date(sellDate.toString());
       const isoString = date.toISOString();
@@ -34,10 +36,12 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
     } else {
       stock.operationDate = new Date().toISOString();
     }
+    console.log("quantidade a ser vendida: ", stock.qnt);
     setCard(true);
   }
 
   const [price, setPrice] = useState(0);
+  const [qnt, setQnt] = useState(stock.qnt);
   const [provents, setProvents] = useState(0);
   const [sellDate, setSellDate] = useState<Date>();
 
@@ -47,23 +51,36 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
         <SellCard
           stock={stock}
           user={user}
+          qnt={qnt}
+          sellPriceSingle={price}
           date={sellDate}
           handleClose={() => {
-            setCard(false)
+            setCard(false);
             handleClose();
           }}
         />
       )}
       <div className="screen-blocker-lower">
-        <div className="card">
+        <div className="card border">
           <div>
-            <label>{t("sell-price") /* Preço à ser vendida */}</label>
+            <label>{t("sell-price") /* Preço a ser vendida */}</label>
             <br />
             <input
               className="default-input"
               type="number"
               onChange={(e) => {
                 setPrice(Number(e.target.value));
+              }}
+            />
+          </div>
+          <div className="margin-top">
+            <label>{t("sell-qnt") /* Quantidade a ser vendida */}</label>
+            <br />
+            <input
+              className="default-input"
+              type="number"
+              onChange={(e) => {
+                setQnt(Number(e.target.value));
               }}
             />
           </div>
@@ -94,8 +111,14 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
           <div className="button-field use-width">
             <button
               className="sim-button green-button use-width button-left-margin"
-              onClick={() => { 
-                MakeCard(price, provents, sellDate);
+              onClick={() => {
+                console.log(
+                  "price: ",price,
+                  "qnt: ",qnt,
+                  "provents: ",provents,
+                  "sellDate: ",sellDate
+                );
+                MakeCard(price, qnt, provents, sellDate);
               }}
             >
               {t("sell") /*Vender*/}

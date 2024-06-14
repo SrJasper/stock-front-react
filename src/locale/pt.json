@@ -22,6 +22,7 @@
     "sell-earnings": "Proventos",
     "sell-date": "Data da venda",
     "sell-value": "Valor da venda",
+    "sell-qnt": "Quantidade a ser vendida",
     "bougth-value": "Valor da compra (corrigido)",
     "taxes": "Impostos",
     "profit": "Lucro",

@@ -1,6 +1,7 @@
 export type StockToSell = {
   stockName: string;
   stockSymbol: string;
+  qnt: number;
   paidPriceSingle: number;
   sellPriceSingle: number;
   paidPrice: number;

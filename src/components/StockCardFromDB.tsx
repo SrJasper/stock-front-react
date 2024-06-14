@@ -58,7 +58,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
   const GetPriceFromAPI = async (data: string[]) => {
     const prices = [];
     for (const stockToBePriced of data) {
-      const res = await api.get(`/stocks/search/${stockToBePriced}`);
+      const res = await api.get(`/stocks/search/${stockToBePriced.toLowerCase()}`);
       prices.push(res.data.Price);
     }
     setStockPriceFromApi(prices);
@@ -87,6 +87,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
         <SellCard
           stock={stockToPass}
           user={user}
+          qnt={stockToPass.qnt}
           handleClose={() => setCard(false)}
         />
       )}
@@ -148,14 +149,19 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
 
                   <div>
                     <button
-                      className={`buy-button ${
+                      className={`buy-button margin-down ${
                         Number(stockPriceFromApi[index]) > stock.price
                           ? "green-button"
                           : "red-button"
                       }`}
                       onClick={() => SellStockModal(stock)}
                     >
-                      {t("sell") /* Vender */}
+                      <p>
+                      {t("sell") /* Vender */}  
+                      </p>
+                      <p className="qnt-text">
+                        ({stock.qnt})
+                      </p>
                     </button>
                   </div>
                 </div>
