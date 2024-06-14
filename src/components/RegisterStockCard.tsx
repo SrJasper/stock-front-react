@@ -20,7 +20,6 @@ const RegisterStockCard = ({
   stockSymbol,
   stockPrice,
 }: Props) => {
-
   
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -42,7 +41,9 @@ const RegisterStockCard = ({
       operationDate: date,
     };
     await api.post("/stocks/regsim", data);
+    console.log("Stock registered")
     query.refetchQueries("fetchStocks");
+    query.setQueryData("stockToBuy", undefined);
   }
 
   const [newStockName, setNewStockName] = useState(stockName || "");

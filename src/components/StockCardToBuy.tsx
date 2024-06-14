@@ -148,13 +148,25 @@ const StockCardToBuy = ({
           </div>
         </div>
 
+        {/* <div className="buy-buttons-parent">
+          <div className="buy-button-options">
+           <button> Aqui </button>
+          </div>
+          <div className="other-buttons">
+           <button> oia </button>
+           <button> oia </button>
+          </div>
+        </div> */}
+
         <div className="new-stock-buttons mobile-maring-down">
-          <button
-            className="buy-button margin-right green-button use-width"
-            onClick={() => setCard(true)}
-          >
-            {t("buy")/* Comprar */}
-          </button>
+          <div className="use-height use-width buy-button-height">
+            <button
+              className="buy-button margin-right green-button use-width"
+              onClick={() => setCard(true)}
+              >
+              {t("buy")/* Comprar */}
+            </button>
+          </div>
           <div className="alternative-buttons">
             <button
               className="register-stock-button"
