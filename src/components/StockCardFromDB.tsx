@@ -52,14 +52,19 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
   const { data, isLoading } = useQuery("fetchStocks", listStocks);
 
   useEffect(() => {
-    GetPriceFromAPI(stockToFindPrice);
+    GetPriceFromAPI(stockToFindPrice);    
   }, [data, stockToFindPrice]);
 
   const GetPriceFromAPI = async (data: string[]) => {
     const prices = [];
     for (const stockToBePriced of data) {
       const res = await api.get(`/stocks/search/${stockToBePriced.toLowerCase()}`);
-      prices.push(res.data.Price);
+      if(res.data.Price === undefined){
+        const res2 = await api.get(`/stocks/search/${stockToBePriced.toUpperCase()}`);
+        prices.push(res2.data.Price);
+      } else {
+        prices.push(res.data.Price);
+      }
     }
     setStockPriceFromApi(prices);
     setLoaded(true);

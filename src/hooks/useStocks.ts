@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { StockToBuy } from "../components/types";
 import { api } from "../config/api";
 
@@ -25,6 +26,17 @@ function useStocks() {
     await api.post("/stocks/newsim", data);
   }
 
+  async function useSearchNewStock({ e, data }: { e: FormEvent; data: string }) {
+    e.preventDefault();
+    try {
+      const res = await api.get("/stocks/search/" + data);
+      return res.data;
+    } catch (error) {
+      alert("Escreva algo para pesquisar!");
+      throw error;
+    }
+  }
+
   //exemplo de função de compra de ações
   async function buyStock(data: any) {
     try {
@@ -35,7 +47,7 @@ function useStocks() {
     }
   }
 
-  return { useSellStock, useNewSimStock, buyStock};
+  return { useSellStock, useNewSimStock, useSearchNewStock, buyStock};
 }
 
 export { useStocks };

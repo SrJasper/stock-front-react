@@ -11,10 +11,14 @@ import { useAuth } from "../../store/useAuth";
 import "./HomeStyle.css";
 import { api } from "../../config/api";
 import { StockToBuy } from "../../components/types";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
+import { useStocks } from "../../hooks/useStocks";
 
 function HomePage() {
+
+  const { useSearchNewStock } = useStocks();
+
   async function getUserInfo() {
     const response = await api.get("/users/info/");
     return response.data;
@@ -29,11 +33,9 @@ function HomePage() {
   const { t, i18n } = useTranslation();
 
   const [search, setSearch] = useState("");
-  const [noStock, setNoStock] = useState(true);
   const [stockPrice, setStockPrice] = useState<number | undefined>(0);
   const [stockName, setStockName] = useState("");
   const [stockSymbol, setStockSymbol] = useState("");
-  // const [loading, setLoading] = useState(false);
   const [register, setRegister] = useState(false);
 
   function registerCard() {
@@ -53,6 +55,7 @@ function HomePage() {
     logout();
   }
 
+  const [noStock, setNoStock] = useState(true);
   const [stockList, setStockList] = useState([]);
   async function listStocks() {
     try {
@@ -70,24 +73,25 @@ function HomePage() {
     }
   }
 
-  const queryClient = useQueryClient();
+  const query = useQueryClient();
   const { data: stockToBuy, refetch } = useQuery<StockToBuy | undefined>(
     "stockToBuy",
-    () => queryClient.getQueryData<StockToBuy>("stockToBuy"),
+    () => query.getQueryData<StockToBuy>("stockToBuy"),
     { enabled: false }
   );
 
-  async function searchNewStock(e: FormEvent, data: string) {
-    e.preventDefault();
-    // setLoading(true);
-    try {
-      const res = await api.get("/stocks/search/" + data);
-      queryClient.setQueryData("stockToBuy", res.data);
+  const { mutateAsync: serachStock } = useMutation(useSearchNewStock, {
+    onSuccess: (data) => {
+      query.setQueryData("stockToBuy", data);
       refetch();
-    } catch (error) {
-      alert("Escreva algo para pesquisar!");
+    },
+    onError: (error) => {
+      console.error("Erro ao buscar a ação:", error);
     }
-    // setLoading(false);
+  });
+
+  async function handleSubmit(e: FormEvent, qnt: string) {
+    await serachStock({ e, data: qnt });
   }
 
   function isJsonObject(obj: any) {
@@ -151,13 +155,13 @@ function HomePage() {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    searchNewStock(e, search);
+                    handleSubmit(e, search);
                   }
                 }}
               />
               <button
                 className="search-button"
-                onClick={(e) => searchNewStock(e, search)}
+                onClick={(e) => handleSubmit(e, search)}
               >
                 {t("search") /* pesquisar */}
               </button>
@@ -220,7 +224,7 @@ function HomePage() {
                 setStockPrice(price);
               }}
               handleReturn={() => {
-                queryClient.setQueryData("stockToBuy", undefined);
+                query.setQueryData("stockToBuy", undefined);
               }}
             />
           )}
