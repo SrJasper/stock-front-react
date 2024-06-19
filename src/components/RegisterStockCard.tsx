@@ -41,7 +41,7 @@ const RegisterStockCard = ({
       operationDate: date,
     };
     await api.post("/stocks/regsim", data);
-    console.log("Stock registered")
+    // console.log("Stock registered");
     query.refetchQueries("fetchStocks");
     query.setQueryData("stockToBuy", undefined);
   }

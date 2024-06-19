@@ -13,9 +13,11 @@
     "sell": "Sell",
     "cancel": "Cancel",
     "value": "value",
-    "bought": "bought",
+    "bought": "yield",
     "price": "Price",
     "qnt": "Quantity",
+    "dell": "Delete Registration",
+    "account-statement": "Account statement",
 
     "sell-info-title": "Sell informations",
     "sell-price": "Price to be sold",
@@ -57,17 +59,25 @@
     "no-stock-card-text-one": "To make a new simulation, search for a stock by its symbol in the search bar above. If you don't know the symbol, click on the link 'View list of stocks (Ibovespa)' to see a list of available stocks.",
     "no-stock-card-title-two": "About the website",
     "no-stock-card-text-two": "The Stock Monitor is a website that allows you to interact with stocks from the stock market by conducting simulations or real registrations.",
-    "no-stock-card-text-three": "When choosing an asset through the link 'View list of stocks (Ibovespa)', you'll have the option to conduct a simulation or register the stock (which can be real) in your portfolio on the website. Upon conducting the sale, the website will display a card with information about the profitability of the stock, performing calculations to show relevant selling information to the investor without them having to do it themselves.",
+    "no-stock-card-text-three": "When choosing an asset through the link 'View list of stocks (Ibovespa)', you'll have the option to conduct a simulation or register the stock (which can be real) in your portfolio on the website. Upon conducting the sale, the website will display a card with information about the profitability of the stock, performing calculations to show relevant selling information to the investor without them having to do it themselves. Please keep in mind that the website was designed with IBOVESPA in mind; any other stock exchange may not be covered by the project.",
+    
+    "observations": "Relevant observations",
+    "obs-one": "- No action record will be deleted, so we ask that finalized transactions be deleted from our database. Although it is little information for the user to keep registered, for many people it ends up becoming a lot of information.",
+    "obs-two": "After a simulation is sold or a record is deleted, no data regarding the transactions will be stored. Therefore, before clicking on 'sell,' if you wish to keep a record, save the information locally somewhere while the sales information panel is still open. (Remember, at this point, you can still cancel the sale; there's no need to rush.)",
+    "obs-three": "- Statements are advanced features available only in records; simulations will not have access to the transaction history of the product.",
+
     "simulation": "Simulation",
     "simulation-text-one": "Simulation is a way for you to track the performance of a stock without needing to invest real money.",
     "simulation-text-two": "To conduct a simulation, search for the stock symbol in the search bar and click on 'Buy'. Upon doing so, a prompt will appear asking you to enter the quantity of shares you wish to buy. After entering the quantity, click 'Buy' again and the simulation will be conducted.",
     "simulation-text-three": "To conduct the sale, click on 'Sell'. The platform will show a card with information about the profitability of the simulation. This card takes into consideration values that the user won't be able to control, such as the purchase and sale dates, sale and purchase prices, and earnings. After that, if the user is satisfied with the simulation, simply click 'Sell' again and you're done.",
     "simulation-text-four": "This is the quickest type of interaction with the website and doesn't require the user to input more information to monitor the stock. However, the purchase and sale dates, purchase and sale prices, and earnings will be automatically generated values, meaning they are outside the user's control.",
     "simulation-text-five": "This is an alternative for those who want to 'play investing' using real stocks through the platform.",
+    
     "reg-title": "Register",
     "register-text-one": "Registration is a way for you to add real stocks to your portfolio on the website.",
     "register-text-two": "To register a stock, there are two ways: search for the stock symbol in the search bar and click on 'Register', or you can click on 'Register stock' (The second way is only available on computers).",
     "register-text-three": "Upon doing so, a prompt will appear asking you to enter the stock name, symbol, quantity, price, and the day the stock was purchased. These values will already be filled in if the stock is registered from a search through the search bar, but they can be changed (if the user modifies the name and symbol of the stock, the process of automatically fetching the data may be compromised). After entering the values, click on Register and the stock will be registered.",
+    "register-text-three-dot-five": "The initial record functions very similarly to the simulation. However, if additional transactions are conducted with the same registered product, they will be logged in the product statement. There, users can view purchases, sales, the type of transaction, and the date it occurred.",
     "register-text-four": "To conduct the sale, click on Sell. The platform will show a card that prompts the user to complete some information about the sale so that profitability information can be calculated more accurately. After entering the values, click on Sell, and a card will appear with information just like the simulations, but with values provided by the user.",
     "register-text-five": "This is the most comprehensive type of interaction with the website and requires the user to input more information to monitor the stock. It can also be used for 'play investing', but it can be used as a registrar of real stocks, providing the user with real information about stocks they own in their portfolio. It can be used as a real stock monitoring tool."
   }

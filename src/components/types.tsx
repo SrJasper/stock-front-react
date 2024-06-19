@@ -28,6 +28,7 @@ export type Stock = {
   provents?: number | 0;
   ownerId: number;
   simulation: boolean;
+  type: string;
 };
 
 export type User = {

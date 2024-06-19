@@ -28,6 +28,10 @@ const NoStockCard = ({ user }: Props) => {
           {t("no-stock-card-text-three")}
           <br />
         </p>
+        <h2 className="margin-top golden-font">{t("observations")}</h2>
+        <p> {t("obs-one")}</p>
+        <p> {t("obs-two")} </p>
+        <p> {t("obs-three")}</p>
         <hr className="gap-line black" />
         <div className="horizontal-texts">
           <div>
@@ -54,10 +58,14 @@ const NoStockCard = ({ user }: Props) => {
               <br />
               {t("register-text-three")}
               <br />
+              <p> 
+                {t("register-text-three-dot-five")}
+              </p>
               {t("register-text-four")}
-              <br />
+              <br />            
               {t("register-text-five")}
             </p>
+            
           </div>
         </div>
       </div>

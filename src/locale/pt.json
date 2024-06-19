@@ -13,9 +13,11 @@
     "sell": "Vender",
     "cancel": "Cancelar",
     "value": "valor",
-    "bought": "compra",
+    "bought": "rendimento",
     "price": "Preço",
     "qnt": "Quantidade",
+    "dell": "Deletar Registro",
+    "account-statement": "Extrato da conta",
 
     "sell-info-title": "Informações da venda",
     "sell-price": "Preço a ser vendida",
@@ -60,6 +62,13 @@
     "no-stock-card-text-two": "O Monitor de ações é um site que permite que você interaja com ações da bolsa de valores realizando simulações ou registros reais.",
     "no-stock-card-text-three": "Ao escolher um ativo pelo link 'Ver lista de ações (ibovespa)', você terá a opção de realizar uma simulação ou de registrar a ação (que pode ser real) em sua carteira no site. E ao realizar a venda o site mostrará um card com informações sobre a rentabilidade da ação realizando alguns cálculos para mostrar informações de venda relevantes para o investidor sem que ele tenha que se dar ao trabalho de fazer isso.",
     "simulation": "Simulação",
+
+    "observations": "Observações relevantes",
+    "obs-one": "- Nenhum registro de ação será deletado, por isso pedimos que movimentações finalizadas sejam deletadas do nosso banco de dados. Apesar de ser pouca informação para o usuário manter registrado, para várias pessoas acaba se tornando muita informação.",
+    "obs-two": "- Depois que uma simulação for vendida ou registro for apagado, não serão armazenados dados referentes às movimentações, por isso, antes de clicar em vender, se quiser manter registo, salve as informações localmente em algum lugar enquanto o painel de informações de venda ainda estiver aberto (lembre-se nesse momento você ainda pode cancelar a venda, não é preciso ter pressa)",
+    "obs-three": "- Extratos são recursos avançados presentes apenas em registros, simulações não terão acesso ao histórico de movimentações do produto.",
+
+
     "simulation-text-one": "A simulação é uma forma de você acompanhar o desempenho de uma ação sem precisar investir dinheiro real.",
     "simulation-text-two": "Para realizar uma simulação, procure pelo simbolo da ação no balão de procurar ação e clique em 'Comprar'. Ao fazer isso, um balão aparecerá pedindo que informe a quantidade de ações que deseja comprar. Após informar a quantidade, clique em 'Comprar' novamente e a simulação será realizada.",
     "simulation-text-three": "Para realizar a venda, clique em 'Vender' a plataforma irá mostrar um card com informações sobre a rentabilidade da simulação. Esse cartão leva em consideração valores que o usuário não poderá controlar, como data de compra e venda, preço de venda e compra e proventos. Depois disso, se o usuário 'estiver satisfeito' com a simulação, é só clicar novamente em 'vender' e pronto.",
@@ -69,6 +78,7 @@
     "register-text-one": "O registro é uma forma de você adicionar ações reais à sua carteira no site.",
     "register-text-two": "Para registrar uma ação tem dois jeitos, procure pelo símbolo da ação no balão de procurar ação e clique em 'Registrar' ou você pode clicar em 'Registrar ação' (O segundo jeito está apenas disponível em computadores).",
     "register-text-three": "Ao fazer isso, um balão aparecerá pedindo que informe o nome da ação, o símbolo, a quantidade, o preço e o dia em que a ação foi comprada. Esses valores já virão preenchidos caso a ação seja registrada a partir de uma pesquisa pelo balão de pesquisa, mas podem ser alterados (caso o usuário modifique o nome e símbolo da ação, o processo de buscar os dados automaticamente poderá ficar comprometido). Após informar os valores, clique em Registrar e a ação será registrada.",
+    "register-text-three-dot-five": "O primeiro registro funciona de forma muito parecida com a simulação, mas se forem realizadas outras movimentações com o mesmo produto registrado, isso entrará para o extrato do produto, nele o usuário poderá ver compras, vendas, o tipo de movimentação e a data em que foi realizada.",
     "register-text-four": "Para realizar a venda, clique em Vender. A plataforma irá mostrar um card que pede para que o usuário complete algumas informações sobre a venda para que as informações de rentabilidade sejam calculadas com mais precisão. Após informar os valores, clique em Vender, e aparecerá um card com informações do mesmo jeito que as simulações, mas com valores que o usuário informou.",
     "register-text-five": "Esse é o tipo mais completo de interação com o site e requer que o usuário coloque mais informações para monitorar a ação. Também pode ser usado para 'brincar de investir', mas pode ser usado como um registrador de ações reais, informando ao usuário informações reais sobre ações que ele possui em sua carteira. Podendo ser usada como uma ferramenta real de monitoramento de ações."
   }

@@ -36,7 +36,6 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
     } else {
       stock.operationDate = new Date().toISOString();
     }
-    console.log("quantidade a ser vendida: ", stock.qnt);
     setCard(true);
   }
 
@@ -112,12 +111,12 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
             <button
               className="sim-button green-button use-width button-left-margin"
               onClick={() => {
-                console.log(
-                  "price: ",price,
-                  "qnt: ",qnt,
-                  "provents: ",provents,
-                  "sellDate: ",sellDate
-                );
+                // console.log(
+                //   "price: ",price,
+                //   "qnt: ",qnt,
+                //   "provents: ",provents,
+                //   "sellDate: ",sellDate
+                // );
                 MakeCard(price, qnt, provents, sellDate);
               }}
             >

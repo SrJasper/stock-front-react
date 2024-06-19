@@ -10,6 +10,16 @@
   flex-direction: column;
 }
 
+.stock-name label {
+  height: 1rem;
+  @media (max-width: 765px) {
+  }
+}
+
+.stock-name p{
+  height: 2.6rem;
+}
+
 .stock div {
   display: flex;
   justify-content: space-between;
@@ -80,6 +90,15 @@
   }
 }
 
+.stock-info label{
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.stock-info div{
+  height: 2.5rem;
+  margin-bottom: .5rem;
+}
+
 .stock-info-display {
   @media (max-width: 765px) {
     display: flex;
@@ -87,23 +106,28 @@
   }
 }
 
-
-
 .buy-button {
+  display:flex;
+  align-items: center;
+  gap: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   color: white;
   @media (max-width: 765px) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
   }
 }
+
+.spacer {
+  justify-content: space-between;
+}
+
 .qnt-text{
-  font-size: .7rem;
+  font-size: 1rem;
   color: gray;
-  padding-bottom: .3rem;
   @media (max-width: 765px) {
   }
 }
@@ -160,10 +184,15 @@
   }
 }
 
-.registered-stock{
+.golden-font{
   color: #FFD700;
 }
 
 .buy-button-height{
   height: 64px;
+}
+
+.stock-options-menu{
+  gap: .2rem;
+  flex-direction: column;
 }

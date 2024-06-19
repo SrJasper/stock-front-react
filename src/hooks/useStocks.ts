@@ -3,17 +3,26 @@ import { StockToBuy } from "../components/types";
 import { api } from "../config/api";
 
 function useStocks() {
-
-  async function useSellStock({ id, qnt }: { id: number; qnt?: number }) {
-    console.log("id: ", id, "\nqnt: ", qnt);
+  async function useSellStock({
+    symbol,
+    qnt,
+    simulation,
+    id
+  }: {
+    symbol: string;
+    qnt?: number;
+    simulation: boolean;
+    id : number;
+  }) {
     try {
-      await api.post(`/stocks/sell/`, { id: id, qnt: qnt });
+      console.log("id: ", id, "\nsymbol: ", symbol, "\nqnt: ", qnt, "\nsimulation: ", simulation)
+      await api.post(`/stocks/sell/`, { symbol: symbol, qnt: qnt, simulation: simulation, id: id });
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
     }
   }
-  
+
   async function useNewSimStock(stock: StockToBuy) {
     const symbol = stock.Symbol.toUpperCase();
 
@@ -26,7 +35,13 @@ function useStocks() {
     await api.post("/stocks/newsim", data);
   }
 
-  async function useSearchNewStock({ e, data }: { e: FormEvent; data: string }) {
+  async function useSearchNewStock({
+    e,
+    data,
+  }: {
+    e: FormEvent;
+    data: string;
+  }) {
     e.preventDefault();
     try {
       const res = await api.get("/stocks/search/" + data);
@@ -47,7 +62,7 @@ function useStocks() {
     }
   }
 
-  return { useSellStock, useNewSimStock, useSearchNewStock, buyStock};
+  return { useSellStock, useNewSimStock, useSearchNewStock, buyStock };
 }
 
 export { useStocks };

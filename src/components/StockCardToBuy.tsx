@@ -15,7 +15,7 @@ type Props = {
   handleOpenRegisterCard?: (
     name: string,
     symbol: string,
-    price: number
+    price: number,
   ) => void;
   handleReturn?: () => void;
 };
@@ -36,6 +36,7 @@ const Card = ({ stock, user, handleClose }: Props) => {
     onSuccess: () => {
       query.refetchQueries("fetchStocks");
       query.invalidateQueries("stockToBuy");
+      console.log("Stock bought");
       handleClose && handleClose();
     },
   });

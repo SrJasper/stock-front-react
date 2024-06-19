@@ -16,7 +16,13 @@ type Props = {
   handleClose: () => void;
 };
 
-const SellCard: React.FC<Props> = ({ stock, user, qnt, sellPriceSingle, handleClose }) => {
+const SellCard: React.FC<Props> = ({
+  stock,
+  user,
+  qnt,
+  sellPriceSingle,
+  handleClose,
+}) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {
@@ -43,12 +49,18 @@ const SellCard: React.FC<Props> = ({ stock, user, qnt, sellPriceSingle, handleCl
 
   async function GotInfo() {
     try {
-      console.log(
-      'id: ' + stock.id +
-      '\nqnt: ' + qnt +
-      '\nsellPrice: ' + stock.price +
-      '\nprovents: ' + stock.provents +
-      '\ndate: ' + stock.operationDate);
+      // console.log(
+      //   "id: " +
+      //     stock.id +
+      //     "\nqnt: " +
+      //     qnt +
+      //     "\nsellPrice: " +
+      //     stock.price +
+      //     "\nprovents: " +
+      //     stock.provents +
+      //     "\ndate: " +
+      //     stock.operationDate
+      // );
       const response = await api.post("/stocks/sellinfo", {
         id: stock.id,
         qnt: qnt,
@@ -63,7 +75,7 @@ const SellCard: React.FC<Props> = ({ stock, user, qnt, sellPriceSingle, handleCl
   }
   useEffect(() => {
     setCard(true);
-    console.log("stockInfo: ", stockInfo);
+    // console.log("stockInfo: ", stockInfo);
   }, [stockInfo]);
 
   const query = useQueryClient();
@@ -76,7 +88,8 @@ const SellCard: React.FC<Props> = ({ stock, user, qnt, sellPriceSingle, handleCl
   });
 
   async function handleSubmit() {
-    await mutateAsync({ id: stock.id, qnt });
+    console.log("stock: ", stock.symbol, "\nqnt: ", qnt, "\nsimulation: ", stock.simulation)
+    await mutateAsync({ symbol: stock.symbol, qnt, simulation: stock.simulation, id: stock.id});
   }
 
   return (
@@ -112,9 +125,7 @@ const SellCard: React.FC<Props> = ({ stock, user, qnt, sellPriceSingle, handleCl
                       {stockInfo.sellPrice.toFixed(2)}
                     </span>
                   </span>
-                  <span className="orientation-text">
-                    {sellPriceSingle}
-                  </span>
+                  <span className="orientation-text">{sellPriceSingle}</span>
                 </div>
 
                 <div className="orientation-text padding-top">
