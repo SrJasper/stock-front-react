@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { useStocks } from "../../hooks/useStocks";
 
 function HomePage() {
-
   const { useSearchNewStock } = useStocks();
 
   async function getUserInfo() {
@@ -87,7 +86,7 @@ function HomePage() {
     },
     onError: (error) => {
       console.error("Erro ao buscar a ação:", error);
-    }
+    },
   });
 
   async function handleSubmit(e: FormEvent, qnt: string) {

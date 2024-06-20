@@ -1,12 +1,10 @@
-.statement-display{
+.statement-display {
   display: flex;
-  justify-content: space-between;
-  gap: 4rem;
-  margin-top : 0.4rem;
-  margin-bottom : 0.4rem;
+  justify-content: space-between !important;
+  padding: 1rem 2rem;
 }
 
-.separation-line-statement{
+.separation-line-statement {
   border: 1px solid rgba(255, 255, 255, 0.605);
   width: 90%;
 }

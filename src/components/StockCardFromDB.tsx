@@ -137,7 +137,9 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
           .filter(
             (stock) => !filterSymbol || stock.symbol.includes(filterSymbol)
           )
-          .filter((stock) => stock.type === "media" || stock.simulation === true)
+          .filter(
+            (stock) => stock.type === "media" || stock.simulation === true
+          )
           .map((stock, index) => (
             <>
               <li className="stock" key={stock.id}>

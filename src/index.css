@@ -30,7 +30,7 @@ input {
   color: white;
 }
 
-.default-select{
+.default-select {
   background-color: #000000;
   border: 3px solid rgb(255, 255, 255);
   color: white;
@@ -134,7 +134,7 @@ input[type="number"] {
   justify-content: center;
 }
 
-.line-display{
+.line-display {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -178,7 +178,7 @@ input[type="number"] {
   margin-bottom: 0.63rem;
 }
 
-.mobile-maring-down{
+.mobile-maring-down {
   @media (max-width: 765px) {
     margin-bottom: 0.63rem;
   }
@@ -191,7 +191,7 @@ input[type="number"] {
   }
 }
 
-.display-column{
+.display-column {
   display: flex;
   flex-direction: column;
 }
@@ -260,6 +260,10 @@ input[type="number"] {
   border: 1px solid rgba(255, 255, 255, 0.605);
 }
 
-.disable{
+.disable {
   display: none !important;
+}
+
+.test {
+  display: flex;
 }
