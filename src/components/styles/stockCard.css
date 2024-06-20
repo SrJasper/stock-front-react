@@ -11,8 +11,9 @@
 }
 
 .stock-name label {
-  height: 1rem;
+  width: 100%;
   @media (max-width: 765px) {
+    height: 1rem;
   }
 }
 
