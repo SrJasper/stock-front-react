@@ -90,14 +90,14 @@ const SellCard: React.FC<Props> = ({
   async function handleSubmit() {
     console.log(
       "stock: ",
-      stock.Symbol,
+      stock.symbol,
       "\nqnt: ",
       qnt,
       "\nsimulation: ",
       stock.simulation
     );
     await mutateAsync({
-      symbol: stock.Symbol,
+      symbol: stock.symbol,
       qnt,
       simulation: stock.simulation,
       id: stock.id,

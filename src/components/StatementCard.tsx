@@ -1,4 +1,5 @@
 import { api } from "../config/api";
+import { useStock } from "../contexts/stockContext";
 import "./styles/statementCard.css";
 import React, { useState, useEffect } from "react";
 
@@ -10,19 +11,16 @@ interface StatementItem {
   type: string;
 }
 
-interface Props {
-  symbol: string;
-}
-
-const StatementCard: React.FC<Props> = ({ symbol }) => {
+const StatementCard: React.FC = () => {
   const [statements, setStatements] = useState<StatementItem[]>([]);
+
+  const { stock } = useStock();
 
   useEffect(() => {
     const fetchStatements = async () => {
       try {
-        const res = await api.get(`stocks/statement/${symbol.toUpperCase()}`);
+        const res = await api.get(`stocks/statement/${stock?.symbol}`);
 
-        // Transformando a data antes de salvar no estado
         const transformedData = res.data.map((item: StatementItem) => ({
           ...item,
           operationDate: formatMonthYear(item.operationDate),
@@ -35,7 +33,7 @@ const StatementCard: React.FC<Props> = ({ symbol }) => {
     };
 
     fetchStatements();
-  }, [symbol]);
+  }, [stock?.symbol]);
 
   const formatMonthYear = (dateString: string): string => {
     const date = new Date(dateString);

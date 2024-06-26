@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { StatementCard } from "./StatementCard";
 import { useUser } from "../contexts/userContext";
+import { useStock } from "../contexts/stockContext";
 
 type Props = {
   filterSymbol?: string;
@@ -17,6 +18,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   filterSymbol,
 }: Props) => {
   const { user } = useUser();
+  const { stock, setStock } = useStock();
 
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -35,6 +37,10 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   useEffect(() => {
     listStocks();
   }, []);
+
+  useEffect(() => {
+    console.log('Stock sendo manipulada: ', stock?.symbol)
+  }, [stock]);
 
   const listStocks = async (): Promise<Stock[]> => {
     try {
@@ -142,27 +148,27 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
           .filter(
             (stock) => stock.type === "media" || stock.simulation === true
           )
-          .map((stock, index) => (
+          .map((stockOl, index) => (
             
-            <li className="stock" key={stock.id}>
+            <li className="stock" key={stockOl.id}>
               <div className="stock-name">
                 <label className="small-font margin-top use-width">
-                  {stock.longName}
+                  {stockOl.longName}
                 </label>
                 <p
                   className={`
                   big-font 
                   margin-down 
                   use-width 
-                  ${!stock.simulation ? "golden-font" : ""}`}
+                  ${!stockOl.simulation ? "golden-font" : ""}`}
                 >
-                  {stock.symbol}
+                  {stockOl.symbol}
                 </p>
               </div>
 
               <div className="stock-info-display use-width">
                 <div className={`stock-comparison ${
-                  stock.qnt === 0 ? "disable" : ""
+                  stockOl.qnt === 0 ? "disable" : ""
                 }`}>
                   <div className="stock-info">
                     <label className="stock-label small-font">
@@ -171,17 +177,17 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                     <div className="stock-value big-font">
                       <p
                         className={`big-font  ${
-                          (Number(stockPriceFromApi[index]) - stock.price) /
+                          (Number(stockPriceFromApi[index]) - stockOl.price) /
                             Number(stockPriceFromApi[index]) >
                           0
                             ? "green-font"
                             : "red-font"
                         }`}
                       >
-                        {stock.price
+                        {stockOl.price
                           ? (
                               (Number(stockPriceFromApi[index]) -
-                                stock.price) /
+                                stockOl.price) /
                               Number(stockPriceFromApi[index])
                             ).toFixed(2) + "%"
                           : 0}
@@ -205,36 +211,37 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                 <div className="stock-options-menu use-width">
                   <button
                     className={`buy-button spacer use-width ${
-                      Number(stockPriceFromApi[index]) > stock.price
+                      Number(stockPriceFromApi[index]) > stockOl.price
                         ? "green-button"
                         : "red-button"
                     }`}
                     onClick={() =>
-                      stock.qnt > 0
-                        ? SellStockModal(stock)
-                        : DellStock(stock.symbol, stock.simulation)
+                      stockOl.qnt > 0
+                        ? SellStockModal(stockOl)
+                        : DellStock(stockOl.symbol, stockOl.simulation)
                     }
                   >
                     <label>
-                      {stock.qnt > 0 ? t("sell") : t("dell") /* Vender */}
+                      {stockOl.qnt > 0 ? t("sell") : t("dell") /* Vender */}
                     </label>
-                    <label className="qnt-text">({stock.qnt})</label>
+                    <label className="qnt-text">({stockOl.qnt})</label>
                   </button>
                   <div
                     className={`use-width display-column
-                    ${stock.simulation === true ? "disable" : ""}
+                    ${stockOl.simulation === true ? "disable" : ""}
                   `}
                   >
                     <button
                       onClick={() => {
                         toggleStatement(index);
+                        setStock(stockOl);
                       }}
                       className="buy-button use-width"
                     >
                       <label> {t("account-statement") /* extrato */} </label>
                     </button>
-                    {statement[index] && stock.symbol && (
-                      <StatementCard symbol={stock.symbol} />
+                    {statement[index] && stockOl.symbol && (
+                      <StatementCard/>
                     )}
                   </div>
                 </div>

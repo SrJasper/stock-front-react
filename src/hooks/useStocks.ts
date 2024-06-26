@@ -10,7 +10,7 @@ function useStocks() {
     return {
       id: 0,
       operationDate: "",
-      symbol: stockToBuy.Symbol,
+      symbol: stockToBuy.Symbol.toUpperCase(),
       longName: stockToBuy.LongName,
       price: stockToBuy.Price,
       qnt: stockToBuy.qnt || 0,
@@ -77,7 +77,6 @@ function useStocks() {
     e.preventDefault();
     try {
       const res = await api.get("/stocks/search/" + data);
-      console.log("res.data: ", res.data);
       const normalizedStock = normalizeStock(res.data);
       setStock(normalizedStock);
       return res.data;
