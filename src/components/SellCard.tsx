@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
-import { Stock, StockToSell, User } from "./types";
+import { Stock, StockToSell } from "./types";
 import { useEffect, useState } from "react";
 import { LoadingCard } from "./LoadingCard";
 import { api } from "../config/api";
