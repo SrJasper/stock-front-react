@@ -41,7 +41,10 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
       const response = await api.get("/stocks/listall");
 
       if (response.data.length !== 0) {
-        setStockToFindPrice(response.data.map((stock: Stock) => stock.symbol));
+        const symbolsToFindPrice = response.data
+          .filter((stock: Stock) => stock.qnt !== 0) // Filtra apenas os stocks com qnt diferente de 0
+          .map((stock: Stock) => stock.symbol);
+        setStockToFindPrice(symbolsToFindPrice);
         return response.data;
       } else {
         return response.data;
@@ -158,7 +161,9 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                 </div>
 
                 <div className="stock-info-display use-width">
-                  <div className="stock-comparison">
+                  <div className={`stock-comparison ${
+                    stock.qnt === 0 ? "disable" : ""
+                  }`}>
                     <div className="stock-info">
                       <label className="stock-label small-font">
                         {t("bought") /* rendimento */}
