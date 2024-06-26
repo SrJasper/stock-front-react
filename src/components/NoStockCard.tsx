@@ -59,9 +59,8 @@ const NoStockCard = () => {
               <br />
               {t("register-text-three")}
               <br />
-              <p> 
-                {t("register-text-three-dot-five")}
-              </p>
+              {t("register-text-three-dot-five")}
+              <br />
               {t("register-text-four")}
               <br />            
               {t("register-text-five")}
