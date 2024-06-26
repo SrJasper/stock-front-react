@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { User } from "./types";
+import { useUser } from "../contexts/userContext";
 
-type Props = {
-  user?: User;
-};
 
-const LoadingCard = ({ user }: Props) => {
+const LoadingCard = () => {
+
+  const { user } = useUser();
+
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {

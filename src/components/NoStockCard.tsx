@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
 import "./styles/noStockCard.css";
 import { useEffect } from "react";
-import { User } from "./types";
+import { useUser } from "../contexts/userContext";
 
-type Props = {
-  user: User;
-};
 
-const NoStockCard = ({ user }: Props) => {
+
+const NoStockCard = () => {
+
+  const { user } = useUser();
+
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {

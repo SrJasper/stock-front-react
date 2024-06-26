@@ -2,21 +2,22 @@ import { useState, useEffect } from "react";
 import { SellCard } from "./SellCard";
 import { LoadingCard } from "./LoadingCard";
 import { SellRegisteredStockCard } from "./SellRegisteredStockCard";
-import { Stock, User } from "./types";
+import { Stock } from "./types";
 import { api } from "../config/api";
 import { useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { StatementCard } from "./StatementCard";
+import { useUser } from "../contexts/userContext";
 
 type Props = {
   filterSymbol?: string;
-  user: User;
 };
 
-const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
+const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   filterSymbol,
-  user,
 }: Props) => {
+  const { user } = useUser();
+
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (user) {
@@ -116,11 +117,10 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
 
   return (
     <>
-      {isLoading && <LoadingCard user={user} />}
+      {isLoading && <LoadingCard />}
       {card && stockToPass && (
         <SellCard
           stock={stockToPass}
-          user={user}
           qnt={stockToPass.qnt}
           handleClose={() => setCard(false)}
         />
@@ -128,7 +128,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string; user: User }> = ({
       {cardReg && stockToPass && (
         <SellRegisteredStockCard
           stock={stockToPass}
-          user={user}
           handleClose={() => setCardReg(false)}
         />
       )}

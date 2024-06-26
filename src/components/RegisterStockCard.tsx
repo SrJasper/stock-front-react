@@ -2,12 +2,11 @@ import "./styles/registerCard.css";
 import { useEffect, useState } from "react";
 import { api } from "../config/api";
 import { useTranslation } from "react-i18next";
-import { User } from "./types";
 import { useQueryClient } from "react-query";
+import { useUser } from "../contexts/userContext";
 
 type Props = {
   handleClose: () => void;
-  user: User;
   stockName?: string;
   stockSymbol?: string;
   stockPrice?: number | undefined;
@@ -15,11 +14,11 @@ type Props = {
 
 const RegisterStockCard = ({
   handleClose,
-  user,
   stockName,
   stockSymbol,
   stockPrice,
 }: Props) => {
+  const { user } = useUser();
   
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -41,7 +40,6 @@ const RegisterStockCard = ({
       operationDate: date,
     };
     await api.post("/stocks/regsim", data);
-    // console.log("Stock registered");
     query.refetchQueries("fetchStocks");
     query.setQueryData("stockToBuy", undefined);
   }

@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useStocks } from "../hooks/useStocks";
-import { StockToBuy, User } from "./types";
+import { StockToBuy } from "./types";
 import { LoadingCard } from "./LoadingCard";
 import "./styles/cardConfiguration.css";
 import "./styles/buyStockCard.css";
 import { useEffect, useState } from "react";
 import "./styles/stockCard.css";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../contexts/userContext";
 
 type Props = {
   stock: StockToBuy;
-  user: User;
   handleClose?: () => void;
   handleOpenRegisterCard?: (
     name: string,
@@ -20,7 +20,8 @@ type Props = {
   handleReturn?: () => void;
 };
 
-const Card = ({ stock, user, handleClose }: Props) => {
+const Card = ({ stock, handleClose }: Props) => {
+
 
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -49,7 +50,7 @@ const Card = ({ stock, user, handleClose }: Props) => {
 
   return (
     <main>
-      {isLoading && <LoadingCard user={user}/>}
+      {isLoading && <LoadingCard/>}
       <div className="screen-blocker">
         <div className="card border">
           <label>{t("qnt-buy") /* Quantidade à ser comprada */}</label>
@@ -79,10 +80,11 @@ const Card = ({ stock, user, handleClose }: Props) => {
 
 const StockCardToBuy = ({
   stock,
-  user,
   handleOpenRegisterCard,
   handleReturn,
 }: Props) => {
+
+  const { user } = useUser();
 
   useEffect(() => {
     if(user){
@@ -124,7 +126,6 @@ const StockCardToBuy = ({
       {card && (
         <Card
           stock={stock}
-          user={user}
           handleOpenRegisterCard={() => setCard(true)}
           handleClose={() => setCard(false)}
         />

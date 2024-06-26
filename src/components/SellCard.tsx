@@ -6,10 +6,10 @@ import { LoadingCard } from "./LoadingCard";
 import { api } from "../config/api";
 import "./styles/sellCard.css";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../contexts/userContext";
 
 type Props = {
   stock: Stock;
-  user: User;
   qnt: number;
   sellPriceSingle?: number;
   date?: Date;
@@ -18,12 +18,12 @@ type Props = {
 
 const SellCard: React.FC<Props> = ({
   stock,
-  user,
   qnt,
   sellPriceSingle,
   handleClose,
 }) => {
   const { t, i18n } = useTranslation();
+  const { user } = useUser();
   useEffect(() => {
     if (user) {
       i18n.changeLanguage(user.language);
@@ -88,13 +88,25 @@ const SellCard: React.FC<Props> = ({
   });
 
   async function handleSubmit() {
-    console.log("stock: ", stock.symbol, "\nqnt: ", qnt, "\nsimulation: ", stock.simulation)
-    await mutateAsync({ symbol: stock.symbol, qnt, simulation: stock.simulation, id: stock.id});
+    console.log(
+      "stock: ",
+      stock.Symbol,
+      "\nqnt: ",
+      qnt,
+      "\nsimulation: ",
+      stock.simulation
+    );
+    await mutateAsync({
+      symbol: stock.Symbol,
+      qnt,
+      simulation: stock.simulation,
+      id: stock.id,
+    });
   }
 
   return (
     <>
-      {isLoading && <LoadingCard user={user} />}
+      {isLoading && <LoadingCard />}
       {card && stockInfo && (
         <>
           <div>

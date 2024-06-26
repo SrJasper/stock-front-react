@@ -1,22 +1,54 @@
-import { FormEvent } from "react";
-import { StockToBuy } from "../components/types";
+import { useStock } from "../contexts/stockContext";
+import { Stock, StockToBuy } from "../components/types";
 import { api } from "../config/api";
+import { FormEvent } from "react";
 
 function useStocks() {
+  const { setStock } = useStock();
+
+  const normalizeStock = (stockToBuy: StockToBuy): Stock => {
+    return {
+      id: 0,
+      operationDate: "",
+      symbol: stockToBuy.Symbol,
+      longName: stockToBuy.LongName,
+      price: stockToBuy.Price,
+      qnt: stockToBuy.qnt || 0,
+      provents: 0,
+      ownerId: 0,
+      simulation: false,  
+      type: "",
+    };
+  };
+
   async function useSellStock({
     symbol,
     qnt,
     simulation,
-    id
+    id,
   }: {
     symbol: string;
     qnt?: number;
     simulation: boolean;
-    id : number;
+    id: number;
   }) {
     try {
-      console.log("id: ", id, "\nsymbol: ", symbol, "\nqnt: ", qnt, "\nsimulation: ", simulation)
-      await api.post(`/stocks/sell/`, { symbol: symbol, qnt: qnt, simulation: simulation, id: id });
+      console.log(
+        "id: ",
+        id,
+        "\nsymbol: ",
+        symbol,
+        "\nqnt: ",
+        qnt,
+        "\nsimulation: ",
+        simulation
+      );
+      await api.post(`/stocks/sell/`, {
+        symbol: symbol,
+        qnt: qnt,
+        simulation: simulation,
+        id: id,
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
@@ -45,6 +77,9 @@ function useStocks() {
     e.preventDefault();
     try {
       const res = await api.get("/stocks/search/" + data);
+      console.log("res.data: ", res.data);
+      const normalizedStock = normalizeStock(res.data);
+      setStock(normalizedStock);
       return res.data;
     } catch (error) {
       alert("Escreva algo para pesquisar!");

@@ -1,17 +1,20 @@
 import "./styles/sellCard.css";
 import { useEffect, useState } from "react";
-import { Stock, User } from "./types";
+import { Stock } from "./types";
 import { SellCard } from "./SellCard";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../contexts/userContext";
 
 type Props = {
   stock: Stock;
-  user: User;
   handleClose: () => void;
 };
 
-const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
+const SellRegisteredStockCard = ({ stock, handleClose }: Props) => {
   const { t, i18n } = useTranslation();
+
+  const { user } = useUser();
+
   useEffect(() => {
     if (user) {
       i18n.changeLanguage(user.language);
@@ -49,7 +52,6 @@ const SellRegisteredStockCard = ({ stock, user, handleClose }: Props) => {
       {card && stock && (
         <SellCard
           stock={stock}
-          user={user}
           qnt={qnt}
           sellPriceSingle={price}
           date={sellDate}

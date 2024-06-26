@@ -14,6 +14,8 @@ import { StockToBuy } from "../../components/types";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useStocks } from "../../hooks/useStocks";
+import { useUser } from "../../contexts/userContext";
+// import { useStock } from "../../contexts/stockContext";
 
 function HomePage() {
   const { useSearchNewStock } = useStocks();
@@ -22,8 +24,17 @@ function HomePage() {
     const response = await api.get("/users/info/");
     return response.data;
   }
-
   const { data: user, isLoading } = useQuery("fetchUser", getUserInfo);
+
+  const { setUser } = useUser();
+  // const { stock } = useStock();
+
+  useEffect(() => {
+    if (user) {
+      setUser(user);
+    }
+  }, [user, setUser]);
+
   useEffect(() => {
     if (user) {
       i18n.changeLanguage(user.language);
@@ -79,7 +90,7 @@ function HomePage() {
     { enabled: false }
   );
 
-  const { mutateAsync: serachStock } = useMutation(useSearchNewStock, {
+  const { mutateAsync: searchStock } = useMutation(useSearchNewStock, {
     onSuccess: (data) => {
       query.setQueryData("stockToBuy", data);
       refetch();
@@ -90,7 +101,7 @@ function HomePage() {
   });
 
   async function handleSubmit(e: FormEvent, qnt: string) {
-    await serachStock({ e, data: qnt });
+    await searchStock({ e, data: qnt });
   }
 
   function isJsonObject(obj: any) {
@@ -133,11 +144,11 @@ function HomePage() {
       </div>
 
       <div className="market-body">
-        {isLoading && <LoadingCard user={user} />}
+        {isLoading && <LoadingCard />}
         {register && (
           <RegisterStockCard
             handleClose={() => setRegister(false)}
-            user={user}
+            //
             stockName={stockName}
             stockSymbol={stockSymbol}
             stockPrice={stockPrice}
@@ -160,7 +171,9 @@ function HomePage() {
               />
               <button
                 className="search-button"
-                onClick={(e) => handleSubmit(e, search)}
+                onClick={(e) => {
+                  handleSubmit(e, search);
+                }}
               >
                 {t("search") /* pesquisar */}
               </button>
@@ -215,7 +228,6 @@ function HomePage() {
           {stockToBuy && (
             <StockCardToBuy
               stock={stockToBuy}
-              user={user}
               handleOpenRegisterCard={(name, symbol, price) => {
                 setRegister(true);
                 setStockName(name);
@@ -232,10 +244,9 @@ function HomePage() {
               filterSymbol={
                 selectedSymbol !== "opcao1" ? selectedSymbol : undefined
               }
-              user={user}
             />
           )}
-          {noStock && !stockToBuy && <NoStockCard user={user} />}
+          {noStock && !stockToBuy && <NoStockCard />}
         </ol>
       </div>
     </main>
