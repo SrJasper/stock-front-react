@@ -1,8 +1,19 @@
 .stock {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: rgb(0, 0, 0);
+}
+
+.stock-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  @media (max-width: 765px) {
+    flex-direction: column;    
+  }
 }
 
 .stock-name {

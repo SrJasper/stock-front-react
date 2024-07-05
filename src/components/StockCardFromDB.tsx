@@ -39,7 +39,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   }, []);
 
   useEffect(() => {
-    console.log('Stock sendo manipulada: ', stock?.symbol)
+    console.log("Stock sendo manipulada: ", stock?.symbol);
   }, [stock]);
 
   const listStocks = async (): Promise<Stock[]> => {
@@ -149,105 +149,105 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
             (stock) => stock.type === "media" || stock.simulation === true
           )
           .map((stockOl, index) => (
-            
             <li className="stock" key={stockOl.id}>
-              <div className="stock-name">
-                <label className="small-font margin-top use-width">
-                  {stockOl.longName}
-                </label>
-                <p
-                  className={`
-                  big-font 
-                  margin-down 
-                  use-width 
-                  ${!stockOl.simulation ? "golden-font" : ""}`}
-                >
-                  {stockOl.symbol}
-                </p>
-              </div>
-
-              <div className="stock-info-display use-width">
-                <div className={`stock-comparison ${
-                  stockOl.qnt === 0 ? "disable" : ""
-                }`}>
-                  <div className="stock-info">
-                    <label className="stock-label small-font">
-                      {t("bought") /* rendimento */}
-                    </label>
-                    <div className="stock-value big-font">
-                      <p
-                        className={`big-font  ${
-                          (Number(stockPriceFromApi[index]) - stockOl.price) /
-                            Number(stockPriceFromApi[index]) >
-                          0
-                            ? "green-font"
-                            : "red-font"
-                        }`}
-                      >
-                        {stockOl.price
-                          ? (
-                              (Number(stockPriceFromApi[index]) -
-                                stockOl.price) /
-                              Number(stockPriceFromApi[index])
-                            ).toFixed(2) + "%"
-                          : 0}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="stock-info value-to-sell">
-                    <label className="stock-label small-font">
-                      {t("current-value") /* valor atual */}
-                    </label>
-                    <div className="stock-value big-font">
-                      <p className="big-font green-font">
-                        {stockPriceFromApi[index]
-                          ? Number(stockPriceFromApi[index])
-                          : "--"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="stock-options-menu use-width">
-                  <button
-                    className={`buy-button spacer use-width ${
-                      Number(stockPriceFromApi[index]) > stockOl.price
-                        ? "green-button"
-                        : "red-button"
-                    }`}
-                    onClick={() =>
-                      stockOl.qnt > 0
-                        ? SellStockModal(stockOl)
-                        : DellStock(stockOl.symbol, stockOl.simulation)
-                    }
+              <div className="stock-div use-width">
+                <div className="stock-name">
+                  <label className="small-font margin-top use-width">
+                    {stockOl.longName}
+                  </label>
+                  <p
+                    className={`
+                    big-font 
+                    margin-down 
+                    use-width 
+                    ${!stockOl.simulation ? "golden-font" : ""}`}
                   >
-                    <label>
-                      {stockOl.qnt > 0 ? t("sell") : t("dell") /* Vender */}
-                    </label>
-                    <label className="qnt-text">({stockOl.qnt})</label>
-                  </button>
+                    {stockOl.symbol}
+                  </p>
+                </div>
+                <div className="stock-info-display use-width">
                   <div
-                    className={`use-width display-column
-                    ${stockOl.simulation === true ? "disable" : ""}
-                  `}
+                    className={`stock-comparison ${
+                      stockOl.qnt === 0 ? "disable" : ""
+                    }`}
                   >
+                    <div className="stock-info">
+                      <label className="stock-label small-font">
+                        {t("bought") /* rendimento */}
+                      </label>
+                      <div className="stock-value big-font">
+                        <p
+                          className={`big-font  ${
+                            (Number(stockPriceFromApi[index]) - stockOl.price) /
+                              Number(stockPriceFromApi[index]) >
+                            0
+                              ? "green-font"
+                              : "red-font"
+                          }`}
+                        >
+                          {stockOl.price
+                            ? (
+                                (Number(stockPriceFromApi[index]) -
+                                  stockOl.price) /
+                                Number(stockPriceFromApi[index])
+                              ).toFixed(2) + "%"
+                            : 0}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="stock-info value-to-sell">
+                      <label className="stock-label small-font">
+                        {t("current-value") /* valor atual */}
+                      </label>
+                      <div className="stock-value big-font">
+                        <p className="big-font green-font">
+                          {stockPriceFromApi[index]
+                            ? Number(stockPriceFromApi[index])
+                            : "--"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="stock-options-menu use-width">
                     <button
-                      onClick={() => {
-                        toggleStatement(index);
-                        setStock(stockOl);
-                      }}
-                      className="buy-button use-width"
+                      className={`buy-button spacer use-width ${
+                        Number(stockPriceFromApi[index]) > stockOl.price
+                          ? "green-button"
+                          : "red-button"
+                      }`}
+                      onClick={() =>
+                        stockOl.qnt > 0
+                          ? SellStockModal(stockOl)
+                          : DellStock(stockOl.symbol, stockOl.simulation)
+                      }
                     >
-                      <label> {t("account-statement") /* extrato */} </label>
+                      <label>
+                        {stockOl.qnt > 0 ? t("sell") : t("dell") /* Vender */}
+                      </label>
+                      <label className="qnt-text">({stockOl.qnt})</label>
                     </button>
-                    {statement[index] && stockOl.symbol && (
-                      <StatementCard/>
-                    )}
+                    <div
+                      className={`use-width display-column
+                      ${stockOl.simulation === true ? "disable" : ""}
+                    `}
+                    >
+                      <button
+                        onClick={() => {
+                          toggleStatement(index);
+                          setStock(stockOl);
+                        }}
+                        className="buy-button use-width"
+                      >
+                        <label> {t("account-statement") /* extrato */} </label>
+                      </button>
+                      {statement[index] && stockOl.symbol && <StatementCard />}
+                    </div>
                   </div>
                 </div>
-              </div>              
+              </div>
               <hr className="separation-line margin-top" />
-            </li>            
+            </li>
           ))
       ) : (
         <></>
