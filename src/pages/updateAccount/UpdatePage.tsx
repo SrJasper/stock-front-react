@@ -4,6 +4,7 @@ import "./UpdateStyle.css";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../config/api";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 function RegisterPage() {
 
@@ -39,7 +40,19 @@ function RegisterPage() {
     } else {
       setLoading(true);
       console.log(data);
-      await api.patch("/users/patch/", data);
+      try {
+        await api.patch("/users/patch/", data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("An unexpected error occurred.");
+          }
+        } else {
+          alert("An unknown error occurred.");
+        }
+      }
     }
     goToHomePage();
     setLoading(false);

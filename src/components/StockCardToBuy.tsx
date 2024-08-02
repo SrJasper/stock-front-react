@@ -15,14 +15,12 @@ type Props = {
   handleOpenRegisterCard?: (
     name: string,
     symbol: string,
-    price: number,
+    price: number
   ) => void;
   handleReturn?: () => void;
 };
 
 const Card = ({ stock, handleClose }: Props) => {
-
-
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage("en");
@@ -50,7 +48,7 @@ const Card = ({ stock, handleClose }: Props) => {
 
   return (
     <main>
-      {isLoading && <LoadingCard/>}
+      {isLoading && <LoadingCard />}
       <div className="screen-blocker">
         <div className="card border">
           <label>{t("qnt-buy") /* Quantidade à ser comprada */}</label>
@@ -83,16 +81,15 @@ const StockCardToBuy = ({
   handleOpenRegisterCard,
   handleReturn,
 }: Props) => {
-
   const { user } = useUser();
 
   useEffect(() => {
-    if(user){
+    if (user) {
       i18n.changeLanguage(user.language);
     }
-  }, [user])
+  }, [user]);
   const { t, i18n } = useTranslation();
-  
+
   const [card, setCard] = useState(false);
   let stockSymbol: string;
   if (stock.Symbol) {
@@ -101,19 +98,19 @@ const StockCardToBuy = ({
     return (
       <>
         <div className="no-stock-card">
-          <h2>
-            {t("symbol-not-found-title")/* Símbolo não encontrado */}
-          </h2>
+          <h2>{t("symbol-not-found-title") /* Símbolo não encontrado */}</h2>
           <p>
-            {t("symbol-not-found-text")/* 
+            {
+              t("symbol-not-found-text") /* 
             Você pode olhar no link 
             para ver uma lista com símbolos
             de ações disponíveis ou tentar
             novamente com outro símbolo. 
-            */}
+            */
+            }
           </p>
           <button className="register-stock-button" onClick={handleReturn}>
-            {t("back")/* voltar */}
+            {t("back") /* voltar */}
           </button>
         </div>
       </>
@@ -130,19 +127,17 @@ const StockCardToBuy = ({
           handleClose={() => setCard(false)}
         />
       )}
-      <li className="stock ol-blocker">
-        <div className="stock-blocks use-width">
-          <div className="use-width margin-top margin-down-pc">
+      <li className="stock-to-buy ol-blocker">
+        <div className="stock-to-buy-info">
+          <div>
             <label className="use-width"> {stock.LongName} </label>
-            <label className="big-font use-width">
+            <h2 className="big-font use-width">
               {" "}
               {stock.Symbol.toUpperCase()}{" "}
-            </label>
+            </h2>
           </div>
-          <div className="use-width text-centralize margin-top margin-down-pc">
-            <label className="use-height ">
-              {t("value")/* valor */}
-            </label>
+          <div>
+            <label className="use-height ">{t("value") /* valor */}</label>
             <label className="big-font">
               {" "}
               {stock.Price ? stock.Price : 0}{" "}
@@ -150,23 +145,13 @@ const StockCardToBuy = ({
           </div>
         </div>
 
-        {/* <div className="buy-buttons-parent">
-          <div className="buy-button-options">
-           <button> Aqui </button>
-          </div>
-          <div className="other-buttons">
-           <button> oia </button>
-           <button> oia </button>
-          </div>
-        </div> */}
-
         <div className="new-stock-buttons mobile-maring-down">
           <div className="use-height use-width buy-button-height">
             <button
               className="buy-button buy-button-height margin-right green-button use-width"
               onClick={() => setCard(true)}
-              >
-              {t("buy")/* Comprar */}
+            >
+              {t("buy") /* Comprar */}
             </button>
           </div>
           <div className="alternative-buttons">
@@ -174,16 +159,16 @@ const StockCardToBuy = ({
               className="register-stock-button"
               onClick={() => {
                 handleOpenRegisterCard &&
-                handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
+                  handleOpenRegisterCard(stockName, stockSymbol, stock.Price);
               }}
             >
-              {t("register")/* Registrar */}
+              {t("register") /* Registrar */}
             </button>
             <button
               className="register-stock-button margin-down"
               onClick={handleReturn}
             >
-              {t("cancel")/* Cancelar */}
+              {t("cancel") /* Cancelar */}
             </button>
           </div>
         </div>

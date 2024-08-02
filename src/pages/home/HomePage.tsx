@@ -15,6 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useStocks } from "../../hooks/useStocks";
 import { useUser } from "../../contexts/userContext";
+import { useGuest } from "../../store/useGuest";
 // import { useStock } from "../../contexts/stockContext";
 
 function HomePage() {
@@ -59,10 +60,12 @@ function HomePage() {
 
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { logoutGuest } = useGuest();
 
   function handleLogout() {
     navigate("/");
     logout();
+    logoutGuest();
   }
 
   const [noStock, setNoStock] = useState(true);

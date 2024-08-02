@@ -160,7 +160,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                     big-font 
                     margin-down 
                     use-width 
-                    ${!stockOl.simulation ? "golden-font" : ""}`}
+                    ${!stockOl.simulation ? "golden" : ""}`}
                   >
                     {stockOl.symbol}
                   </p>

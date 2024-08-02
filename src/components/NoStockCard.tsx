@@ -29,7 +29,7 @@ const NoStockCard = () => {
           {t("no-stock-card-text-three")}
           <br />
         </p>
-        <h2 className="margin-top golden-font">{t("observations")}</h2>
+        <h2 className="margin-top golden">{t("observations")}</h2>
         <p> {t("obs-one")}</p>
         <p> {t("obs-two")} </p>
         <p> {t("obs-three")}</p>

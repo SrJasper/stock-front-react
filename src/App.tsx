@@ -7,10 +7,13 @@ import HomePage from "./pages/home/HomePage.tsx";
 import { useAuth } from "./store/useAuth.ts";
 import { useEffect, useState } from "react";
 import { api } from "./config/api.ts";
+import { useGuest } from "./store/useGuest.ts";
 
 function App() {
   const { user, getUser } = useAuth();
+  const { guest, getGuest } = useGuest();
   const [loadendUser, setLoadedUser] = useState(true);
+  const [loadendGuest, setLoadedGuest] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -19,9 +22,18 @@ function App() {
       setLoadedUser(false);
     };
     loadUser();
+
+    const loadGuest = async () => {
+      const token = await getGuest();
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      setLoadedGuest(false);
+    };
+    loadGuest();
   }, []);
 
-  if (loadendUser) return <>Carregando...</>;
+  useEffect(() => {}, [user, guest]);
+
+  if (loadendUser || loadendGuest) return <>Carregando...</>;
 
   return (
     <>
@@ -29,20 +41,24 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={!user ? <LoginPage /> : <Navigate to="/home" />}
+            element={!user && !guest ? <LoginPage /> : <Navigate to="/home" />}
           />
           <Route
             path="/recover"
-            element={!user ? <RecoverPassword /> : <Navigate to="/home" />}
+            element={
+              !user && !guest ? <RecoverPassword /> : <Navigate to="/home" />
+            }
           />
           <Route
             path="/register"
-            element={!user ? <RegisterPage /> : <Navigate to="/home" />}
+            element={
+              !user && !guest ? <RegisterPage /> : <Navigate to="/home" />
+            }
           />
           <Route path="/update" element={<UpdatePage />} />
           <Route
             path="/home"
-            element={user ? <HomePage /> : <Navigate to="/" />}
+            element={user || guest ? <HomePage /> : <Navigate to="/" />}
           />
         </Routes>
       </div>

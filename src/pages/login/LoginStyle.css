@@ -35,3 +35,14 @@ button:active{
   font-weight: bold;
   display:none;
 }
+
+.temp-account{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto 0 auto;
+  width: 17rem;
+  height: 3.5rem;
+  font-size: 1.4rem;
+  border: #FFD700 3px solid;
+}

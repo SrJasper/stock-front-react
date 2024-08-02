@@ -1,12 +1,12 @@
-import React from "react";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { StockProvider } from "./contexts/stockContext.tsx";
+import { UserProvider } from "./contexts/userContext.tsx";
+import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import React from "react";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClientProvider, QueryClient } from "react-query";
 import './lib/i18n';
-import { UserProvider } from "./contexts/userContext.tsx";
-import { StockProvider } from "./contexts/stockContext.tsx";
 
 const client = new QueryClient();
 
