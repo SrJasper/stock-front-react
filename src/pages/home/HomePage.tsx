@@ -55,9 +55,9 @@ function HomePage() {
   }
 
   useEffect(() => {
-    listStocks();
     getUserInfo();
   }, []);
+
 
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -86,7 +86,7 @@ function HomePage() {
       setNoStock(true);
     }
   }
-
+  
   const query = useQueryClient();
   const { data: stockToBuy, refetch } = useQuery<StockToBuy | undefined>(
     "stockToBuy",
@@ -121,6 +121,9 @@ function HomePage() {
   function updateAccount() {
     navigate("/update");
   }
+
+
+ 
 
   return (
     <main>

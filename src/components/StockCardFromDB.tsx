@@ -8,7 +8,6 @@ import { useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { StatementCard } from "./StatementCard";
 import { useUser } from "../contexts/userContext";
-// import { useStock } from "../contexts/stockContext";
 
 type Props = {
   filterSymbol?: string;
@@ -18,7 +17,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   filterSymbol,
 }: Props) => {
   const { user } = useUser();
-  // const { stock, setStock } = useStock();
 
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -34,17 +32,13 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const [loaded, setLoaded] = useState(false);
   const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
 
-  // useEffect(() => {
-  //   console.log("Stock sendo manipulada: ", stock?.symbol);
-  // }, [stock]);
-
   const listStocks = async (): Promise<Stock[]> => {
     try {
       const response = await api.get("/stocks/listall");
 
       if (response.data.length !== 0) {
         const symbolsToFindPrice = response.data
-          .filter((stock: Stock) => stock.qnt !== 0) // Filtra apenas os stocks com qnt diferente de 0
+          .filter((stock: Stock) => stock.qnt !== 0)
           .map((stock: Stock) => stock.symbol);
         setStockToFindPrice(symbolsToFindPrice);
         return response.data;
@@ -56,16 +50,17 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
       throw error;
     }
   };
+  
+  const { data: dataQuery, isLoading } = useQuery("fetchStocks", listStocks);
 
-  const { data, isLoading } = useQuery("fetchStocks", listStocks);
-
-  useEffect(() => {
-    listStocks();
-  }, [ data ]);
+  const [stockData, setStockData] = useState<Stock[]>();
 
   useEffect(() => {
     GetPriceFromAPI(stockToFindPrice);
-  }, [data, stockToFindPrice]);
+    if(dataQuery){
+      setStockData(dataQuery);
+    }
+  }, [dataQuery, stockToFindPrice]);
 
   const GetPriceFromAPI = async (data: string[]) => {
     const prices = [];
@@ -112,10 +107,6 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
 
   const [statement, setStatement] = useState<boolean[]>([]);
 
-  useEffect(() => {
-    if (data) setStatement(new Array(data.length).fill(false));
-  }, [data]);
-
   const toggleStatement = (index: number) => {
     setStatement((prevState) => {
       const newState = [...prevState];
@@ -140,8 +131,8 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
           handleClose={() => setCardReg(false)}
         />
       )}
-      {data && data.length > 0 ? (
-        data
+      {stockData && stockData.length > 0 ? (
+        stockData
           .filter(
             (stock) => !filterSymbol || stock.symbol.includes(filterSymbol)
           )
