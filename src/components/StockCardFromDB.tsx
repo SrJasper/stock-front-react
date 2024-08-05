@@ -8,7 +8,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import { StatementCard } from "./StatementCard";
 import { useUser } from "../contexts/userContext";
-import { useStock } from "../contexts/stockContext";
+// import { useStock } from "../contexts/stockContext";
 
 type Props = {
   filterSymbol?: string;
@@ -18,7 +18,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   filterSymbol,
 }: Props) => {
   const { user } = useUser();
-  const { stock, setStock } = useStock();
+  // const { stock, setStock } = useStock();
 
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -34,13 +34,9 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   const [loaded, setLoaded] = useState(false);
   const [stockPriceFromApi, setStockPriceFromApi] = useState<string[]>([]);
 
-  useEffect(() => {
-    listStocks();
-  }, []);
-
-  useEffect(() => {
-    console.log("Stock sendo manipulada: ", stock?.symbol);
-  }, [stock]);
+  // useEffect(() => {
+  //   console.log("Stock sendo manipulada: ", stock?.symbol);
+  // }, [stock]);
 
   const listStocks = async (): Promise<Stock[]> => {
     try {
@@ -62,6 +58,10 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
   };
 
   const { data, isLoading } = useQuery("fetchStocks", listStocks);
+
+  useEffect(() => {
+    listStocks();
+  }, [ data ]);
 
   useEffect(() => {
     GetPriceFromAPI(stockToFindPrice);
@@ -235,7 +235,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                       <button
                         onClick={() => {
                           toggleStatement(index);
-                          setStock(stockOl);
+                          // setStock(stockOl);
                         }}
                         className="buy-button use-width"
                       >

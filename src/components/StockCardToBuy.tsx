@@ -29,13 +29,12 @@ const Card = ({ stock, handleClose }: Props) => {
   const [qnt, setQnt] = useState(0);
   const { useNewSimStock } = useStocks();
 
-  //mutation
   const query = useQueryClient();
   const { isLoading, mutateAsync } = useMutation("simStock", useNewSimStock, {
     onSuccess: () => {
       query.refetchQueries("fetchStocks");
       query.invalidateQueries("stockToBuy");
-      console.log("Stock bought");
+      // console.log("Stock bought");
       handleClose && handleClose();
     },
   });

@@ -33,16 +33,16 @@ function useStocks() {
     id: number;
   }) {
     try {
-      console.log(
-        "id: ",
-        id,
-        "\nsymbol: ",
-        symbol,
-        "\nqnt: ",
-        qnt,
-        "\nsimulation: ",
-        simulation
-      );
+      // console.log(
+      //   "id: ",
+      //   id,
+      //   "\nsymbol: ",
+      //   symbol,
+      //   "\nqnt: ",
+      //   qnt,
+      //   "\nsimulation: ",
+      //   simulation
+      // );
       await api.post(`/stocks/sell/`, {
         symbol: symbol,
         qnt: qnt,

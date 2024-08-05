@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { useStocks } from "../../hooks/useStocks";
 import { useUser } from "../../contexts/userContext";
 import { useGuest } from "../../store/useGuest";
-// import { useStock } from "../../contexts/stockContext";
 
 function HomePage() {
   const { useSearchNewStock } = useStocks();
@@ -26,9 +25,11 @@ function HomePage() {
     return response.data;
   }
   const { data: user, isLoading } = useQuery("fetchUser", getUserInfo);
+  const {} = useQuery("fetchStocks", listStocks, {
+    enabled: true, // Desabilita a execução automática da query
+  });
 
   const { setUser } = useUser();
-  // const { stock } = useStock();
 
   useEffect(() => {
     if (user) {
