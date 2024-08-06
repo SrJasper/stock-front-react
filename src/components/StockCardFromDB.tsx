@@ -13,9 +13,7 @@ type Props = {
   filterSymbol?: string;
 };
 
-const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
-  filterSymbol,
-}: Props) => {
+const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({ filterSymbol,}: Props) => {
   const { user } = useUser();
 
   const { t, i18n } = useTranslation();
@@ -25,6 +23,7 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
     }
   }, [user]);
 
+  
   const [card, setCard] = useState(false);
   const [cardReg, setCardReg] = useState(false);
   const [stockToPass, setStockToPass] = useState<Stock>();
@@ -226,13 +225,16 @@ const StockCardFromDB: React.FC<{ filterSymbol?: string }> = ({
                       <button
                         onClick={() => {
                           toggleStatement(index);
-                          // setStock(stockOl);
+                          setStockToPass(stockOl);                       
                         }}
                         className="buy-button use-width"
                       >
                         <label> {t("account-statement") /* extrato */} </label>
                       </button>
-                      {statement[index] && stockOl.symbol && <StatementCard />}
+                      {statement[index] && stockOl.symbol && stockToPass &&
+                        <StatementCard
+                          stock={stockToPass}  
+                      />}
                     </div>
                   </div>
                 </div>

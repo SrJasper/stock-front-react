@@ -1,26 +1,28 @@
 import { api } from "../config/api";
-import { useStock } from "../contexts/stockContext";
 import "./styles/statementCard.css";
 import React, { useState, useEffect } from "react";
+import { Stock } from "./types";
 
 interface StatementItem {
   id: number;
   qnt: number;
   price: number;
-  operationDate: string; // ou Date, dependendo da manipulação desejada
+  operationDate: string;
   type: string;
 }
 
-const StatementCard: React.FC = () => {
-  const [statements, setStatements] = useState<StatementItem[]>([]);
+interface Prop {
+  stock?: Stock;
+}
 
-  const { stock } = useStock();
+const StatementCard: React.FC<Prop> = ({ stock }) => {
+  const [statements, setStatements] = useState<StatementItem[]>([]);
 
   useEffect(() => {
     const fetchStatements = async () => {
       try {
         const res = await api.get(`stocks/statement/${stock?.symbol}`);
-
+        console.log("res.data", res.data);
         const transformedData = res.data.map((item: StatementItem) => ({
           ...item,
           operationDate: formatMonthYear(item.operationDate),
